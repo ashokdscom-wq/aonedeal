@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AONeDEAL | Premium Fashion</title>
+<title>AONeDEAL | Premium Fashion Store</title>
 
 <meta name="description"
-content="AONeDEAL premium fashion store for men and women.">
+content="AONeDEAL premium men's and women's fashion store. Shop shirts, t-shirts, formal wear, dresses, leggings and sarees.">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -18,524 +18,663 @@ content="AONeDEAL premium fashion store for men and women.">
     box-sizing:border-box;
 }
 
-:root{
-    --black:#111111;
-    --white:#ffffff;
-    --cream:#f7f5f1;
-    --gray:#777;
-    --light:#e9e7e3;
-    --gold:#b18a52;
-}
-
 html{
     scroll-behavior:smooth;
 }
 
 body{
-    font-family:Arial,Helvetica,sans-serif;
-    color:var(--black);
-    background:white;
+    font-family:Inter,Arial,Helvetica,sans-serif;
+    background:#f8f8f8;
+    color:#111;
+    overflow-x:hidden;
 }
 
 button,
 input,
 select{
-    font-family:inherit;
+    font:inherit;
 }
 
 button{
     cursor:pointer;
 }
 
-a{
-    text-decoration:none;
-    color:inherit;
+img{
+    display:block;
+    width:100%;
 }
 
-/* ================= TOP BAR ================= */
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+/* =========================
+   VARIABLES
+========================= */
+
+:root{
+    --black:#111;
+    --dark:#171717;
+    --white:#fff;
+    --gray:#777;
+    --light:#f5f5f5;
+    --border:#e5e5e5;
+    --gold:#b88a44;
+    --danger:#d92323;
+    --success:#16803c;
+}
+
+/* =========================
+   TOP BAR
+========================= */
 
 .topbar{
-    height:34px;
     background:#111;
     color:#fff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:10px;
-    letter-spacing:1.5px;
-    text-transform:uppercase;
+    text-align:center;
+    font-size:12px;
+    letter-spacing:.8px;
+    padding:9px 15px;
 }
 
-/* ================= HEADER ================= */
+/* =========================
+   HEADER
+========================= */
 
 .header{
     position:sticky;
     top:0;
-    z-index:100;
-    background:rgba(255,255,255,.95);
-    backdrop-filter:blur(15px);
-    border-bottom:1px solid #eee;
+    z-index:1000;
+    background:rgba(255,255,255,.96);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--border);
 }
 
-.nav{
+.header-inner{
     max-width:1450px;
-    height:76px;
     margin:auto;
-    padding:0 30px;
-
-    display:grid;
-    grid-template-columns:1fr auto 1fr;
+    height:78px;
+    padding:0 25px;
+    display:flex;
     align-items:center;
+    justify-content:space-between;
+    gap:25px;
 }
 
 .logo{
-    font-size:25px;
-    font-weight:800;
-    letter-spacing:4px;
+    font-size:28px;
+    font-weight:900;
+    letter-spacing:-1px;
+    white-space:nowrap;
 }
 
 .logo span{
-    font-weight:400;
+    color:var(--gold);
 }
 
-.navlinks{
+.main-nav{
     display:flex;
-    gap:30px;
-    font-size:12px;
-    text-transform:uppercase;
-    letter-spacing:1.4px;
-}
-
-.navlinks a{
-    position:relative;
-}
-
-.navlinks a:after{
-    content:"";
-    position:absolute;
-    left:0;
-    bottom:-7px;
-    height:1px;
-    width:0;
-    background:#111;
-    transition:.3s;
-}
-
-.navlinks a:hover:after{
-    width:100%;
-}
-
-.actions{
-    display:flex;
-    justify-content:flex-end;
     align-items:center;
-    gap:15px;
+    gap:30px;
 }
 
-.iconbtn{
-    border:0;
-    background:none;
-    font-size:20px;
+.main-nav a{
+    font-size:14px;
+    font-weight:700;
+    transition:.2s;
 }
 
-.count{
-    position:absolute;
-    background:#111;
-    color:#fff;
-    border-radius:50%;
-    width:16px;
-    height:16px;
-    font-size:9px;
-    display:grid;
-    place-items:center;
-    margin-top:-26px;
-    margin-left:12px;
+.main-nav a:hover{
+    color:var(--gold);
 }
 
-.lang{
-    padding:8px;
-    border:1px solid #ddd;
+.header-actions{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.icon-btn{
+    border:1px solid var(--border);
     background:#fff;
-    font-size:10px;
+    width:43px;
+    height:43px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:18px;
+    transition:.2s;
 }
 
-.accountBtn{
-    border:1px solid #111;
+.icon-btn:hover{
     background:#111;
     color:#fff;
-    padding:9px 13px;
+}
+
+.login-btn{
+    background:#111;
+    color:#fff;
+    border:none;
+    padding:12px 20px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:800;
+}
+
+.login-btn:hover{
+    background:var(--gold);
+}
+
+.cart-count{
+    position:absolute;
+    background:#d92323;
+    color:#fff;
+    width:19px;
+    height:19px;
+    border-radius:50%;
     font-size:10px;
-    text-transform:uppercase;
-    letter-spacing:1px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    top:-3px;
+    right:-3px;
 }
 
-/* ================= MOBILE MENU ================= */
+/* =========================
+   MOBILE MENU BUTTON
+========================= */
 
-.menuBtn{
+.menu-btn{
     display:none;
-    background:none;
-    border:0;
-    font-size:24px;
+    width:43px;
+    height:43px;
+    border:1px solid var(--border);
+    background:#fff;
+    border-radius:50%;
+    font-size:21px;
 }
 
-/* ================= HERO ================= */
+/* =========================
+   HERO
+========================= */
 
 .hero{
-    min-height:calc(100vh - 110px);
-    position:relative;
-    overflow:hidden;
+    min-height:680px;
+    background:
+    linear-gradient(90deg,rgba(0,0,0,.72),rgba(0,0,0,.15)),
+    url("https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=2000&q=90")
+    center/cover;
     display:flex;
     align-items:center;
 }
 
-.hero img{
-    position:absolute;
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-.hero:after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:linear-gradient(
-        90deg,
-        rgba(0,0,0,.65),
-        rgba(0,0,0,.1)
-    );
-}
-
-.heroContent{
-    position:relative;
-    z-index:2;
-    color:#fff;
+.hero-content{
     max-width:1450px;
     width:100%;
     margin:auto;
-    padding:80px 7%;
+    padding:60px 25px;
+    color:#fff;
 }
 
-.eyebrow{
-    font-size:11px;
-    letter-spacing:4px;
+.hero-small{
     text-transform:uppercase;
+    letter-spacing:4px;
+    font-size:12px;
+    font-weight:700;
+    margin-bottom:20px;
 }
 
 .hero h1{
-    font-family:Georgia,serif;
-    font-weight:400;
-    font-size:clamp(50px,7vw,100px);
-    line-height:.95;
-    max-width:750px;
-    margin:20px 0;
+    font-size:clamp(50px,8vw,105px);
+    line-height:.9;
+    max-width:850px;
+    letter-spacing:-5px;
+    margin-bottom:30px;
 }
 
 .hero p{
-    max-width:500px;
-    font-size:15px;
+    max-width:600px;
+    font-size:18px;
+    line-height:1.7;
     color:#eee;
-    margin-bottom:28px;
+    margin-bottom:35px;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
 }
 
 .btn{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-
-    min-width:160px;
+    border:none;
     padding:15px 25px;
+    border-radius:4px;
+    font-weight:800;
+    font-size:13px;
+}
 
+.btn-black{
+    background:#111;
+    color:#fff;
+}
+
+.btn-white{
     background:#fff;
     color:#111;
-
-    text-transform:uppercase;
-    font-size:10px;
-    letter-spacing:1.5px;
-    font-weight:bold;
-
-    border:0;
 }
 
-.btn.dark{
-    background:#111;
+.btn-gold{
+    background:var(--gold);
     color:#fff;
 }
 
-/* ================= SECTION ================= */
+.btn:hover{
+    transform:translateY(-1px);
+}
 
-.section{
+/* =========================
+   FEATURE BAR
+========================= */
+
+.feature-bar{
+    background:#fff;
+    border-bottom:1px solid var(--border);
+}
+
+.feature-inner{
     max-width:1450px;
     margin:auto;
-    padding:90px 30px;
-}
-
-.sectionHead{
-    display:flex;
-    justify-content:space-between;
-    align-items:end;
-    margin-bottom:30px;
-}
-
-.sectionTitle{
-    font-family:Georgia,serif;
-    font-size:42px;
-    font-weight:400;
-}
-
-.sectionSub{
-    color:#777;
-    font-size:13px;
-    margin-top:7px;
-}
-
-/* ================= CATEGORY ================= */
-
-.categoryGrid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:18px;
-}
-
-.categoryCard{
-    height:560px;
-    position:relative;
-    overflow:hidden;
-}
-
-.categoryCard img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    transition:.6s;
-}
-
-.categoryCard:hover img{
-    transform:scale(1.04);
-}
-
-.categoryContent{
-    position:absolute;
-    left:0;
-    right:0;
-    bottom:0;
-
-    padding:45px;
-    color:#fff;
-
-    background:linear-gradient(
-        transparent,
-        rgba(0,0,0,.8)
-    );
-}
-
-.categoryContent h2{
-    font:400 45px Georgia,serif;
-}
-
-.categoryContent p{
-    margin:10px 0 20px;
-}
-
-/* ================= FILTER ================= */
-
-.filters{
-    display:flex;
-    gap:8px;
-    overflow:auto;
-    margin-bottom:30px;
-}
-
-.filter{
-    white-space:nowrap;
-    border:1px solid #ddd;
-    padding:10px 15px;
-    background:white;
-    font-size:10px;
-    text-transform:uppercase;
-    letter-spacing:1px;
-}
-
-.filter.active{
-    background:#111;
-    color:white;
-}
-
-/* ================= PRODUCTS ================= */
-
-.productGrid{
+    padding:24px 25px;
     display:grid;
     grid-template-columns:repeat(4,1fr);
     gap:20px;
 }
 
-.product{
-    min-width:0;
+.feature{
+    display:flex;
+    gap:13px;
+    align-items:center;
 }
 
-.productImage{
+.feature-icon{
+    font-size:24px;
+}
+
+.feature strong{
+    font-size:13px;
+    display:block;
+}
+
+.feature span{
+    font-size:11px;
+    color:#777;
+}
+
+/* =========================
+   GENERAL SECTION
+========================= */
+
+.section{
+    max-width:1450px;
+    margin:auto;
+    padding:90px 25px;
+}
+
+.section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    gap:20px;
+    margin-bottom:35px;
+}
+
+.section-kicker{
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:3px;
+    color:var(--gold);
+    font-weight:900;
+    margin-bottom:10px;
+}
+
+.section-title{
+    font-size:42px;
+    letter-spacing:-2px;
+}
+
+.section-description{
+    max-width:550px;
+    color:#777;
+    line-height:1.7;
+    font-size:14px;
+}
+
+/* =========================
+   CATEGORY CARDS
+========================= */
+
+.category-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+}
+
+.category-card{
+    min-height:500px;
     position:relative;
-    aspect-ratio:3/4;
     overflow:hidden;
-    background:#f2f2f2;
+    background:#ddd;
+    cursor:pointer;
 }
 
-.productImage img{
-    width:100%;
+.category-card img{
     height:100%;
     object-fit:cover;
-    transition:.4s;
+    transition:.6s;
 }
 
-.product:hover .productImage img{
+.category-card:hover img{
+    transform:scale(1.05);
+}
+
+.category-overlay{
+    position:absolute;
+    inset:0;
+    display:flex;
+    align-items:end;
+    padding:40px;
+    background:linear-gradient(transparent,rgba(0,0,0,.75));
+    color:#fff;
+}
+
+.category-overlay h3{
+    font-size:40px;
+    margin-bottom:8px;
+}
+
+.category-overlay p{
+    font-size:13px;
+    color:#ddd;
+}
+
+/* =========================
+   CATEGORY FILTER
+========================= */
+
+.category-filters{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-bottom:30px;
+}
+
+.filter-btn{
+    border:1px solid var(--border);
+    background:#fff;
+    padding:10px 17px;
+    border-radius:30px;
+    font-size:12px;
+    font-weight:700;
+}
+
+.filter-btn.active,
+.filter-btn:hover{
+    background:#111;
+    color:#fff;
+    border-color:#111;
+}
+
+/* =========================
+   PRODUCT GRID
+========================= */
+
+.product-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.product-card{
+    background:#fff;
+    border:1px solid var(--border);
+    position:relative;
+    overflow:hidden;
+}
+
+.product-image-wrap{
+    position:relative;
+    aspect-ratio:4/5;
+    background:#eee;
+    overflow:hidden;
+}
+
+.product-image{
+    height:100%;
+    object-fit:cover;
+    transition:.45s;
+}
+
+.product-card:hover .product-image{
     transform:scale(1.035);
 }
 
-.productBadge{
+.product-badge{
     position:absolute;
-    left:12px;
     top:12px;
-    background:white;
-    padding:7px 10px;
+    left:12px;
+    z-index:2;
+    background:#111;
+    color:#fff;
+    padding:7px 9px;
     font-size:9px;
-    text-transform:uppercase;
+    font-weight:900;
+    letter-spacing:.7px;
 }
 
 .wishlist{
     position:absolute;
-    right:12px;
     top:12px;
-    width:36px;
-    height:36px;
+    right:12px;
+    z-index:3;
+    width:38px;
+    height:38px;
     border-radius:50%;
-    background:white;
     border:0;
+    background:#fff;
     font-size:18px;
 }
 
 .wishlist.active{
-    background:#111;
-    color:white;
+    color:#d92323;
 }
 
-.quickAdd{
+.quick-view{
     position:absolute;
+    bottom:12px;
     left:12px;
     right:12px;
-    bottom:12px;
-
-    background:#fff;
     border:0;
-    padding:13px;
-
-    font-size:10px;
-    text-transform:uppercase;
-    letter-spacing:1.2px;
-
-    transform:translateY(70px);
+    background:rgba(17,17,17,.9);
+    color:#fff;
+    padding:12px;
+    font-size:11px;
+    font-weight:800;
+    opacity:0;
+    transform:translateY(10px);
     transition:.3s;
 }
 
-.product:hover .quickAdd{
+.product-card:hover .quick-view{
+    opacity:1;
     transform:translateY(0);
 }
 
-.productInfo{
-    padding:13px 2px;
+.product-info{
+    padding:18px;
 }
 
-.productInfo h3{
-    font-size:14px;
-    font-weight:500;
+.product-category{
+    color:#999;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    margin-bottom:7px;
+}
+
+.product-name{
+    font-size:15px;
+    font-weight:800;
+    margin-bottom:8px;
+}
+
+.product-price{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:12px;
 }
 
 .price{
-    margin-top:6px;
-    font-size:13px;
+    font-size:16px;
+    font-weight:900;
 }
 
-.oldPrice{
-    color:#999;
+.old-price{
+    color:#aaa;
     text-decoration:line-through;
-    margin-left:7px;
+    font-size:12px;
 }
 
-/* ================= PRODUCT VIEW MODAL ================= */
+.discount{
+    color:#16803c;
+    font-size:11px;
+    font-weight:800;
+}
 
-.productModal{
+.card-bottom{
+    display:flex;
+    gap:8px;
+}
+
+.add-cart{
+    flex:1;
+    border:0;
+    background:#111;
+    color:#fff;
+    padding:11px;
+    font-size:11px;
+    font-weight:800;
+}
+
+.buy-now{
+    width:44px;
+    border:1px solid #111;
+    background:#fff;
+    font-size:15px;
+}
+
+/* =========================
+   PRODUCT MODAL
+========================= */
+
+.modal{
     position:fixed;
     inset:0;
-    background:rgba(0,0,0,.65);
-    z-index:300;
-
+    background:rgba(0,0,0,.7);
+    z-index:3000;
     display:none;
     align-items:center;
     justify-content:center;
-
     padding:20px;
 }
 
-.productModal.show{
+.modal.show{
     display:flex;
 }
 
-.productView{
-    width:min(1050px,100%);
-    max-height:90vh;
+.product-modal{
+    width:min(1100px,100%);
+    max-height:92vh;
     overflow:auto;
-    background:white;
-
+    background:#fff;
+    position:relative;
     display:grid;
     grid-template-columns:1fr 1fr;
-
-    position:relative;
 }
 
-.closeModal{
+.close{
     position:absolute;
-    right:15px;
     top:12px;
-
-    z-index:5;
-
-    background:white;
-    border:0;
-
-    width:35px;
-    height:35px;
+    right:12px;
+    z-index:20;
+    width:40px;
+    height:40px;
     border-radius:50%;
-
-    font-size:18px;
+    border:0;
+    background:#111;
+    color:#fff;
+    font-size:20px;
 }
 
 .gallery{
-    background:#f3f3f3;
-    padding:25px;
+    padding:20px;
+    background:#f4f4f4;
 }
 
-.mainPhoto{
-    width:100%;
+.main-photo-box{
+    position:relative;
     aspect-ratio:4/5;
+    overflow:hidden;
+    background:#ddd;
+}
+
+.main-product-photo{
+    height:100%;
     object-fit:cover;
 }
 
-.thumbs{
+.gallery-arrow{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:42px;
+    height:42px;
+    border:0;
+    border-radius:50%;
+    background:rgba(255,255,255,.9);
+    z-index:4;
+    font-size:22px;
+}
+
+.gallery-prev{
+    left:12px;
+}
+
+.gallery-next{
+    right:12px;
+}
+
+.thumbnails{
     display:flex;
     gap:8px;
-    margin-top:10px;
     overflow:auto;
+    margin-top:10px;
 }
 
 .thumb{
     width:70px;
-    height:80px;
-    flex-shrink:0;
-    border:1px solid transparent;
+    height:82px;
+    flex:0 0 auto;
+    border:2px solid transparent;
     cursor:pointer;
+    overflow:hidden;
 }
 
 .thumb.active{
-    border:2px solid #111;
+    border-color:#111;
 }
 
 .thumb img{
@@ -544,174 +683,427 @@ a{
     object-fit:cover;
 }
 
-.productDetails{
-    padding:55px 45px;
+.product-details{
+    padding:45px;
 }
 
-.productDetails .small{
-    font-size:10px;
+.modal-category{
+    font-size:11px;
     text-transform:uppercase;
     letter-spacing:2px;
-    color:#999;
+    color:var(--gold);
+    font-weight:900;
+    margin-bottom:10px;
 }
 
-.productDetails h2{
-    font:400 40px Georgia,serif;
-    margin:12px 0;
+.modal-title{
+    font-size:34px;
+    line-height:1.1;
+    margin-bottom:15px;
 }
 
-.productDetails .bigPrice{
-    font-size:20px;
+.modal-price{
+    display:flex;
+    align-items:center;
+    gap:12px;
     margin-bottom:20px;
 }
 
-.productDetails p{
-    color:#666;
-    font-size:14px;
-    line-height:1.8;
+.modal-price .price{
+    font-size:25px;
 }
 
-.sizeTitle{
-    font-size:11px;
-    text-transform:uppercase;
-    letter-spacing:1px;
-    margin:25px 0 10px;
+.modal-description{
+    color:#666;
+    line-height:1.7;
+    font-size:14px;
+    margin-bottom:22px;
+}
+
+.feature-list{
+    list-style:none;
+    margin-bottom:25px;
+}
+
+.feature-list li{
+    font-size:13px;
+    padding:8px 0;
+    border-bottom:1px solid #eee;
+}
+
+.option-title{
+    font-size:12px;
+    font-weight:900;
+    margin-bottom:10px;
 }
 
 .sizes{
     display:flex;
-    gap:8px;
+    gap:7px;
+    flex-wrap:wrap;
+    margin-bottom:22px;
 }
 
 .size{
+    width:43px;
+    height:40px;
     border:1px solid #ddd;
-    padding:10px 16px;
-    background:white;
+    background:#fff;
+    font-size:12px;
 }
 
-.size.selected{
+.size.active{
     background:#111;
-    color:white;
+    color:#fff;
+    border-color:#111;
 }
 
-/* ================= BANNER ================= */
+.quantity-row{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    margin-bottom:20px;
+}
 
-.banner{
+.quantity{
+    display:flex;
+    border:1px solid #ddd;
+}
+
+.quantity button{
+    width:38px;
+    height:38px;
+    border:0;
+    background:#fff;
+}
+
+.quantity span{
+    min-width:42px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:800;
+}
+
+.modal-actions{
     display:grid;
     grid-template-columns:1fr 1fr;
-    background:#eee;
+    gap:10px;
 }
 
-.banner img{
+.modal-actions button{
+    padding:14px;
+    border:0;
+    font-weight:900;
+}
+
+/* =========================
+   AUTH MODAL
+========================= */
+
+.auth-box{
+    width:min(460px,100%);
+    background:#fff;
+    padding:35px;
+    position:relative;
+}
+
+.auth-title{
+    font-size:30px;
+    margin-bottom:8px;
+}
+
+.auth-subtitle{
+    color:#777;
+    font-size:13px;
+    margin-bottom:25px;
+    line-height:1.6;
+}
+
+.auth-tabs{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    border-bottom:1px solid #ddd;
+    margin-bottom:22px;
+}
+
+.auth-tab{
+    border:0;
+    background:#fff;
+    padding:13px;
+    font-weight:800;
+}
+
+.auth-tab.active{
+    border-bottom:2px solid #111;
+}
+
+.auth-form{
+    display:none;
+}
+
+.auth-form.active{
+    display:block;
+}
+
+.input-group{
+    margin-bottom:15px;
+}
+
+.input-group label{
+    display:block;
+    font-size:11px;
+    font-weight:900;
+    margin-bottom:7px;
+}
+
+.input-group input,
+.input-group select{
     width:100%;
-    height:500px;
-    object-fit:cover;
+    border:1px solid #ddd;
+    padding:13px;
+    outline:none;
+    background:#fff;
 }
 
-.bannerText{
-    padding:60px;
+.input-group input:focus{
+    border-color:#111;
+}
+
+.full-btn{
+    width:100%;
+    border:0;
+    background:#111;
+    color:#fff;
+    padding:14px;
+    font-weight:900;
+    margin-top:5px;
+}
+
+.forgot{
+    display:block;
+    text-align:right;
+    color:#777;
+    font-size:11px;
+    margin:10px 0 15px;
+    cursor:pointer;
+}
+
+.switch-link{
+    margin-top:15px;
+    text-align:center;
+    font-size:12px;
+    color:#777;
+}
+
+.switch-link button{
+    border:0;
+    background:none;
+    font-weight:900;
+}
+
+.message{
+    padding:11px;
+    font-size:12px;
+    margin-bottom:15px;
+    display:none;
+}
+
+.message.show{
+    display:block;
+}
+
+.message.error{
+    background:#fff0f0;
+    color:#b00000;
+}
+
+.message.success{
+    background:#eefaf2;
+    color:#147333;
+}
+
+/* =========================
+   CART DRAWER
+========================= */
+
+.drawer{
+    position:fixed;
+    top:0;
+    right:-480px;
+    width:min(450px,100%);
+    height:100vh;
+    background:#fff;
+    z-index:4000;
+    box-shadow:-10px 0 30px rgba(0,0,0,.15);
+    transition:.35s;
     display:flex;
-    justify-content:center;
     flex-direction:column;
 }
 
-.bannerText h2{
-    font:400 50px Georgia,serif;
-    margin:15px 0;
+.drawer.open{
+    right:0;
 }
 
-.bannerText p{
-    max-width:450px;
-    color:#666;
-    margin-bottom:25px;
-}
-
-/* ================= NEWSLETTER ================= */
-
-.newsletter{
-    background:#111;
-    color:white;
-    text-align:center;
-    padding:80px 20px;
-}
-
-.newsletter h2{
-    font:400 42px Georgia,serif;
-}
-
-.newsletter p{
-    color:#aaa;
-    margin:12px 0 25px;
-}
-
-.subscribe{
+.drawer-head{
+    padding:22px;
+    border-bottom:1px solid #eee;
     display:flex;
-    max-width:500px;
-    margin:auto;
+    justify-content:space-between;
+    align-items:center;
 }
 
-.subscribe input{
+.drawer-head h3{
+    font-size:20px;
+}
+
+.drawer-close{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    border:1px solid #ddd;
+    background:#fff;
+}
+
+.cart-items{
     flex:1;
-    padding:16px;
-    border:0;
-    outline:0;
+    overflow:auto;
+    padding:20px;
 }
 
-.subscribe button{
-    background:#b18a52;
-    color:white;
-    border:0;
-    padding:0 25px;
-}
-
-/* ================= FOOTER ================= */
-
-.footer{
-    background:#111;
-    color:#fff;
-    padding:60px 30px 25px;
-}
-
-.footerGrid{
-    max-width:1400px;
-    margin:auto;
-
-    display:grid;
-    grid-template-columns:2fr 1fr 1fr 1fr;
-    gap:40px;
-}
-
-.footer h3{
-    font-size:11px;
-    letter-spacing:1.5px;
-    text-transform:uppercase;
-    margin-bottom:18px;
-}
-
-.footer a,
-.footer p{
-    display:block;
-    color:#aaa;
-    font-size:12px;
-    margin:9px 0;
-}
-
-.copyright{
-    max-width:1400px;
-    margin:40px auto 0;
-    padding-top:20px;
-    border-top:1px solid #292929;
+.empty-cart{
+    text-align:center;
     color:#777;
-    font-size:10px;
+    padding:60px 20px;
 }
 
-/* ================= DRAWERS ================= */
+.cart-item{
+    display:grid;
+    grid-template-columns:80px 1fr auto;
+    gap:12px;
+    padding:15px 0;
+    border-bottom:1px solid #eee;
+}
+
+.cart-item img{
+    width:80px;
+    height:95px;
+    object-fit:cover;
+}
+
+.cart-item h4{
+    font-size:13px;
+    margin-bottom:6px;
+}
+
+.cart-item p{
+    font-size:11px;
+    color:#777;
+    margin-bottom:6px;
+}
+
+.cart-qty{
+    display:flex;
+    border:1px solid #ddd;
+    width:max-content;
+}
+
+.cart-qty button{
+    width:28px;
+    height:28px;
+    border:0;
+    background:#fff;
+}
+
+.cart-qty span{
+    min-width:28px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:11px;
+}
+
+.remove-cart{
+    border:0;
+    background:none;
+    color:#d92323;
+    font-size:11px;
+}
+
+.drawer-bottom{
+    padding:20px;
+    border-top:1px solid #eee;
+}
+
+.total-row{
+    display:flex;
+    justify-content:space-between;
+    font-weight:900;
+    margin-bottom:15px;
+}
+
+/* =========================
+   SIDE MENU
+========================= */
+
+.side-menu{
+    position:fixed;
+    left:-370px;
+    top:0;
+    height:100vh;
+    width:min(360px,90%);
+    background:#fff;
+    z-index:3500;
+    box-shadow:10px 0 30px rgba(0,0,0,.15);
+    transition:.35s;
+    overflow:auto;
+}
+
+.side-menu.open{
+    left:0;
+}
+
+.menu-head{
+    padding:25px;
+    border-bottom:1px solid #eee;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.menu-links{
+    padding:20px;
+}
+
+.menu-section-title{
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    color:#999;
+    font-weight:900;
+    margin:20px 0 10px;
+}
+
+.menu-link{
+    width:100%;
+    border:0;
+    background:#fff;
+    padding:13px 0;
+    text-align:left;
+    font-size:15px;
+    font-weight:700;
+    border-bottom:1px solid #f0f0f0;
+}
+
+/* =========================
+   OVERLAY
+========================= */
 
 .overlay{
     position:fixed;
     inset:0;
-    background:rgba(0,0,0,.5);
-    z-index:150;
+    background:rgba(0,0,0,.55);
+    z-index:3400;
     display:none;
 }
 
@@ -719,393 +1111,271 @@ a{
     display:block;
 }
 
-.drawer{
-    position:fixed;
-    top:0;
-    bottom:0;
-    left:-430px;
+/* =========================
+   NEWSLETTER
+========================= */
 
-    width:min(400px,90vw);
-
-    background:white;
-    z-index:200;
-
-    transition:.35s;
+.newsletter{
+    background:#111;
+    color:#fff;
+    padding:70px 25px;
 }
 
-.drawer.open{
-    left:0;
+.newsletter-inner{
+    max-width:900px;
+    margin:auto;
+    text-align:center;
 }
 
-.cartDrawer{
-    position:fixed;
-    top:0;
-    bottom:0;
-    right:-430px;
-
-    width:min(420px,92vw);
-
-    background:white;
-    z-index:200;
-
-    transition:.35s;
+.newsletter h2{
+    font-size:40px;
+    margin-bottom:12px;
 }
 
-.cartDrawer.open{
-    right:0;
+.newsletter p{
+    color:#aaa;
+    margin-bottom:25px;
 }
 
-.drawerHead{
-    height:75px;
-    padding:0 25px;
-    border-bottom:1px solid #eee;
-
+.newsletter-form{
     display:flex;
-    justify-content:space-between;
-    align-items:center;
+    max-width:550px;
+    margin:auto;
 }
 
-.drawerBody{
-    padding:25px;
-    height:calc(100% - 75px);
-    overflow:auto;
+.newsletter-form input{
+    flex:1;
+    border:0;
+    padding:16px;
 }
 
-.menuTitle{
+.newsletter-form button{
+    border:0;
+    background:var(--gold);
+    color:#fff;
+    padding:0 25px;
+    font-weight:900;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+    background:#111;
+    color:#fff;
+    border-top:1px solid #333;
+}
+
+.footer-inner{
+    max-width:1450px;
+    margin:auto;
+    padding:55px 25px;
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr;
+    gap:40px;
+}
+
+.footer h3{
+    margin-bottom:15px;
+}
+
+.footer p,
+.footer a{
     color:#999;
-    font-size:10px;
-    text-transform:uppercase;
-    letter-spacing:2px;
-    margin:20px 0 8px;
+    font-size:13px;
+    line-height:1.8;
 }
 
-.menuLink{
-    display:block;
-    padding:10px 0;
-    font-size:16px;
-}
-
-/* ================= CART ================= */
-
-.cartBody{
-    padding:25px;
-    height:calc(100% - 75px);
+.footer-links{
     display:flex;
     flex-direction:column;
 }
 
-.cartItems{
-    flex:1;
-    overflow:auto;
-}
-
-.cartItem{
-    display:grid;
-    grid-template-columns:70px 1fr auto;
-    gap:12px;
-    padding:15px 0;
-    border-bottom:1px solid #eee;
-}
-
-.cartItem img{
-    width:70px;
-    height:85px;
-    object-fit:cover;
-}
-
-.cartItem h4{
-    font-size:13px;
-}
-
-.cartItem p{
-    font-size:12px;
-    margin-top:5px;
-}
-
-.remove{
-    font-size:10px;
-    color:#888;
-    border:0;
-    background:none;
-    margin-top:8px;
-}
-
-.cartTotal{
-    display:flex;
-    justify-content:space-between;
-    border-top:1px solid #111;
-    padding-top:18px;
-    margin-top:15px;
-}
-
-/* ================= AUTH ================= */
-
-.authModal{
-    position:fixed;
-    inset:0;
-
-    background:rgba(0,0,0,.7);
-
-    z-index:500;
-
-    display:none;
-    align-items:center;
-    justify-content:center;
-
-    padding:20px;
-}
-
-.authModal.show{
-    display:flex;
-}
-
-.authBox{
-    width:min(450px,100%);
-    background:#fff;
-
-    padding:38px;
-
-    position:relative;
-}
-
-.authClose{
-    position:absolute;
-    right:18px;
-    top:15px;
-
-    border:0;
-    background:none;
-    font-size:20px;
-}
-
-.authLogo{
-    text-align:center;
-    font-size:21px;
-    font-weight:800;
-    letter-spacing:3px;
-}
-
-.authBox h2{
-    text-align:center;
-    font:400 31px Georgia,serif;
-    margin:12px 0 6px;
-}
-
-.authSubtitle{
+.copyright{
+    border-top:1px solid #333;
     text-align:center;
     color:#777;
-    font-size:12px;
-    margin-bottom:22px;
+    padding:18px;
+    font-size:11px;
 }
 
-.authTabs{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    border-bottom:1px solid #ddd;
-    margin-bottom:20px;
-}
+/* =========================
+   TOAST
+========================= */
 
-.authTab{
-    border:0;
-    background:white;
-    padding:12px;
-    font-size:10px;
-    text-transform:uppercase;
-    letter-spacing:1px;
-}
-
-.authTab.active{
-    border-bottom:2px solid #111;
-}
-
-.authForm label{
-    display:block;
-    margin:13px 0 7px;
-    font-size:10px;
-    text-transform:uppercase;
-    letter-spacing:1px;
-}
-
-.authForm input{
-    width:100%;
-    padding:13px;
-    border:1px solid #ddd;
-    outline:none;
-}
-
-.authForm input:focus{
-    border-color:#111;
-}
-
-.authSubmit{
-    width:100%;
+.toast{
+    position:fixed;
+    bottom:25px;
+    left:50%;
+    transform:translate(-50%,120px);
     background:#111;
     color:#fff;
-    border:0;
-    padding:15px;
-    margin-top:20px;
-    font-size:10px;
-    text-transform:uppercase;
-    letter-spacing:1.5px;
-}
-
-.authLink{
-    border:0;
-    background:none;
-    color:#555;
-    font-size:11px;
-    text-decoration:underline;
-    margin-top:15px;
-}
-
-.otpBox{
-    display:none;
-}
-
-.authMessage{
-    font-size:11px;
-    margin-top:12px;
-    text-align:center;
-}
-
-.success{
-    color:green;
-}
-
-.error{
-    color:#c00;
-}
-
-/* ================= ACCOUNT ================= */
-
-.accountBox{
-    text-align:center;
-    padding:25px 0;
-}
-
-.accountBox h3{
-    font:400 27px Georgia,serif;
-}
-
-.accountBox p{
-    color:#777;
+    padding:14px 20px;
+    border-radius:4px;
+    z-index:6000;
     font-size:12px;
-    margin:8px 0 25px;
+    opacity:0;
+    transition:.3s;
 }
 
-/* ================= RESPONSIVE ================= */
+.toast.show{
+    transform:translate(-50%,0);
+    opacity:1;
+}
 
-@media(max-width:900px){
+/* =========================
+   RESPONSIVE
+========================= */
 
-    .nav{
-        grid-template-columns:auto 1fr auto;
-        height:68px;
-        padding:0 18px;
-    }
+@media(max-width:1100px){
 
-    .menuBtn{
-        display:block;
-    }
-
-    .navlinks{
+    .main-nav{
         display:none;
     }
 
-    .logo{
-        text-align:center;
-        font-size:20px;
+    .menu-btn{
+        display:flex;
+        align-items:center;
+        justify-content:center;
     }
 
-    .productGrid{
+    .product-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .footer-inner{
+        grid-template-columns:2fr 1fr 1fr;
+    }
+}
+
+@media(max-width:800px){
+
+    .header-inner{
+        height:68px;
+        padding:0 15px;
+        gap:8px;
+    }
+
+    .logo{
+        font-size:23px;
+    }
+
+    .login-btn{
+        padding:10px 13px;
+        font-size:11px;
+    }
+
+    .hero{
+        min-height:600px;
+    }
+
+    .hero h1{
+        letter-spacing:-3px;
+    }
+
+    .feature-inner{
         grid-template-columns:repeat(2,1fr);
     }
 
-    .categoryGrid{
+    .category-grid{
         grid-template-columns:1fr;
     }
 
-    .categoryCard{
-        height:430px;
+    .category-card{
+        min-height:420px;
     }
 
-    .productView{
+    .product-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .product-modal{
         grid-template-columns:1fr;
+        max-height:94vh;
     }
 
-    .gallery{
-        padding:15px;
+    .product-details{
+        padding:25px;
     }
 
-    .productDetails{
-        padding:35px 25px;
-    }
-
-    .banner{
-        grid-template-columns:1fr;
-    }
-
-    .banner img{
-        height:400px;
-    }
-
-    .footerGrid{
+    .footer-inner{
         grid-template-columns:1fr 1fr;
     }
 }
 
-@media(max-width:600px){
-
-    .topbar{
-        font-size:8px;
-    }
+@media(max-width:520px){
 
     .section{
-        padding:60px 18px;
+        padding:60px 15px;
     }
 
-    .sectionTitle{
-        font-size:31px;
+    .section-title{
+        font-size:32px;
     }
 
-    .productGrid{
-        gap:10px;
+    .header-actions .icon-btn:nth-child(1){
+        display:none;
     }
 
-    .productInfo h3{
-        font-size:12px;
-    }
-
-    .quickAdd{
-        transform:none;
-        padding:10px;
+    .hero-content{
+        padding:40px 18px;
     }
 
     .hero h1{
-        font-size:47px;
+        font-size:54px;
     }
 
-    .categoryContent{
-        padding:25px;
+    .hero p{
+        font-size:15px;
     }
 
-    .categoryContent h2{
-        font-size:36px;
-    }
-
-    .bannerText{
-        padding:40px 25px;
-    }
-
-    .bannerText h2{
-        font-size:40px;
-    }
-
-    .footerGrid{
+    .feature-inner{
         grid-template-columns:1fr 1fr;
+        padding:18px 15px;
     }
 
-    .authBox{
-        padding:28px 20px;
+    .feature span{
+        display:none;
+    }
+
+    .product-grid{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+    }
+
+    .product-info{
+        padding:12px;
+    }
+
+    .product-name{
+        font-size:13px;
+    }
+
+    .product-price{
+        flex-wrap:wrap;
+        gap:5px;
+    }
+
+    .quick-view{
+        display:none;
+    }
+
+    .auth-box{
+        padding:25px 18px;
+    }
+
+    .footer-inner{
+        grid-template-columns:1fr;
+    }
+
+    .newsletter-form{
+        flex-direction:column;
+        gap:8px;
+    }
+
+    .newsletter-form button{
+        padding:14px;
     }
 }
 </style>
@@ -1113,2378 +1383,4116 @@ a{
 
 <body>
 
-<!-- ======================================================
+<!-- =========================
      TOP BAR
-====================================================== -->
+========================= -->
 
 <div class="topbar">
-    Free shipping on orders over ₹1,999 • Easy 7-day returns
+    FREE SHIPPING ON ORDERS ABOVE ₹1999 • PREMIUM FASHION • SECURE SHOPPING
 </div>
 
-
-<!-- ======================================================
+<!-- =========================
      HEADER
-====================================================== -->
+========================= -->
 
 <header class="header">
 
-<nav class="nav">
+    <div class="header-inner">
 
-<button class="menuBtn" onclick="openMenu()">
-☰
-</button>
+        <button class="menu-btn" onclick="openMenu()">
+            ☰
+        </button>
 
-<a href="#home" class="logo">
-AONE<span>DEAL</span>
-</a>
+        <a href="#home" class="logo">
+            AONe<span>DEAL</span>
+        </a>
 
-<div class="navlinks">
+        <nav class="main-nav">
+            <a href="#home">Home</a>
+            <a href="#men">Men</a>
+            <a href="#women">Women</a>
+            <a href="#new">New Arrivals</a>
+            <a href="#offers">Offers</a>
+        </nav>
 
-<a href="#home">Home</a>
+        <div class="header-actions">
 
-<a href="#men">
-Men
-</a>
+            <button class="icon-btn" onclick="focusSearch()">
+                🔍
+            </button>
 
-<a href="#women">
-Women
-</a>
+            <button class="icon-btn" onclick="openWishlist()">
+                ♡
+            </button>
 
-<a href="#new">
-New Arrivals
-</a>
+            <button class="icon-btn" onclick="openCart()" style="position:relative;">
+                🛒
+                <span class="cart-count" id="cartCount">0</span>
+            </button>
 
-<a href="#offers">
-Offers
-</a>
+            <select id="languageSelect"
+                    onchange="changeLanguage(this.value)"
+                    style="height:40px;border:1px solid #ddd;background:#fff;padding:0 8px;font-size:11px;">
+                <option value="en">EN</option>
+                <option value="gu">ગુજરાતી</option>
+                <option value="hi">हिन्दी</option>
+            </select>
 
-</div>
+            <button class="login-btn" id="authHeaderBtn" onclick="openAuth()">
+                Login
+            </button>
 
-<div class="actions">
+        </div>
 
-<button class="accountBtn"
-id="accountButton"
-onclick="openAccount()">
-LOGIN
-</button>
-
-<button class="iconbtn"
-onclick="openCart()">
-🛍
-<span class="count" id="cartCount">0</span>
-</button>
-
-<select class="lang"
-onchange="changeLanguage(this.value)">
-<option value="en">EN</option>
-<option value="gu">ગુજરાતી</option>
-<option value="hi">हिन्दी</option>
-</select>
-
-</div>
-
-</nav>
+    </div>
 
 </header>
 
 
-<!-- ======================================================
-     HOME PAGE
-====================================================== -->
+<!-- =========================
+     SIDE MENU
+========================= -->
+
+<div class="side-menu" id="sideMenu">
+
+    <div class="menu-head">
+        <strong>AONeDEAL</strong>
+        <button class="drawer-close" onclick="closeAll()">✕</button>
+    </div>
+
+    <div class="menu-links">
+
+        <button class="menu-link" onclick="goHome()">
+            🏠 Home
+        </button>
+
+        <div class="menu-section-title">
+            Men
+        </div>
+
+        <button class="menu-link"
+                onclick="goCategory('men','Shirts')">
+            Shirts
+        </button>
+
+        <button class="menu-link"
+                onclick="goCategory('men','T-Shirts')">
+            T-Shirts
+        </button>
+
+        <button class="menu-link"
+                onclick="goCategory('men','Formal Shirts')">
+            Formal Shirts
+        </button>
+
+        <button class="menu-link"
+                onclick="goCategory('men','Formal Pants')">
+            Formal Pants
+        </button>
+
+
+        <div class="menu-section-title">
+            Women
+        </div>
+
+        <button class="menu-link"
+                onclick="goCategory('women','Formal Shirts')">
+            Formal Shirts
+        </button>
+
+        <button class="menu-link"
+                onclick="goCategory('women','Formal Pants')">
+            Formal Pants
+        </button>
+
+        <button class="menu-link"
+                onclick="goCategory('women','Dresses')">
+            Dresses
+        </button>
+
+        <button class="menu-link"
+                onclick="goCategory('women','Leggings')">
+            Leggings
+        </button>
+
+        <button class="menu-link"
+                onclick="goCategory('women','Sarees')">
+            Sarees
+        </button>
+
+
+        <div class="menu-section-title">
+            Account
+        </div>
+
+        <button class="menu-link" onclick="openAuth()">
+            👤 Login / Create Account
+        </button>
+
+        <button class="menu-link" onclick="openCart()">
+            🛒 My Cart
+        </button>
+
+    </div>
+
+</div>
+
+
+<div class="overlay" id="overlay" onclick="closeAll()"></div>
+
+
+<!-- =========================
+     HOME
+========================= -->
 
 <main id="home">
 
 <section class="hero">
 
-<img
-src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=2000&q=90"
-alt="Premium Fashion"
->
+    <div class="hero-content">
 
-<div class="heroContent">
+        <div class="hero-small">
+            AONeDEAL PREMIUM COLLECTION
+        </div>
 
-<div class="eyebrow">
-THE NEW SEASON 2026
-</div>
+        <h1>
+            STYLE<br>
+            WITHOUT<br>
+            LIMITS.
+        </h1>
 
-<h1>
-Elevate Your Everyday Style.
-</h1>
+        <p>
+            Discover premium fashion for every moment.
+            Carefully selected men's and women's collections
+            designed for comfort, confidence and modern style.
+        </p>
 
-<p>
-Curated fashion for modern men and women.
-Premium looks, timeless essentials and effortless confidence.
-</p>
+        <div class="hero-buttons">
 
-<a href="#men" class="btn">
-SHOP COLLECTION
-</a>
+            <button class="btn btn-white"
+                    onclick="goCategory('men','Shirts')">
+                SHOP MEN
+            </button>
 
-</div>
+            <button class="btn btn-gold"
+                    onclick="goCategory('women','Dresses')">
+                SHOP WOMEN
+            </button>
+
+        </div>
+
+    </div>
 
 </section>
 
 
-<!-- ======================================================
-     CATEGORY SELECTION
-====================================================== -->
+<!-- FEATURES -->
 
+<section class="feature-bar">
+
+    <div class="feature-inner">
+
+        <div class="feature">
+            <div class="feature-icon">🚚</div>
+            <div>
+                <strong>Fast Delivery</strong>
+                <span>Quick delivery across India</span>
+            </div>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">↩️</div>
+            <div>
+                <strong>Easy Returns</strong>
+                <span>Simple return experience</span>
+            </div>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">🔒</div>
+            <div>
+                <strong>Secure Payment</strong>
+                <span>Protected checkout</span>
+            </div>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">⭐</div>
+            <div>
+                <strong>Premium Quality</strong>
+                <span>Carefully selected products</span>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CATEGORY -->
 <section class="section">
 
-<div class="sectionHead">
+    <div class="section-head">
 
-<div>
+        <div>
+            <div class="section-kicker">
+                SHOP BY STYLE
+            </div>
 
-<h2 class="sectionTitle">
-Shop by Category
-</h2>
+            <h2 class="section-title">
+                Explore Collections
+            </h2>
+        </div>
 
-<p class="sectionSub">
-Choose your collection.
-</p>
+    </div>
 
-</div>
+    <div class="category-grid">
 
-</div>
+        <div class="category-card"
+             onclick="goCategory('men','Shirts')">
 
+            <img src="https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?auto=format&fit=crop&w=1200&q=90">
 
-<div class="categoryGrid">
+            <div class="category-overlay">
+                <div>
+                    <h3>MEN</h3>
+                    <p>Shirts • T-Shirts • Formal Wear • Pants</p>
+                </div>
+            </div>
 
-<a href="#men" class="categoryCard">
-
-<img
-src="https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?auto=format&fit=crop&w=1200&q=90"
-alt="Men"
->
-
-<div class="categoryContent">
-
-<h2>
-Men
-</h2>
-
-<p>
-Shirts • T-Shirts • Formal Shirts • Formal Pants
-</p>
-
-<span class="btn">
-EXPLORE MEN
-</span>
-
-</div>
-
-</a>
+        </div>
 
 
-<a href="#women" class="categoryCard">
+        <div class="category-card"
+             onclick="goCategory('women','Dresses')">
 
-<img
-src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=90"
-alt="Women"
->
+            <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1200&q=90">
 
-<div class="categoryContent">
+            <div class="category-overlay">
+                <div>
+                    <h3>WOMEN</h3>
+                    <p>Formal Wear • Dresses • Leggings • Sarees</p>
+                </div>
+            </div>
 
-<h2>
-Women
-</h2>
+        </div>
 
-<p>
-Formal Shirts • Formal Pants • Dresses • Leggings • Sarees
-</p>
-
-<span class="btn">
-EXPLORE WOMEN
-</span>
-
-</div>
-
-</a>
-
-</div>
+    </div>
 
 </section>
 
 
-<!-- ======================================================
+<!-- =========================
      MEN
-====================================================== -->
+========================= -->
 
 <section class="section" id="men">
 
-<div class="sectionHead">
+    <div class="section-head">
 
-<div>
+        <div>
+            <div class="section-kicker">
+                MEN COLLECTION
+            </div>
 
-<h2 class="sectionTitle">
-Men's Collection
-</h2>
+            <h2 class="section-title">
+                Men's Fashion
+            </h2>
 
-<p class="sectionSub">
-Choose your men's category.
-</p>
+            <p class="section-description">
+                Premium everyday and formal clothing for a clean,
+                confident and modern look.
+            </p>
+        </div>
 
-</div>
-
-</div>
-
-
-<div class="filters">
-
-<button class="filter active"
-onclick="filterProducts('men','All',this)">
-All
-</button>
-
-<button class="filter"
-onclick="filterProducts('men','Shirts',this)">
-Shirts
-</button>
-
-<button class="filter"
-onclick="filterProducts('men','T-Shirts',this)">
-T-Shirts
-</button>
-
-<button class="filter"
-onclick="filterProducts('men','Formal Shirts',this)">
-Formal Shirts
-</button>
-
-<button class="filter"
-onclick="filterProducts('men','Formal Pants',this)">
-Formal Pants
-</button>
-
-</div>
+    </div>
 
 
-<div class="productGrid" id="menProducts">
-</div>
+    <div class="category-filters" id="menFilters">
+
+        <button class="filter-btn active"
+                onclick="filterProducts('men','All',this)">
+            All
+        </button>
+
+        <button class="filter-btn"
+                onclick="filterProducts('men','Shirts',this)">
+            Shirts
+        </button>
+
+        <button class="filter-btn"
+                onclick="filterProducts('men','T-Shirts',this)">
+            T-Shirts
+        </button>
+
+        <button class="filter-btn"
+                onclick="filterProducts('men','Formal Shirts',this)">
+            Formal Shirts
+        </button>
+
+        <button class="filter-btn"
+                onclick="filterProducts('men','Formal Pants',this)">
+            Formal Pants
+        </button>
+
+    </div>
+
+
+    <div class="product-grid" id="menProducts"></div>
 
 </section>
 
 
-<!-- ======================================================
+<!-- =========================
      WOMEN
-====================================================== -->
+========================= -->
 
-<section class="section"
-id="women"
-style="background:#faf9f7;max-width:none;">
+<section class="section" id="women">
 
-<div style="max-width:1390px;margin:auto">
+    <div class="section-head">
 
-<div class="sectionHead">
+        <div>
+            <div class="section-kicker">
+                WOMEN COLLECTION
+            </div>
 
-<div>
+            <h2 class="section-title">
+                Women's Fashion
+            </h2>
 
-<h2 class="sectionTitle">
-Women's Collection
-</h2>
+            <p class="section-description">
+                Elegant, comfortable and versatile pieces for
+                work, occasions and everyday style.
+            </p>
+        </div>
 
-<p class="sectionSub">
-Choose your women's category.
-</p>
-
-</div>
-
-</div>
-
-
-<div class="filters">
-
-<button class="filter active"
-onclick="filterProducts('women','All',this)">
-All
-</button>
-
-<button class="filter"
-onclick="filterProducts('women','Formal Shirts',this)">
-Formal Shirts
-</button>
-
-<button class="filter"
-onclick="filterProducts('women','Formal Pants',this)">
-Formal Pants
-</button>
-
-<button class="filter"
-onclick="filterProducts('women','Dresses',this)">
-Dresses
-</button>
-
-<button class="filter"
-onclick="filterProducts('women','Leggings',this)">
-Leggings
-</button>
-
-<button class="filter"
-onclick="filterProducts('women','Sarees',this)">
-Sarees
-</button>
-
-</div>
+    </div>
 
 
-<div class="productGrid"
-id="womenProducts">
-</div>
+    <div class="category-filters" id="womenFilters">
 
-</div>
+        <button class="filter-btn active"
+                onclick="filterProducts('women','All',this)">
+            All
+        </button>
+
+        <button class="filter-btn"
+                onclick="filterProducts('women','Formal Shirts',this)">
+            Formal Shirts
+        </button>
+
+        <button class="filter-btn"
+                onclick="filterProducts('women','Formal Pants',this)">
+            Formal Pants
+        </button>
+
+        <button class="filter-btn"
+                onclick="filterProducts('women','Dresses',this)">
+            Dresses
+        </button>
+
+        <button class="filter-btn"
+                onclick="filterProducts('women','Leggings',this)">
+            Leggings
+        </button>
+
+        <button class="filter-btn"
+                onclick="filterProducts('women','Sarees',this)">
+            Sarees
+        </button>
+
+    </div>
+
+
+    <div class="product-grid" id="womenProducts"></div>
 
 </section>
 
 
-<!-- ======================================================
-     NEW ARRIVALS
-====================================================== -->
+<!-- =========================
+     NEW
+========================= -->
 
 <section class="section" id="new">
 
-<div class="banner">
+    <div class="section-head">
 
-<img
-src="https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&w=1200&q=90"
-alt="New Collection"
->
+        <div>
+            <div class="section-kicker">
+                JUST ARRIVED
+            </div>
 
-<div class="bannerText">
+            <h2 class="section-title">
+                New Arrivals
+            </h2>
+        </div>
 
-<div class="eyebrow">
-LIMITED EDIT
-</div>
+    </div>
 
-<h2>
-Designed for the way you live.
-</h2>
-
-<p>
-Minimal. Refined. Confident.
-Explore our latest collection created for effortless everyday dressing.
-</p>
-
-<a href="#men" class="btn dark">
-DISCOVER COLLECTION
-</a>
-
-</div>
-
-</div>
+    <div class="product-grid" id="newProducts"></div>
 
 </section>
 
 
-<!-- ======================================================
-     NEWSLETTER
-====================================================== -->
+<!-- =========================
+     OFFERS
+========================= -->
 
-<section class="newsletter"
-id="offers">
+<section class="section" id="offers">
 
-<h2>
-Stay in the know.
-</h2>
+    <div class="section-head">
 
-<p>
-Get first access to new drops, private offers and style edits.
-</p>
+        <div>
+            <div class="section-kicker">
+                SPECIAL OFFERS
+            </div>
 
-<form class="subscribe"
-onsubmit="subscribe(event)">
+            <h2 class="section-title">
+                Best Deals
+            </h2>
+        </div>
 
-<input
-type="email"
-placeholder="Your email address"
-required
->
+    </div>
 
-<button>
-SUBSCRIBE
-</button>
+    <div class="product-grid" id="offerProducts"></div>
 
-</form>
+</section>
+
+
+<!-- NEWSLETTER -->
+
+<section class="newsletter">
+
+    <div class="newsletter-inner">
+
+        <h2>Stay in Style</h2>
+
+        <p>
+            Get updates about new collections, special offers
+            and exclusive AONeDEAL launches.
+        </p>
+
+        <form class="newsletter-form"
+              onsubmit="subscribeNewsletter(event)">
+
+            <input
+                type="email"
+                id="newsletterEmail"
+                placeholder="Enter your email"
+                required>
+
+            <button type="submit">
+                SUBSCRIBE
+            </button>
+
+        </form>
+
+    </div>
 
 </section>
 
 </main>
 
 
-<!-- ======================================================
+<!-- =========================
      FOOTER
-====================================================== -->
+========================= -->
 
 <footer class="footer">
 
-<div class="footerGrid">
+    <div class="footer-inner">
 
-<div>
+        <div>
+            <h3>AONeDEAL</h3>
 
-<div class="logo">
-AONE<span>DEAL</span>
-</div>
+            <p>
+                Premium fashion destination for modern men
+                and women. Quality clothing, elegant design
+                and effortless style.
+            </p>
+        </div>
 
-<p>
-Premium fashion for modern lifestyles.
-Quality pieces, considered design and confident style.
-</p>
+        <div>
+            <h3>Shop</h3>
 
-</div>
+            <div class="footer-links">
+                <a href="#men">Men</a>
+                <a href="#women">Women</a>
+                <a href="#new">New Arrivals</a>
+                <a href="#offers">Offers</a>
+            </div>
+        </div>
 
+        <div>
+            <h3>Customer</h3>
 
-<div>
+            <div class="footer-links">
+                <a href="javascript:void(0)" onclick="openAuth()">Login</a>
+                <a href="javascript:void(0)" onclick="openCart()">Cart</a>
+                <a href="javascript:void(0)" onclick="showToast('Returns information will be available soon.')">Returns</a>
+                <a href="javascript:void(0)" onclick="showToast('Contact support will be available soon.')">Contact</a>
+            </div>
+        </div>
 
-<h3>
-SHOP
-</h3>
+        <div>
+            <h3>Secure Shopping</h3>
 
-<a href="#men">
-Men
-</a>
+            <p>
+                🔒 Secure authentication<br>
+                💳 Secure payments<br>
+                🚚 Delivery across India<br>
+                ↩️ Easy returns
+            </p>
+        </div>
 
-<a href="#women">
-Women
-</a>
+    </div>
 
-<a href="#new">
-New Arrivals
-</a>
-
-<a href="#offers">
-Offers
-</a>
-
-</div>
-
-
-<div>
-
-<h3>
-HELP
-</h3>
-
-<a href="#">
-Contact Us
-</a>
-
-<a href="#">
-Shipping
-</a>
-
-<a href="#">
-Returns
-</a>
-
-<a href="#">
-FAQs
-</a>
-
-</div>
-
-
-<div>
-
-<h3>
-FOLLOW
-</h3>
-
-<a href="#">
-Instagram
-</a>
-
-<a href="#">
-Facebook
-</a>
-
-<a href="#">
-YouTube
-</a>
-
-</div>
-
-</div>
-
-
-<div class="copyright">
-© 2026 AONeDEAL. All Rights Reserved.
-</div>
+    <div class="copyright">
+        © 2026 AONeDEAL. All Rights Reserved.
+    </div>
 
 </footer>
 
 
-<!-- ======================================================
-     MENU DRAWER
-====================================================== -->
+<!-- =========================
+     PRODUCT MODAL
+========================= -->
 
-<div class="overlay"
-id="overlay"
-onclick="closeAll()">
-</div>
+<div class="modal" id="productModal">
 
+    <div class="product-modal">
 
-<aside class="drawer"
-id="menuDrawer">
+        <button class="close" onclick="closeProduct()">
+            ✕
+        </button>
 
-<div class="drawerHead">
+        <div class="gallery">
 
-<strong>
-MENU
-</strong>
+            <div class="main-photo-box">
 
-<button onclick="closeAll()">
-✕
-</button>
+                <button class="gallery-arrow gallery-prev"
+                        onclick="changePhoto(-1)">
+                    ‹
+                </button>
 
-</div>
+                <img
+                    id="mainProductPhoto"
+                    class="main-product-photo"
+                    src="">
 
+                <button class="gallery-arrow gallery-next"
+                        onclick="changePhoto(1)">
+                    ›
+                </button>
 
-<div class="drawerBody">
+            </div>
 
-<div class="menuTitle">
-MEN
-</div>
+            <div class="thumbnails" id="productThumbnails"></div>
 
-<a class="menuLink"
-href="#men"
-onclick="closeAll()">
-Shirts
-</a>
-
-<a class="menuLink"
-href="#men"
-onclick="closeAll()">
-T-Shirts
-</a>
-
-<a class="menuLink"
-href="#men"
-onclick="closeAll()">
-Formal Shirts
-</a>
-
-<a class="menuLink"
-href="#men"
-onclick="closeAll()">
-Formal Pants
-</a>
+        </div>
 
 
-<div class="menuTitle">
-WOMEN
-</div>
+        <div class="product-details">
 
-<a class="menuLink"
-href="#women"
-onclick="closeAll()">
-Formal Shirts
-</a>
+            <div class="modal-category"
+                 id="modalCategory">
+            </div>
 
-<a class="menuLink"
-href="#women"
-onclick="closeAll()">
-Formal Pants
-</a>
+            <h2 class="modal-title"
+                id="modalTitle">
+            </h2>
 
-<a class="menuLink"
-href="#women"
-onclick="closeAll()">
-Dresses
-</a>
+            <div class="modal-price">
 
-<a class="menuLink"
-href="#women"
-onclick="closeAll()">
-Leggings
-</a>
+                <span class="price"
+                      id="modalPrice">
+                </span>
 
-<a class="menuLink"
-href="#women"
-onclick="closeAll()">
-Sarees
-</a>
+                <span class="old-price"
+                      id="modalOldPrice">
+                </span>
 
+                <span class="discount"
+                      id="modalDiscount">
+                </span>
 
-<div class="menuTitle">
-EXPLORE
-</div>
+            </div>
 
-<a class="menuLink"
-href="#new"
-onclick="closeAll()">
-New Arrivals
-</a>
+            <p class="modal-description"
+               id="modalDescription">
+            </p>
 
-<a class="menuLink"
-href="#offers"
-onclick="closeAll()">
-Offers
-</a>
-
-</div>
-
-</aside>
+            <ul class="feature-list"
+                id="modalFeatures">
+            </ul>
 
 
-<!-- ======================================================
-     CART
-====================================================== -->
+            <div class="option-title">
+                SELECT SIZE
+            </div>
 
-<aside class="cartDrawer"
-id="cartDrawer">
-
-<div class="drawerHead">
-
-<strong>
-YOUR BAG
-</strong>
-
-<button onclick="closeAll()">
-✕
-</button>
-
-</div>
+            <div class="sizes"
+                 id="modalSizes">
+            </div>
 
 
-<div class="cartBody">
+            <div class="option-title">
+                QUANTITY
+            </div>
 
-<div class="cartItems"
-id="cartItems">
-</div>
+            <div class="quantity-row">
+
+                <div class="quantity">
+
+                    <button onclick="changeModalQuantity(-1)">
+                        −
+                    </button>
+
+                    <span id="modalQuantity">
+                        1
+                    </span>
+
+                    <button onclick="changeModalQuantity(1)">
+                        +
+                    </button>
+
+                </div>
+
+                <span style="font-size:12px;color:#777;">
+                    Available stock:
+                    <strong id="modalStock">
+                        0
+                    </strong>
+                </span>
+
+            </div>
 
 
-<div class="cartTotal">
+            <div class="modal-actions">
 
-<strong>
-TOTAL
-</strong>
+                <button
+                    style="background:#111;color:#fff;"
+                    onclick="addCurrentProductToCart()">
+                    ADD TO CART
+                </button>
 
-<strong id="cartTotal">
-₹0
-</strong>
+                <button
+                    style="background:#b88a44;color:#fff;"
+                    onclick="buyCurrentProduct()">
+                    BUY NOW
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </div>
 
 
-<button
-class="btn dark"
-style="width:100%;margin-top:18px"
-onclick="checkout()">
-
-CHECKOUT
-
-</button>
-
-</div>
-
-</aside>
-
-
-<!-- ======================================================
+<!-- =========================
      AUTH MODAL
-====================================================== -->
+========================= -->
 
-<div class="authModal"
-id="authModal">
+<div class="modal" id="authModal">
 
-<div class="authBox">
+    <div class="auth-box">
 
-<button
-class="authClose"
-onclick="closeAuth()">
-✕
-</button>
+        <button class="close" onclick="closeAuth()">
+            ✕
+        </button>
 
+        <h2 class="auth-title">
+            Welcome to AONeDEAL
+        </h2>
 
-<div class="authLogo">
-AONEDEAL
-</div>
+        <p class="auth-subtitle">
+            Login to your existing account or create a new account
+            to continue shopping.
+        </p>
 
 
-<h2 id="authTitle">
-Welcome Back
-</h2>
+        <div class="auth-tabs">
 
+            <button
+                class="auth-tab active"
+                id="loginTab"
+                onclick="showAuthTab('login')">
+                LOGIN
+            </button>
 
-<p class="authSubtitle"
-id="authSubtitle">
-Login to continue shopping.
-</p>
+            <button
+                class="auth-tab"
+                id="signupTab"
+                onclick="showAuthTab('signup')">
+                CREATE ACCOUNT
+            </button>
 
+        </div>
 
-<div class="authTabs">
 
-<button
-class="authTab active"
-id="loginTab"
-onclick="showLogin()">
+        <div id="authMessage"
+             class="message">
+        </div>
 
-LOGIN
 
-</button>
+        <!-- LOGIN -->
 
+        <form id="loginForm"
+              class="auth-form active"
+              onsubmit="loginUser(event)">
 
-<button
-class="authTab"
-id="signupTab"
-onclick="showSignup()">
+            <div class="input-group">
 
-CREATE ACCOUNT
+                <label>
+                    EMAIL
+                </label>
 
-</button>
+                <input
+                    type="email"
+                    id="loginEmail"
+                    placeholder="you@example.com"
+                    required>
 
-</div>
+            </div>
 
 
-<!-- LOGIN -->
+            <div class="input-group">
 
-<form
-class="authForm"
-id="loginForm"
-onsubmit="loginUser(event)">
+                <label>
+                    PASSWORD
+                </label>
 
-<label>
-Email Address
-</label>
+                <input
+                    type="password"
+                    id="loginPassword"
+                    placeholder="Your password"
+                    required>
 
-<input
-id="loginEmail"
-type="email"
-required
-placeholder="you@example.com"
->
+            </div>
 
 
-<label>
-Password
-</label>
+            <button
+                type="button"
+                class="forgot"
+                onclick="showForgotPassword()">
+                Forgot Password?
+            </button>
 
-<input
-id="loginPassword"
-type="password"
-required
-placeholder="Your password"
->
 
+            <button
+                type="submit"
+                class="full-btn">
+                LOGIN
+            </button>
 
-<button
-class="authSubmit">
 
-LOGIN
+            <div class="switch-link">
+                Don't have an account?
+                <button
+                    type="button"
+                    onclick="showAuthTab('signup')">
+                    Create Account
+                </button>
+            </div>
 
-</button>
+        </form>
 
 
-<button
-type="button"
-class="authLink"
-onclick="showForgot()">
+        <!-- SIGNUP -->
 
-Forgot Password?
+        <form id="signupForm"
+              class="auth-form"
+              onsubmit="signupUser(event)">
 
-</button>
+            <div class="input-group">
 
+                <label>
+                    FULL NAME
+                </label>
 
-<p
-class="authMessage"
-id="loginMessage">
-</p>
+                <input
+                    type="text"
+                    id="signupName"
+                    placeholder="Your full name"
+                    required>
 
-</form>
+            </div>
 
 
-<!-- SIGNUP -->
+            <div class="input-group">
 
-<form
-class="authForm"
-id="signupForm"
-style="display:none"
-onsubmit="signupUser(event)">
+                <label>
+                    EMAIL
+                </label>
 
-<label>
-Full Name
-</label>
+                <input
+                    type="email"
+                    id="signupEmail"
+                    placeholder="you@example.com"
+                    required>
 
-<input
-id="signupName"
-type="text"
-required
-placeholder="Your name"
->
+            </div>
 
 
-<label>
-Email Address
-</label>
+            <div class="input-group">
 
-<input
-id="signupEmail"
-type="email"
-required
-placeholder="you@example.com"
->
+                <label>
+                    PASSWORD
+                </label>
 
+                <input
+                    type="password"
+                    id="signupPassword"
+                    placeholder="Minimum 6 characters"
+                    minlength="6"
+                    required>
 
-<label>
-Password
-</label>
+            </div>
 
-<input
-id="signupPassword"
-type="password"
-required
-minlength="6"
-placeholder="Minimum 6 characters"
->
 
+            <button
+                type="submit"
+                class="full-btn">
+                CREATE ACCOUNT
+            </button>
 
-<button
-class="authSubmit">
 
-CREATE ACCOUNT
+            <div class="switch-link">
+                Already have an account?
+                <button
+                    type="button"
+                    onclick="showAuthTab('login')">
+                    Login
+                </button>
+            </div>
 
-</button>
+        </form>
 
 
-<p
-class="authMessage"
-id="signupMessage">
-</p>
+        <!-- OTP -->
 
-</form>
+        <form id="otpForm"
+              class="auth-form"
+              onsubmit="verifySignupOtp(event)">
 
+            <div class="input-group">
 
-<!-- OTP -->
+                <label>
+                    EMAIL OTP
+                </label>
 
-<form
-class="authForm otpBox"
-id="otpForm"
-onsubmit="verifySignupOtp(event)">
+                <input
+                    type="text"
+                    id="otpCode"
+                    inputmode="numeric"
+                    maxlength="6"
+                    placeholder="Enter 6 digit OTP"
+                    required>
 
-<label>
-OTP
-</label>
+            </div>
 
-<input
-id="signupOtp"
-type="text"
-inputmode="numeric"
-maxlength="6"
-required
-placeholder="Enter 6 digit OTP"
->
+            <button
+                type="submit"
+                class="full-btn">
+                VERIFY OTP
+            </button>
 
+            <div class="switch-link">
+                OTP sent to
+                <strong id="otpEmailText"></strong>
+            </div>
 
-<button
-class="authSubmit">
+        </form>
 
-VERIFY OTP
 
-</button>
+        <!-- FORGOT -->
 
+        <form id="forgotForm"
+              class="auth-form"
+              onsubmit="sendResetEmail(event)">
 
-<p
-class="authMessage"
-id="otpMessage">
-</p>
+            <div class="input-group">
 
-</form>
+                <label>
+                    ACCOUNT EMAIL
+                </label>
 
+                <input
+                    type="email"
+                    id="forgotEmail"
+                    placeholder="Your account email"
+                    required>
 
-<!-- FORGOT PASSWORD -->
+            </div>
 
-<form
-class="authForm"
-id="forgotForm"
-style="display:none"
-onsubmit="sendResetEmail(event)">
+            <button
+                type="submit"
+                class="full-btn">
+                SEND RESET EMAIL
+            </button>
 
-<label>
-Email Address
-</label>
+            <div class="switch-link">
 
-<input
-id="forgotEmail"
-type="email"
-required
-placeholder="Your registered email"
->
+                <button
+                    type="button"
+                    onclick="showAuthTab('login')">
+                    ← Back to Login
+                </button>
 
+            </div>
 
-<button
-class="authSubmit">
+        </form>
 
-SEND RESET LINK
 
-</button>
+        <!-- RESET PASSWORD -->
 
+        <form id="resetForm"
+              class="auth-form"
+              onsubmit="updatePassword(event)">
 
-<button
-type="button"
-class="authLink"
-onclick="showLogin()">
+            <div class="input-group">
 
-Back to Login
+                <label>
+                    NEW PASSWORD
+                </label>
 
-</button>
+                <input
+                    type="password"
+                    id="newPassword"
+                    minlength="6"
+                    required
+                    placeholder="New password">
 
+            </div>
 
-<p
-class="authMessage"
-id="forgotMessage">
-</p>
+            <div class="input-group">
 
-</form>
+                <label>
+                    CONFIRM PASSWORD
+                </label>
 
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    minlength="6"
+                    required
+                    placeholder="Confirm new password">
 
-<!-- ACCOUNT -->
+            </div>
 
-<div
-class="accountBox"
-id="accountBox"
-style="display:none">
+            <button
+                type="submit"
+                class="full-btn">
+                UPDATE PASSWORD
+            </button>
 
-<h3>
-My Account
-</h3>
+        </form>
 
-<p id="accountEmail">
-</p>
 
-<button
-class="btn dark"
-onclick="logoutUser()">
+        <!-- ACCOUNT -->
 
-LOGOUT
+        <div id="accountPanel"
+             class="auth-form">
 
-</button>
+            <div style="text-align:center;padding:15px 0 25px;">
 
-</div>
+                <div style="font-size:50px;">
+                    👤
+                </div>
 
-</div>
+                <h3 id="accountName">
+                    Account
+                </h3>
 
-</div>
+                <p id="accountEmail"
+                   style="color:#777;font-size:12px;margin-top:5px;">
+                </p>
 
+            </div>
 
-<!-- ======================================================
-     PRODUCT DETAILS MODAL
-====================================================== -->
+            <button
+                class="full-btn"
+                onclick="logoutUser()">
+                LOGOUT
+            </button>
 
-<div
-class="productModal"
-id="productModal">
+        </div>
 
-<div class="productView">
-
-<button
-class="closeModal"
-onclick="closeProduct()">
-
-✕
-
-</button>
-
-
-<div class="gallery">
-
-<img
-class="mainPhoto"
-id="mainProductPhoto"
-src=""
-alt=""
->
-
-
-<div
-class="thumbs"
-id="productThumbs">
-</div>
-
-</div>
-
-
-<div class="productDetails">
-
-<div class="small"
-id="productCategory">
-</div>
-
-
-<h2 id="productName">
-</h2>
-
-
-<div class="bigPrice"
-id="productPrice">
-</div>
-
-
-<p id="productDescription">
-</p>
-
-
-<div class="sizeTitle">
-SELECT SIZE
-</div>
-
-
-<div class="sizes">
-
-<button
-class="size"
-onclick="selectSize(this)">
-S
-</button>
-
-<button
-class="size"
-onclick="selectSize(this)">
-M
-</button>
-
-<button
-class="size"
-onclick="selectSize(this)">
-L
-</button>
-
-<button
-class="size"
-onclick="selectSize(this)">
-XL
-</button>
+    </div>
 
 </div>
 
 
-<button
-class="btn dark"
-style="width:100%;margin-top:30px"
-id="productAddButton">
+<!-- =========================
+     CART DRAWER
+========================= -->
 
-ADD TO BAG
+<div class="drawer" id="cartDrawer">
 
-</button>
+    <div class="drawer-head">
+
+        <h3>
+            Your Cart
+        </h3>
+
+        <button class="drawer-close"
+                onclick="closeCart()">
+            ✕
+        </button>
+
+    </div>
+
+
+    <div class="cart-items"
+         id="cartItems">
+    </div>
+
+
+    <div class="drawer-bottom">
+
+        <div class="total-row">
+
+            <span>
+                Total
+            </span>
+
+            <span id="cartTotal">
+                ₹0
+            </span>
+
+        </div>
+
+        <button
+            class="full-btn"
+            onclick="checkout()">
+            PROCEED TO CHECKOUT
+        </button>
+
+    </div>
 
 </div>
 
-</div>
 
+<!-- =========================
+     TOAST
+========================= -->
+
+<div class="toast" id="toast">
 </div>
 
 
 <script>
 
-/* ======================================================
+/* =========================================================
    SUPABASE CONFIGURATION
-======================================================
+========================================================= */
 
-   અહીં તમારું Supabase Project URL અને ANON KEY નાખો.
+/*
+    IMPORTANT:
 
-   Example:
+    અહીં તમારા પોતાના Supabase projectની માહિતી મૂકો.
 
-   const SUPABASE_URL =
-   "https://xxxxxxxx.supabase.co";
+    Supabase Dashboard:
+    Project Settings → API
 
-   const SUPABASE_ANON_KEY =
-   "eyJhbGciOiJIUzI1Ni...";
+    SUPABASE_URL = Project URL
+    SUPABASE_ANON_KEY = Publishable/Anon key
 
-====================================================== */
+    NEVER put service_role key here.
+*/
 
-const SUPABASE_URL =
-"YOUR_SUPABASE_URL";
-
-const SUPABASE_ANON_KEY =
-"YOUR_SUPABASE_ANON_KEY";
-
-
-const supabaseClient =
-supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_ANON_KEY
-);
+const SUPABASE_URL = "YOUR_SUPABASE_URL";
+const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
 
 
-/* ======================================================
-   PRODUCTS
+/* =========================================================
+   SUPABASE CLIENT
+========================================================= */
 
-   દરેક productમાં 4 અલગ photos છે.
-====================================================== */
+let supabaseClient = null;
+
+if(
+    SUPABASE_URL !== "YOUR_SUPABASE_URL" &&
+    SUPABASE_ANON_KEY !== "YOUR_SUPABASE_ANON_KEY"
+){
+
+    supabaseClient =
+        window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_ANON_KEY
+        );
+
+}
+
+
+/* =========================================================
+   PRODUCT DATABASE - TEMPORARY FRONTEND DATA
+========================================================= */
 
 const products = [
 
+/* =========================
+   MEN - SHIRTS
+========================= */
+
 {
-id:1,
-group:"men",
-category:"Shirts",
-name:"Premium Oxford Shirt",
-price:1499,
-oldPrice:1999,
-badge:"BEST SELLER",
+    id:1,
+    group:"men",
+    category:"Shirts",
+    name:"Premium Oxford Casual Shirt",
+    price:1499,
+    oldPrice:1999,
+    stock:25,
+    badge:"BEST SELLER",
 
-photos:[
-"https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=900&q=90",
-"https://images.unsplash.com/photo-1603252109303-2751441dd157?auto=format&fit=crop&w=900&q=90",
-"https://images.unsplash.com/photo-1602810319428-019690571b5b?auto=format&fit=crop&w=900&q=90",
-"https://images.unsplash.com/photo-1608234807905-4466023792f5?auto=format&fit=crop&w=900&q=90"
-],
+    sizes:["S","M","L","XL","XXL"],
 
-description:
-"Premium Oxford shirt designed for a clean and confident everyday look."
+    photos:[
+        "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1603252109303-2751441dd157?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1602810319428-019690571b5b?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=1000&q=90"
+    ],
+
+    description:
+        "Premium Oxford casual shirt designed for a smart everyday appearance. Comfortable enough for long working days and stylish enough for casual occasions.",
+
+    features:[
+        "Premium Oxford cotton fabric",
+        "Regular comfortable fit",
+        "Breathable and lightweight",
+        "Full sleeve design",
+        "Button-down front",
+        "Machine washable",
+        "Suitable for office and casual wear"
+    ]
 },
 
+
 {
-id:2,
-group:"men",
-category:"T-Shirts",
-name:"Essential Premium Tee",
-price:899,
-oldPrice:1299,
-badge:"TRENDING",
+    id:2,
+    group:"men",
+    category:"Shirts",
+    name:"Classic Premium Blue Shirt",
+    price:1399,
+    oldPrice:1899,
+    stock:30,
+    badge:"TRENDING",
 
-photos:[
-"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=90",
-"https://images.unsplash.com/photo-1503341504253-dff4815485f1?auto=format&fit=crop&w=900&q=90",
-"https://images.unsplash.com/photo-1583743814966-8936f37f4678?auto=format&fit=crop&w=900&q=90",
-"https://images.unsplash.com/photo-1622445275576-721325763afe?auto=format&fit=crop&w=900&q=90"
-],
+    sizes:["S","M","L","XL","XXL"],
 
-description:
-"Premium cotton T-shirt with a clean modern silhouette."
+    photos:[
+        "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1621072156002-e2fccdc0b176?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1608234807905-4466023792f5?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1603252109303-2751441dd157?auto=format&fit=crop&w=1000&q=90"
+    ],
+
+    description:
+        "Clean modern shirt with a versatile design that works equally well with jeans, chinos or formal trousers.",
+
+    features:[
+        "Soft cotton blend",
+        "Modern regular fit",
+        "Smooth finish",
+        "Comfortable collar",
+        "Long sleeves",
+        "Easy-care fabric",
+        "Everyday premium styling"
+    ]
 },
 
+
+/* =========================
+   MEN - T SHIRTS
+========================= */
+
 {
-id:3,
-group:"men",
-category:"Formal Shirts",
-name:"Executive White Shirt",
-price:1899,
-oldPrice:2499,
-badge:"PREMIUM",
+    id:3,
+    group:"men",
+    category:"T-Shirts",
+    name:"Essential Premium Cotton T-Shirt",
+    price:899,
+    oldPrice:1299,
+    stock:45,
+    badge:"TRENDING",
 
-photos:[
-"https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=900&q=90",
-"https://images.unsplash.com/photo-1621072156002-e2fccdc0b176?auto=format&fit=crop&w=900&q=90",
-"https://images.unsplash.com/photo-1608234807905-4466023792f5?auto=format&fit=crop&w=900&q=90",
-"https://images.unsplash.com/photo-1603252109303-2751441dd157?auto=format&fit=crop&w=900&q=90"
-],
+    sizes:["S","M","L","XL","XXL"],
 
-description:
-"Elegant formal shirt for business meetings and special occasions."
+    photos:[
+        "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1503341504253-dff4815485f1?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1583743814966-8936f37f4678?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1622445275576-721325763afe?auto=format&fit=crop&w=1000&q=90"
+    ],
+
+    description:
+        "A premium everyday T-shirt made for comfort, movement and effortless styling.",
+
+    features:[
+        "Soft cotton fabric",
+        "Breathable construction",
+        "Regular fit",
+        "Comfort ribbed neckline",
+        "Durable stitching",
+        "Minimal premium look",
+        "Suitable for everyday wear"
+    ]
 },
 
+
 {
-id:4,
-group:"men",
-category:"Formal Pants",
-name:"Tailored Black Trousers",
-price:1999,
-oldPrice:2799,
-badge:"NEW",
+    id:4,
+    group:"men",
+    category:"T-Shirts",
+    name:"Urban Essential Black Tee",
+    price:999,
+    oldPrice:1399,
+    stock:40,
+    badge:"NEW",
 
-photos:[
-"https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=900&q=90",
-"https://images.unsplash.com/photo-1598033129183-c4f50c736f10?auto=format&fit=crop&w=900&q=90",
-"https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?auto=format&fit=crop&w=900&q=90",
-"https://images.unsplash.com/photo-1610652492500-ded49ceeb378?auto=format&fit=crop&w=900&q=90"
-],
+    sizes:["S","M","L","XL","XXL"],
 
-description:
-"Tailored formal trousers with a refined premium finish."
+    photos:[
+        "https://images.unsplash.com/photo-1583743814966-8936f37f4678?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1503341504253-dff4815485f1?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1622445275576-721325763afe?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=1000&q=90"
+    ],
+
+    description:
+        "Minimal black T-shirt for a sharp streetwear-inspired wardrobe.",
+
+    features:[
+        "Premium cotton",
+        "Soft hand feel",
+        "Regular fit",
+        "Fade-resistant colour",
+        "Lightweight",
+        "Everyday styling",
+        "Easy to pair with jeans"
+    ]
 },
 
+
+/* =========================
+   MEN - FORMAL SHIRTS
+========================= */
+
 {
-id:5,
-group:"women",
-category:"Formal Shirts",
-name:"Silk Touch Blouse",
-price:1799,
-oldPrice:2399,
-badge:"NEW",
+    id:5,
+    group:"men",
+    category:"Formal Shirts",
+    name:"Executive White Formal Shirt",
+    price:1899,
+    oldPrice:2499,
+    stock:20,
+    badge:"PREMIUM",
 
-photos:[
-"https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=900&q=90",
-"https://images.unsplash.com/photo-1551488831-8f9d5f1d2c1b?auto=format&fit=crop&w=900&q=90",
-"https://images.unsplash.com/photo-1598554747436-c9293d6a588f?auto=format&fit=crop&w=900&q=90",
-"https://images.unsplash.com/photo-1581044777550-4cfa60707c03?auto=format&fit=crop&w=900&q=90"
-],
+    sizes:["S","M","L","XL","XXL"],
 
-description:
-"Elegant women's formal blouse with a smooth premium finish."
+    photos:[
+        "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1621072156002-e2fccdc0b176?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1608234807905-4466023792f5?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1603252109303-2751441dd157?auto=format&fit=crop&w=1000&q=90"
+    ],
+
+    description:
+        "Elegant formal white shirt designed for meetings, presentations, business events and special occasions.",
+
+    features:[
+        "Premium formal fabric",
+        "Sharp structured collar",
+        "Comfort regular fit",
+        "Low-wrinkle finish",
+        "Professional appearance",
+        "Long sleeve",
+        "Ideal for office wear"
+    ]
 },
 
+
 {
-id:6,
-group:"women",
-category:"Formal Pants",
-name:"Elegant Tailored Pants",
-price:1899,
-oldPrice:2599,
-badge:"",
+    id:6,
+    group:"men",
+    category:"Formal Shirts",
+    name:"Executive Sky Blue Shirt",
+    price:1799,
+    oldPrice:2299,
+    stock:18,
+    badge:"FORMAL",
 
-photos:[
-"https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=900&q=90",
-"https://images.unsplash.com/photo-1506629905607-d9a9b8a8c6e0?auto=format&fit=crop&w=900&q=90",
-"https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=900&q=90",
-"https://images.unsplash.com/photo-1584273143981-41c073dfe8f8?auto=format&fit=crop&w=900&q=90"
-],
+    sizes:["S","M","L","XL","XXL"],
 
-description:
-"Modern tailored pants designed for a sophisticated professional wardrobe."
+    photos:[
+        "https://images.unsplash.com/photo-1621072156002-e2fccdc0b176?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1603252109303-2751441dd157?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1602810319428-019690571b5b?auto=format&fit=crop&w=1000&q=90"
+    ],
+
+    description:
+        "Sophisticated sky-blue formal shirt for a refined professional wardrobe.",
+
+    features:[
+        "Premium blend fabric",
+        "Formal cut",
+        "Breathable",
+        "Comfortable cuffs",
+        "Elegant colour",
+        "Office-ready",
+        "Easy-care construction"
+    ]
 },
 
+
+/* =========================
+   MEN - FORMAL PANTS
+========================= */
+
 {
-id:7,
-group:"women",
-category:"Dresses",
-name:"Satin Evening Dress",
-price:2499,
-oldPrice:3299,
-badge:"BEST SELLER",
+    id:7,
+    group:"men",
+    category:"Formal Pants",
+    name:"Tailored Black Formal Trousers",
+    price:1999,
+    oldPrice:2799,
+    stock:22,
+    badge:"NEW",
 
-photos:[
-"https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=900&q=90",
-"https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=900&q=90",
-"https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=900&q=90",
-"https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=900&q=90"
-],
+    sizes:["28","30","32","34","36","38","40"],
 
-description:
-"Elegant satin dress created for evening occasions."
+    photos:[
+        "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1610652492500-ded49ceeb378?auto=format&fit=crop&w=1000&q=90"
+    ],
+
+    description:
+        "Tailored black trousers with a clean professional silhouette and comfortable construction.",
+
+    features:[
+        "Premium suiting fabric",
+        "Tailored fit",
+        "Flat front design",
+        "Comfort waistband",
+        "Professional black colour",
+        "Office and event wear",
+        "Durable stitching"
+    ]
 },
 
+
 {
-id:8,
-group:"women",
-category:"Leggings",
-name:"Second Skin Leggings",
-price:799,
-oldPrice:1099,
-badge:"",
+    id:8,
+    group:"men",
+    category:"Formal Pants",
+    name:"Modern Charcoal Formal Pants",
+    price:2099,
+    oldPrice:2899,
+    stock:15,
+    badge:"PREMIUM",
 
-photos:[
-"https://images.unsplash.com/photo-1506629905607-d9a9b8a8c6e0?auto=format&fit=crop&w=900&q=90",
-"https://images.unsplash.com/photo-1506629905607-d9a9b8a8c6e0?auto=format&fit=crop&w=900&q=90",
-"https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=90",
-"https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=90"
-],
+    sizes:["28","30","32","34","36","38","40"],
 
-description:
-"Comfortable stretch leggings designed for everyday movement."
+    photos:[
+        "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1610652492500-ded49ceeb378?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?auto=format&fit=crop&w=1000&q=90"
+    ],
+
+    description:
+        "Refined charcoal trousers designed for modern office and occasion styling.",
+
+    features:[
+        "Premium suiting material",
+        "Modern tailored silhouette",
+        "Smooth finish",
+        "Comfort waistband",
+        "Smart professional styling",
+        "Easy to coordinate",
+        "All-season wear"
+    ]
 },
 
+
+/* =========================================================
+   WOMEN
+========================================================= */
+
+
+/* WOMEN FORMAL SHIRTS */
+
 {
-id:9,
-group:"women",
-category:"Sarees",
-name:"Elegant Heritage Saree",
-price:2999,
-oldPrice:3999,
-badge:"PREMIUM",
+    id:9,
+    group:"women",
+    category:"Formal Shirts",
+    name:"Elegant Silk Touch Formal Blouse",
+    price:1799,
+    oldPrice:2399,
+    stock:25,
+    badge:"NEW",
 
-photos:[
-"https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=900&q=90",
-"https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=900&q=90",
-"https://images.unsplash.com/photo-1583391733956-6c78276477e2?auto=format&fit=crop&w=900&q=90",
-"https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&w=900&q=90"
-],
+    sizes:["XS","S","M","L","XL","XXL"],
 
-description:
-"Premium heritage-inspired saree with an elegant traditional finish."
+    photos:[
+        "https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1598554747436-c9293d6a588f?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1581044777550-4cfa60707c03?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1551488831-8f9d5f1d2c1b?auto=format&fit=crop&w=1000&q=90"
+    ],
+
+    description:
+        "Elegant women's formal blouse with a smooth premium finish, perfect for office and professional occasions.",
+
+    features:[
+        "Silk-touch premium fabric",
+        "Elegant drape",
+        "Comfortable fit",
+        "Smooth finish",
+        "Professional styling",
+        "Easy to pair with trousers",
+        "Suitable for office wear"
+    ]
+},
+
+
+{
+    id:10,
+    group:"women",
+    category:"Formal Shirts",
+    name:"Classic White Office Shirt",
+    price:1599,
+    oldPrice:2199,
+    stock:28,
+    badge:"BEST SELLER",
+
+    sizes:["XS","S","M","L","XL","XXL"],
+
+    photos:[
+        "https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1598554747436-c9293d6a588f?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1581044777550-4cfa60707c03?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1551488831-8f9d5f1d2c1b?auto=format&fit=crop&w=1000&q=90"
+    ],
+
+    description:
+        "Minimal white formal shirt designed for a polished professional appearance.",
+
+    features:[
+        "Soft breathable fabric",
+        "Classic collar",
+        "Regular fit",
+        "Clean white finish",
+        "Professional look",
+        "Comfortable sleeves",
+        "Easy-care material"
+    ]
+},
+
+
+/* WOMEN FORMAL PANTS */
+
+{
+    id:11,
+    group:"women",
+    category:"Formal Pants",
+    name:"Elegant Tailored Black Pants",
+    price:1899,
+    oldPrice:2599,
+    stock:20,
+    badge:"PREMIUM",
+
+    sizes:["XS","S","M","L","XL","XXL"],
+
+    photos:[
+        "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1506629905607-d9a9b8a8c6e0?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1584273143981-41c073dfe8f8?auto=format&fit=crop&w=1000&q=90"
+    ],
+
+    description:
+        "Modern tailored pants designed for professional outfits and sophisticated everyday styling.",
+
+    features:[
+        "Premium stretch fabric",
+        "Tailored silhouette",
+        "Comfort waistband",
+        "Soft inner feel",
+        "Professional finish",
+        "Easy movement",
+        "Office-friendly design"
+    ]
+},
+
+
+{
+    id:12,
+    group:"women",
+    category:"Formal Pants",
+    name:"Modern Beige Office Trousers",
+    price:1799,
+    oldPrice:2399,
+    stock:23,
+    badge:"NEW",
+
+    sizes:["XS","S","M","L","XL","XXL"],
+
+    photos:[
+        "https://images.unsplash.com/photo-1506629905607-d9a9b8a8c6e0?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1584273143981-41c073dfe8f8?auto=format&fit=crop&w=1000&q=90"
+    ],
+
+    description:
+        "Sophisticated beige trousers offering a soft neutral colour and polished professional appearance.",
+
+    features:[
+        "Stretch comfort fabric",
+        "Modern straight fit",
+        "Neutral beige colour",
+        "Comfort waistband",
+        "Professional styling",
+        "Lightweight feel",
+        "Easy to mix and match"
+    ]
+},
+
+
+/* WOMEN DRESSES */
+
+{
+    id:13,
+    group:"women",
+    category:"Dresses",
+    name:"Satin Evening Dress",
+    price:2499,
+    oldPrice:3299,
+    stock:12,
+    badge:"BEST SELLER",
+
+    sizes:["XS","S","M","L","XL"],
+
+    photos:[
+        "https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=1000&q=90"
+    ],
+
+    description:
+        "Elegant satin evening dress created for dinners, celebrations and special occasions.",
+
+    features:[
+        "Smooth satin-look fabric",
+        "Elegant silhouette",
+        "Comfortable lining",
+        "Premium finish",
+        "Evening occasion design",
+        "Soft drape",
+        "Statement style"
+    ]
+},
+
+
+{
+    id:14,
+    group:"women",
+    category:"Dresses",
+    name:"Elegant Everyday Midi Dress",
+    price:1999,
+    oldPrice:2699,
+    stock:18,
+    badge:"TRENDING",
+
+    sizes:["XS","S","M","L","XL"],
+
+    photos:[
+        "https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1000&q=90"
+    ],
+
+    description:
+        "Versatile midi dress designed for effortless everyday elegance.",
+
+    features:[
+        "Soft comfortable fabric",
+        "Relaxed elegant fit",
+        "Lightweight",
+        "Easy movement",
+        "Modern midi length",
+        "Day-to-evening styling",
+        "Easy maintenance"
+    ]
+},
+
+
+/* WOMEN LEGGINGS */
+
+{
+    id:15,
+    group:"women",
+    category:"Leggings",
+    name:"Second Skin Premium Leggings",
+    price:799,
+    oldPrice:1099,
+    stock:50,
+    badge:"VALUE",
+
+    sizes:["S","M","L","XL","XXL"],
+
+    photos:[
+        "https://images.unsplash.com/photo-1506629905607-d9a9b8a8c6e0?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=1000&q=90"
+    ],
+
+    description:
+        "Comfortable stretch leggings designed for everyday movement, casual wear and layering.",
+
+    features:[
+        "High-stretch fabric",
+        "Soft-touch feel",
+        "Comfort waistband",
+        "Flexible movement",
+        "Body-hugging fit",
+        "Everyday essential",
+        "Easy-care fabric"
+    ]
+},
+
+
+/* WOMEN SAREES */
+
+{
+    id:16,
+    group:"women",
+    category:"Sarees",
+    name:"Elegant Heritage Saree",
+    price:2999,
+    oldPrice:3999,
+    stock:10,
+    badge:"PREMIUM",
+
+    sizes:["FREE SIZE"],
+
+    photos:[
+        "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1583391733956-6c78276477e2?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&w=1000&q=90"
+    ],
+
+    description:
+        "Premium heritage-inspired saree designed for festive occasions, family celebrations and elegant traditional styling.",
+
+    features:[
+        "Premium saree fabric",
+        "Elegant traditional appearance",
+        "Beautiful drape",
+        "Statement border",
+        "Festive styling",
+        "Comfortable for occasions",
+        "Includes blouse piece"
+    ]
+},
+
+
+{
+    id:17,
+    group:"women",
+    category:"Sarees",
+    name:"Classic Festive Saree",
+    price:2799,
+    oldPrice:3699,
+    stock:14,
+    badge:"FESTIVE",
+
+    sizes:["FREE SIZE"],
+
+    photos:[
+        "https://images.unsplash.com/photo-1583391733956-6c78276477e2?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&w=1000&q=90",
+        "https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=1000&q=90"
+    ],
+
+    description:
+        "Classic festive saree created for traditional occasions with an elegant premium appearance.",
+
+    features:[
+        "Premium traditional fabric",
+        "Festive finish",
+        "Elegant border",
+        "Comfortable drape",
+        "Occasion wear",
+        "Blouse piece included",
+        "Gift-worthy presentation"
+    ]
 }
 
 ];
 
 
-let cart =
-JSON.parse(
-localStorage.getItem("aonedeal_cart") || "[]"
-);
+/* =========================================================
+   GLOBAL VARIABLES
+========================================================= */
 
 let currentProduct = null;
+let currentPhotoIndex = 0;
+let selectedSize = "";
+let modalQuantity = 1;
 
-
-/* ======================================================
-   PRODUCT CARD
-====================================================== */
-
-function productCard(product){
-
-return `
-
-<article class="product">
-
-<div
-class="productImage"
-onclick="openProduct(${product.id})"
-style="cursor:pointer"
->
-
-<img
-src="${product.photos[0]}"
-alt="${product.name}"
-loading="lazy"
->
-
-${
-product.badge
-?
-`<span class="productBadge">
-${product.badge}
-</span>`
-:
-""
-}
-
-<button
-class="quickAdd"
-onclick="event.stopPropagation();addToCart(${product.id})"
->
-ADD TO BAG
-</button>
-
-</div>
-
-
-<div class="productInfo"
-onclick="openProduct(${product.id})"
-style="cursor:pointer">
-
-<h3>
-${product.name}
-</h3>
-
-<div class="price">
-
-₹${product.price.toLocaleString("en-IN")}
-
-<span class="oldPrice">
-₹${product.oldPrice.toLocaleString("en-IN")}
-</span>
-
-</div>
-
-</div>
-
-</article>
-
-`;
-}
-
-
-/* ======================================================
-   RENDER
-====================================================== */
-
-function renderProducts(){
-
-document.getElementById("menProducts").innerHTML =
-products
-.filter(p=>p.group==="men")
-.map(productCard)
-.join("");
-
-
-document.getElementById("womenProducts").innerHTML =
-products
-.filter(p=>p.group==="women")
-.map(productCard)
-.join("");
-
-updateCart();
-
-}
-
-
-/* ======================================================
-   CATEGORY FILTER
-====================================================== */
-
-function filterProducts(group,category,button){
-
-const container =
-group==="men"
-?
-document.getElementById("menProducts")
-:
-document.getElementById("womenProducts");
-
-
-document
-.querySelectorAll(
-group==="men"
-?
-"#men .filter"
-:
-"#women .filter"
-)
-.forEach(btn=>{
-btn.classList.remove("active");
-});
-
-
-button.classList.add("active");
-
-
-container.innerHTML =
-products
-.filter(p=>
-p.group===group &&
-(category==="All" || p.category===category)
-)
-.map(productCard)
-.join("");
-
-}
-
-
-/* ======================================================
-   PRODUCT DETAIL
-====================================================== */
-
-function openProduct(id){
-
-const product =
-products.find(p=>p.id===id);
-
-if(!product)return;
-
-currentProduct=product;
-
-
-document.getElementById("productCategory")
-.textContent=product.category;
-
-document.getElementById("productName")
-.textContent=product.name;
-
-document.getElementById("productPrice")
-.innerHTML=
-`₹${product.price.toLocaleString("en-IN")}
-<span style="color:#999;text-decoration:line-through;font-size:14px">
-₹${product.oldPrice.toLocaleString("en-IN")}
-</span>`;
-
-document.getElementById("productDescription")
-.textContent=product.description;
-
-
-document.getElementById("mainProductPhoto")
-.src=product.photos[0];
-
-
-const thumbs =
-document.getElementById("productThumbs");
-
-thumbs.innerHTML="";
-
-
-product.photos.forEach(
-(photo,index)=>{
-
-const thumb =
-document.createElement("div");
-
-thumb.className=
-"thumb"+(index===0?" active":"");
-
-thumb.innerHTML=
-`<img src="${photo}" alt="">`;
-
-thumb.onclick=()=>{
-
-document.getElementById(
-"mainProductPhoto"
-).src=photo;
-
-document
-.querySelectorAll(".thumb")
-.forEach(t=>
-t.classList.remove("active")
+let cart = JSON.parse(
+    localStorage.getItem("aonedeal_cart") || "[]"
 );
 
-thumb.classList.add("active");
-
-};
-
-thumbs.appendChild(thumb);
-
-});
-
-
-document.getElementById(
-"productAddButton"
-).onclick=()=>{
-addToCart(product.id);
-};
-
-
-document
-.getElementById("productModal")
-.classList.add("show");
-
-}
-
-
-function closeProduct(){
-
-document
-.getElementById("productModal")
-.classList.remove("show");
-
-}
-
-
-/* ======================================================
-   SIZE
-====================================================== */
-
-function selectSize(button){
-
-document
-.querySelectorAll(".size")
-.forEach(
-b=>b.classList.remove("selected")
+let wishlist = JSON.parse(
+    localStorage.getItem("aonedeal_wishlist") || "[]"
 );
 
-button.classList.add("selected");
+
+/* =========================================================
+   BASIC HELPERS
+========================================================= */
+
+function money(value){
+
+    return "₹" + Number(value).toLocaleString("en-IN");
 
 }
 
 
-/* ======================================================
-   AUTH HELPERS
-====================================================== */
+function discountPercent(product){
+
+    if(!product.oldPrice){
+        return "";
+    }
+
+    const discount =
+        Math.round(
+            ((product.oldPrice - product.price) /
+            product.oldPrice) * 100
+        );
+
+    return discount + "% OFF";
+
+}
+
+
+function showToast(message){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+    setTimeout(() => {
+
+        toast.classList.remove("show");
+
+    },3000);
+
+}
+
+
+/* =========================================================
+   AUTH CHECK
+========================================================= */
+
+async function getCurrentSession(){
+
+    if(!supabaseClient){
+        return null;
+    }
+
+    const {
+        data,
+        error
+    } = await supabaseClient.auth.getSession();
+
+    if(error){
+        console.error(error);
+        return null;
+    }
+
+    return data.session;
+
+}
+
+
+/* =========================================================
+   AUTH MODAL
+========================================================= */
 
 function openAuth(){
 
-document
-.getElementById("authModal")
-.classList.add("show");
+    closeAll();
 
-showLogin();
+    document
+        .getElementById("authModal")
+        .classList.add("show");
+
+    updateAuthPanel();
 
 }
 
 
 function closeAuth(){
 
-document
-.getElementById("authModal")
-.classList.remove("show");
+    document
+        .getElementById("authModal")
+        .classList.remove("show");
 
 }
 
 
-function showLogin(){
+function showAuthTab(tab){
 
-document.getElementById("loginForm")
-.style.display="block";
+    clearAuthMessage();
 
-document.getElementById("signupForm")
-.style.display="none";
+    document
+        .querySelectorAll(".auth-form")
+        .forEach(form => form.classList.remove("active"));
 
-document.getElementById("otpForm")
-.style.display="none";
-
-document.getElementById("forgotForm")
-.style.display="none";
-
-document.getElementById("accountBox")
-.style.display="none";
+    document
+        .querySelectorAll(".auth-tab")
+        .forEach(btn => btn.classList.remove("active"));
 
 
-document.getElementById("loginTab")
-.classList.add("active");
+    if(tab === "login"){
 
-document.getElementById("signupTab")
-.classList.remove("active");
+        document
+            .getElementById("loginForm")
+            .classList.add("active");
 
-}
+        document
+            .getElementById("loginTab")
+            .classList.add("active");
 
-
-function showSignup(){
-
-document.getElementById("loginForm")
-.style.display="none";
-
-document.getElementById("signupForm")
-.style.display="block";
-
-document.getElementById("otpForm")
-.style.display="none";
-
-document.getElementById("forgotForm")
-.style.display="none";
-
-document.getElementById("accountBox")
-.style.display="none";
+    }
 
 
-document.getElementById("loginTab")
-.classList.remove("active");
+    if(tab === "signup"){
 
-document.getElementById("signupTab")
-.classList.add("active");
+        document
+            .getElementById("signupForm")
+            .classList.add("active");
+
+        document
+            .getElementById("signupTab")
+            .classList.add("active");
+
+    }
 
 }
 
 
-function showForgot(){
+function showForgotPassword(){
 
-document.getElementById("loginForm")
-.style.display="none";
+    clearAuthMessage();
 
-document.getElementById("signupForm")
-.style.display="none";
+    document
+        .querySelectorAll(".auth-form")
+        .forEach(form => form.classList.remove("active"));
 
-document.getElementById("otpForm")
-.style.display="none";
-
-document.getElementById("forgotForm")
-.style.display="block";
-
-document.getElementById("accountBox")
-.style.display="none";
+    document
+        .getElementById("forgotForm")
+        .classList.add("active");
 
 }
 
 
-/* ======================================================
-   SIGN UP
-====================================================== */
+function showMessage(message,type="error"){
+
+    const box =
+        document.getElementById("authMessage");
+
+    box.textContent = message;
+
+    box.className =
+        "message show " + type;
+
+}
+
+
+function clearAuthMessage(){
+
+    const box =
+        document.getElementById("authMessage");
+
+    box.textContent = "";
+
+    box.className = "message";
+
+}
+
+
+/* =========================================================
+   SIGNUP
+========================================================= */
 
 async function signupUser(event){
 
-event.preventDefault();
+    event.preventDefault();
 
-const name =
-document.getElementById("signupName")
-.value.trim();
+    clearAuthMessage();
 
-const email =
-document.getElementById("signupEmail")
-.value.trim();
+    if(!supabaseClient){
 
-const password =
-document.getElementById("signupPassword")
-.value;
+        showMessage(
+            "Supabase is not connected. Please add your Supabase URL and key in the code.",
+            "error"
+        );
 
-
-const message =
-document.getElementById("signupMessage");
-
-message.className="authMessage";
-message.textContent="Creating account...";
+        return;
+    }
 
 
-const {data,error} =
-await supabaseClient.auth.signUp({
+    const name =
+        document
+            .getElementById("signupName")
+            .value
+            .trim();
 
-email:email,
+    const email =
+        document
+            .getElementById("signupEmail")
+            .value
+            .trim()
+            .toLowerCase();
 
-password:password,
+    const password =
+        document
+            .getElementById("signupPassword")
+            .value;
 
-options:{
-data:{
-full_name:name
+
+    if(password.length < 6){
+
+        showMessage(
+            "Password must be at least 6 characters.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    showMessage(
+        "Creating your account...",
+        "success"
+    );
+
+
+    const {
+        data,
+        error
+    } = await supabaseClient.auth.signUp({
+
+        email,
+        password,
+
+        options:{
+            data:{
+                full_name:name
+            },
+
+            emailRedirectTo:
+                window.location.href.split("#")[0]
+        }
+
+    });
+
+
+    if(error){
+
+        showMessage(
+            error.message,
+            "error"
+        );
+
+        return;
+    }
+
+
+    sessionStorage.setItem(
+        "aonedeal_signup_email",
+        email
+    );
+
+
+    /*
+       If Supabase returned a session immediately,
+       the project may have email confirmation disabled.
+       For this store, email confirmation should remain enabled.
+    */
+
+    if(data.session){
+
+        showMessage(
+            "Account created. You are now logged in.",
+            "success"
+        );
+
+        await updateAuthButton();
+
+        setTimeout(() => {
+
+            closeAuth();
+
+        },1000);
+
+        return;
+    }
+
+
+    /*
+       Email confirmation/OTP required.
+    */
+
+    document
+        .querySelectorAll(".auth-form")
+        .forEach(form => form.classList.remove("active"));
+
+    document
+        .getElementById("otpForm")
+        .classList.add("active");
+
+
+    document
+        .getElementById("otpEmailText")
+        .textContent = email;
+
+
+    showMessage(
+        "OTP has been sent to your email. Enter the 6 digit OTP.",
+        "success"
+    );
+
 }
-}
-
-});
 
 
-if(error){
-
-message.className=
-"authMessage error";
-
-message.textContent=
-error.message;
-
-return;
-
-}
-
-
-/*
-IMPORTANT:
-
-If your Supabase email template is configured
-for OTP, user will receive the OTP.
-
-The account is NOT treated as logged in until
-OTP verification is successful.
-*/
-
-
-sessionStorage.setItem(
-"signup_email",
-email
-);
-
-
-document.getElementById("signupForm")
-.style.display="none";
-
-document.getElementById("otpForm")
-.style.display="block";
-
-
-document.getElementById("authTitle")
-.textContent="Verify Your Email";
-
-document.getElementById("authSubtitle")
-.textContent=
-"Enter the OTP sent to your email.";
-
-}
-
-
-/* ======================================================
-   VERIFY SIGNUP OTP
-====================================================== */
+/* =========================================================
+   VERIFY OTP
+========================================================= */
 
 async function verifySignupOtp(event){
 
-event.preventDefault();
+    event.preventDefault();
 
-const email =
-sessionStorage.getItem("signup_email");
+    clearAuthMessage();
 
-const token =
-document.getElementById("signupOtp")
-.value.trim();
+    if(!supabaseClient){
 
+        showMessage(
+            "Supabase is not connected.",
+            "error"
+        );
 
-const message =
-document.getElementById("otpMessage");
-
-message.textContent="Verifying...";
-
-
-const {data,error} =
-await supabaseClient.auth.verifyOtp({
-
-email:email,
-
-token:token,
-
-type:"signup"
-
-});
+        return;
+    }
 
 
-if(error){
+    const email =
+        sessionStorage.getItem(
+            "aonedeal_signup_email"
+        );
 
-message.className=
-"authMessage error";
+    const token =
+        document
+            .getElementById("otpCode")
+            .value
+            .trim();
 
-message.textContent=
-"Invalid or expired OTP.";
 
-return;
+    if(!email){
+
+        showMessage(
+            "Signup session expired. Please create the account again.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    if(!/^[0-9]{6}$/.test(token)){
+
+        showMessage(
+            "Please enter a valid 6 digit OTP.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    const {
+        data,
+        error
+    } = await supabaseClient.auth.verifyOtp({
+
+        email,
+        token,
+
+        /*
+          Current Supabase email OTP verification.
+        */
+        type:"email"
+
+    });
+
+
+    if(error){
+
+        showMessage(
+            error.message,
+            "error"
+        );
+
+        return;
+    }
+
+
+    sessionStorage.removeItem(
+        "aonedeal_signup_email"
+    );
+
+
+    showMessage(
+        "Account verified successfully. Welcome to AONeDEAL!",
+        "success"
+    );
+
+
+    await updateAuthButton();
+
+
+    setTimeout(() => {
+
+        closeAuth();
+
+    },1200);
 
 }
 
 
-message.className=
-"authMessage success";
-
-message.textContent=
-"Account verified successfully.";
-
-
-sessionStorage.removeItem("signup_email");
-
-
-setTimeout(()=>{
-
-closeAuth();
-
-updateAuthButton();
-
-},800);
-
-}
-
-
-/* ======================================================
+/* =========================================================
    LOGIN
-====================================================== */
+========================================================= */
 
 async function loginUser(event){
 
-event.preventDefault();
+    event.preventDefault();
+
+    clearAuthMessage();
+
+    if(!supabaseClient){
+
+        showMessage(
+            "Supabase is not connected. Add your Supabase URL and key first.",
+            "error"
+        );
+
+        return;
+    }
 
 
-const email =
-document.getElementById("loginEmail")
-.value.trim();
+    const email =
+        document
+            .getElementById("loginEmail")
+            .value
+            .trim()
+            .toLowerCase();
 
-const password =
-document.getElementById("loginPassword")
-.value;
-
-
-const message =
-document.getElementById("loginMessage");
-
-message.textContent="Logging in...";
+    const password =
+        document
+            .getElementById("loginPassword")
+            .value;
 
 
-const {data,error} =
-await supabaseClient.auth.signInWithPassword({
+    if(!email || !password){
 
-email:email,
+        showMessage(
+            "Please enter email and password.",
+            "error"
+        );
 
-password:password
+        return;
+    }
 
-});
+
+    showMessage(
+        "Checking your account...",
+        "success"
+    );
 
 
-if(error){
+    const {
+        data,
+        error
+    } = await supabaseClient.auth.signInWithPassword({
 
-message.className=
-"authMessage error";
+        email,
+        password
 
-message.textContent=
-"Account not found or email/password is incorrect.";
+    });
 
-return;
+
+    if(error){
+
+        /*
+           This prevents fake/demo login.
+           If account/password does not exist,
+           Supabase returns an error.
+        */
+
+        showMessage(
+            "Login failed: " + error.message,
+            "error"
+        );
+
+        return;
+    }
+
+
+    if(!data.session){
+
+        showMessage(
+            "Login could not be completed. Please verify your email first.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    showMessage(
+        "Login successful!",
+        "success"
+    );
+
+
+    await updateAuthButton();
+
+
+    setTimeout(() => {
+
+        closeAuth();
+
+    },800);
 
 }
 
 
-message.className=
-"authMessage success";
-
-message.textContent=
-"Login successful.";
-
-
-setTimeout(()=>{
-
-closeAuth();
-
-updateAuthButton();
-
-},500);
-
-}
-
-
-/* ======================================================
+/* =========================================================
    FORGOT PASSWORD
-====================================================== */
+========================================================= */
 
 async function sendResetEmail(event){
 
-event.preventDefault();
+    event.preventDefault();
+
+    clearAuthMessage();
+
+    if(!supabaseClient){
+
+        showMessage(
+            "Supabase is not connected.",
+            "error"
+        );
+
+        return;
+    }
 
 
-const email =
-document.getElementById("forgotEmail")
-.value.trim();
+    const email =
+        document
+            .getElementById("forgotEmail")
+            .value
+            .trim()
+            .toLowerCase();
 
 
-const message =
-document.getElementById("forgotMessage");
+    if(!email){
 
-message.textContent=
-"Sending reset email...";
+        showMessage(
+            "Enter your account email.",
+            "error"
+        );
 
-
-const {error} =
-await supabaseClient.auth
-.resetPasswordForEmail(
-
-email,
-
-{
-redirectTo:
-window.location.origin+
-window.location.pathname+
-"?reset=true"
-}
-
-);
+        return;
+    }
 
 
-if(error){
-
-message.className=
-"authMessage error";
-
-message.textContent=
-error.message;
-
-return;
-
-}
-
-
-message.className=
-"authMessage success";
-
-message.textContent=
-"Password reset link sent to your email.";
-
-}
+    const {
+        error
+    } = await supabaseClient.auth.resetPasswordForEmail(
+        email,
+        {
+            redirectTo:
+                window.location.origin +
+                window.location.pathname +
+                "?reset=true"
+        }
+    );
 
 
-/* ======================================================
-   AUTH STATUS
-====================================================== */
+    if(error){
 
-async function updateAuthButton(){
+        showMessage(
+            error.message,
+            "error"
+        );
 
-const {
-data:{
-session
-}
-} =
-await supabaseClient.auth.getSession();
+        return;
+    }
 
 
-const button =
-document.getElementById("accountButton");
-
-
-if(session){
-
-button.textContent="ACCOUNT";
-
-}else{
-
-button.textContent="LOGIN";
-
-}
+    showMessage(
+        "Password reset email sent. Open the email and follow the reset link.",
+        "success"
+    );
 
 }
 
 
-async function openAccount(){
+/* =========================================================
+   UPDATE PASSWORD AFTER RESET
+========================================================= */
 
-const {
-data:{
-session
+async function updatePassword(event){
+
+    event.preventDefault();
+
+    clearAuthMessage();
+
+
+    const password =
+        document
+            .getElementById("newPassword")
+            .value;
+
+    const confirm =
+        document
+            .getElementById("confirmPassword")
+            .value;
+
+
+    if(password.length < 6){
+
+        showMessage(
+            "Password must be at least 6 characters.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    if(password !== confirm){
+
+        showMessage(
+            "Passwords do not match.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    if(!supabaseClient){
+
+        showMessage(
+            "Supabase is not connected.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    const {
+        error
+    } = await supabaseClient.auth.updateUser({
+
+        password:password
+
+    });
+
+
+    if(error){
+
+        showMessage(
+            error.message,
+            "error"
+        );
+
+        return;
+    }
+
+
+    showMessage(
+        "Password updated successfully. You can now login.",
+        "success"
+    );
+
+
+    setTimeout(() => {
+
+        showAuthTab("login");
+
+    },1200);
+
 }
-} =
-await supabaseClient.auth.getSession();
 
 
-if(!session){
-
-openAuth();
-
-return;
-
-}
-
-
-const email =
-session.user.email;
-
-
-document.getElementById("loginForm")
-.style.display="none";
-
-document.getElementById("signupForm")
-.style.display="none";
-
-document.getElementById("otpForm")
-.style.display="none";
-
-document.getElementById("forgotForm")
-.style.display="none";
-
-document.getElementById("accountBox")
-.style.display="block";
-
-
-document.getElementById("accountEmail")
-.textContent=email;
-
-
-document.getElementById("authModal")
-.classList.add("show");
-
-}
-
-
-/* ======================================================
+/* =========================================================
    LOGOUT
-====================================================== */
+========================================================= */
 
 async function logoutUser(){
 
-await supabaseClient.auth.signOut();
+    if(supabaseClient){
 
-closeAuth();
+        await supabaseClient.auth.signOut();
 
-updateAuthButton();
+    }
 
-alert("You have been logged out.");
+    showAuthTab("login");
 
-}
+    closeAuth();
 
+    updateAuthButton();
 
-/* ======================================================
-   ADD TO CART
-====================================================== */
-
-async function addToCart(id){
-
-const {
-data:{
-session
-}
-} =
-await supabaseClient.auth.getSession();
-
-
-/*
-IMPORTANT:
-
-Without valid login session,
-product cannot be added.
-*/
-
-if(!session){
-
-sessionStorage.setItem(
-"pending_product",
-id
-);
-
-openAuth();
-
-return;
+    showToast("You have been logged out.");
 
 }
 
 
-const product =
-products.find(p=>p.id===id);
+/* =========================================================
+   UPDATE HEADER AUTH BUTTON
+========================================================= */
 
-if(!product)return;
+async function updateAuthButton(){
 
+    const button =
+        document.getElementById("authHeaderBtn");
 
-const existing =
-cart.find(p=>p.id===id);
+    if(!supabaseClient){
 
+        button.textContent = "Login";
 
-if(existing){
-
-existing.quantity++;
-
-}else{
-
-cart.push({
-
-id:product.id,
-
-name:product.name,
-
-price:product.price,
-
-image:product.photos[0],
-
-quantity:1
-
-});
-
-}
+        return;
+    }
 
 
-localStorage.setItem(
-"aonedeal_cart",
-JSON.stringify(cart)
-);
+    const session =
+        await getCurrentSession();
 
 
-updateCart();
+    if(session){
 
-openCart();
+        button.textContent = "Account";
 
-}
+        button.onclick = () => {
 
+            openAuth();
 
-/* ======================================================
-   CART
-====================================================== */
+            openAccountPanel();
 
-function updateCart(){
+        };
 
-const count =
-cart.reduce(
-(total,item)=>
-total+item.quantity,
-0
-);
+    }else{
 
-document.getElementById(
-"cartCount"
-).textContent=count;
+        button.textContent = "Login";
+
+        button.onclick = openAuth;
+
+    }
 
 
-const box =
-document.getElementById("cartItems");
-
-
-if(!cart.length){
-
-box.innerHTML=
-`
-<div style="
-text-align:center;
-padding:60px 10px;
-color:#999;
-font-size:13px;
-">
-Your bag is empty.
-</div>
-`;
-
-document.getElementById(
-"cartTotal"
-).textContent="₹0";
-
-return;
+    updateAuthPanel();
 
 }
 
 
-box.innerHTML=
-cart.map(item=>`
+/* =========================================================
+   ACCOUNT PANEL
+========================================================= */
 
-<div class="cartItem">
+async function openAccountPanel(){
 
-<img
-src="${item.image}"
-alt=""
->
+    clearAuthMessage();
 
-<div>
+    document
+        .querySelectorAll(".auth-form")
+        .forEach(form => form.classList.remove("active"));
 
-<h4>
-${item.name}
-</h4>
-
-<p>
-₹${item.price.toLocaleString("en-IN")}
-× ${item.quantity}
-</p>
-
-<button
-class="remove"
-onclick="removeFromCart(${item.id})"
->
-REMOVE
-</button>
-
-</div>
-
-<strong>
-₹${(
-item.price*
-item.quantity
-).toLocaleString("en-IN")}
-</strong>
-
-</div>
-
-`).join("");
+    document
+        .getElementById("accountPanel")
+        .classList.add("active");
 
 
-const total =
-cart.reduce(
-(total,item)=>
-total+
-item.price*item.quantity,
-0
-);
+    if(!supabaseClient){
+        return;
+    }
 
 
-document.getElementById(
-"cartTotal"
-).textContent=
-"₹"+total.toLocaleString("en-IN");
+    const {
+        data
+    } = await supabaseClient.auth.getUser();
+
+
+    if(data.user){
+
+        document
+            .getElementById("accountName")
+            .textContent =
+                data.user.user_metadata?.full_name ||
+                "AONeDEAL Customer";
+
+        document
+            .getElementById("accountEmail")
+            .textContent =
+                data.user.email || "";
+
+    }
 
 }
 
 
-function removeFromCart(id){
+async function updateAuthPanel(){
 
-cart =
-cart.filter(
-item=>item.id!==id
-);
+    if(!supabaseClient){
+        return;
+    }
 
-localStorage.setItem(
-"aonedeal_cart",
-JSON.stringify(cart)
-);
 
-updateCart();
+    const session =
+        await getCurrentSession();
+
+
+    if(session){
+
+        /*
+           Do not automatically switch to account panel
+           when opening auth unless header Account is clicked.
+        */
+
+    }
 
 }
 
+
+/* =========================================================
+   SUPABASE AUTH EVENTS
+========================================================= */
+
+if(supabaseClient){
+
+    supabaseClient.auth.onAuthStateChange(
+        async (event, session) => {
+
+            console.log(
+                "AUTH EVENT:",
+                event
+            );
+
+
+            if(event === "PASSWORD_RECOVERY"){
+
+                document
+                    .getElementById("authModal")
+                    .classList.add("show");
+
+
+                document
+                    .querySelectorAll(".auth-form")
+                    .forEach(form =>
+                        form.classList.remove("active")
+                    );
+
+
+                document
+                    .getElementById("resetForm")
+                    .classList.add("active");
+
+            }
+
+
+            await updateAuthButton();
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   PRODUCT RENDER
+========================================================= */
+
+function renderProducts(){
+
+    renderGroup("men","All");
+
+    renderGroup("women","All");
+
+    renderNewProducts();
+
+    renderOfferProducts();
+
+    updateCartCount();
+
+}
+
+
+/* =========================================================
+   RENDER GROUP
+========================================================= */
+
+function renderGroup(group,category){
+
+    const container =
+        document.getElementById(
+            group === "men"
+                ? "menProducts"
+                : "womenProducts"
+        );
+
+
+    if(!container){
+        return;
+    }
+
+
+    let list =
+        products.filter(
+            product =>
+                product.group === group
+        );
+
+
+    if(category !== "All"){
+
+        list =
+            list.filter(
+                product =>
+                    product.category === category
+            );
+
+    }
+
+
+    container.innerHTML =
+        list.map(productCardHTML).join("");
+
+}
+
+
+/* =========================================================
+   PRODUCT CARD HTML
+========================================================= */
+
+function productCardHTML(product){
+
+    const isWishlisted =
+        wishlist.includes(product.id);
+
+
+    return `
+
+        <article class="product-card">
+
+            <div class="product-image-wrap">
+
+                ${
+                    product.badge
+                    ?
+                    `
+                    <div class="product-badge">
+                        ${product.badge}
+                    </div>
+                    `
+                    :
+                    ""
+                }
+
+
+                <button
+                    class="wishlist ${isWishlisted ? "active" : ""}"
+                    onclick="toggleWishlist(event,${product.id})">
+                    ${isWishlisted ? "♥" : "♡"}
+                </button>
+
+
+                <img
+                    class="product-image"
+                    src="${product.photos[0]}"
+                    alt="${product.name}"
+                    loading="lazy">
+
+
+                <button
+                    class="quick-view"
+                    onclick="openProduct(${product.id})">
+                    QUICK VIEW
+                </button>
+
+            </div>
+
+
+            <div class="product-info">
+
+                <div class="product-category">
+                    ${product.category}
+                </div>
+
+                <div class="product-name">
+                    ${product.name}
+                </div>
+
+
+                <div class="product-price">
+
+                    <span class="price">
+                        ${money(product.price)}
+                    </span>
+
+                    <span class="old-price">
+                        ${money(product.oldPrice)}
+                    </span>
+
+                    <span class="discount">
+                        ${discountPercent(product)}
+                    </span>
+
+                </div>
+
+
+                <div class="card-bottom">
+
+                    <button
+                        class="add-cart"
+                        onclick="quickAdd(${product.id})">
+                        ADD TO CART
+                    </button>
+
+                    <button
+                        class="buy-now"
+                        onclick="openProduct(${product.id})">
+                        👁
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+    `;
+
+}
+
+
+/* =========================================================
+   FILTER PRODUCTS
+========================================================= */
+
+function filterProducts(group,category,button){
+
+    const parent =
+        document.getElementById(
+            group + "Filters"
+        );
+
+
+    if(parent){
+
+        parent
+            .querySelectorAll(".filter-btn")
+            .forEach(btn =>
+                btn.classList.remove("active")
+            );
+
+    }
+
+
+    if(button){
+        button.classList.add("active");
+    }
+
+
+    renderGroup(group,category);
+
+}
+
+
+/* =========================================================
+   GO EXACT CATEGORY
+========================================================= */
+
+function goCategory(group,category){
+
+    closeAll();
+
+
+    const section =
+        document.getElementById(group);
+
+
+    if(!section){
+        return;
+    }
+
+
+    const buttons =
+        document.querySelectorAll(
+            "#" + group + "Filters .filter-btn"
+        );
+
+
+    let targetButton = null;
+
+
+    buttons.forEach(button => {
+
+        if(
+            button.textContent
+                .trim()
+                .toLowerCase()
+                === category.toLowerCase()
+        ){
+
+            targetButton = button;
+
+        }
+
+    });
+
+
+    filterProducts(
+        group,
+        category,
+        targetButton
+    );
+
+
+    setTimeout(() => {
+
+        section.scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+        });
+
+    },100);
+
+}
+
+
+/* =========================================================
+   HOME
+========================================================= */
+
+function goHome(){
+
+    closeAll();
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================================================
+   NEW PRODUCTS
+========================================================= */
+
+function renderNewProducts(){
+
+    const container =
+        document.getElementById("newProducts");
+
+
+    const list =
+        products.filter(
+            product =>
+                ["NEW","TRENDING","PREMIUM"]
+                .includes(product.badge)
+        ).slice(0,8);
+
+
+    container.innerHTML =
+        list.map(productCardHTML).join("");
+
+}
+
+
+/* =========================================================
+   OFFER PRODUCTS
+========================================================= */
+
+function renderOfferProducts(){
+
+    const container =
+        document.getElementById("offerProducts");
+
+
+    const list =
+        [...products]
+            .sort(
+                (a,b) =>
+                    discountNumber(b) -
+                    discountNumber(a)
+            )
+            .slice(0,8);
+
+
+    container.innerHTML =
+        list.map(productCardHTML).join("");
+
+}
+
+
+function discountNumber(product){
+
+    if(!product.oldPrice){
+        return 0;
+    }
+
+    return (
+        (product.oldPrice - product.price) /
+        product.oldPrice
+    );
+
+}
+
+
+/* =========================================================
+   OPEN PRODUCT
+========================================================= */
+
+function openProduct(id){
+
+    const product =
+        products.find(
+            p => p.id === id
+        );
+
+
+    if(!product){
+        return;
+    }
+
+
+    currentProduct = product;
+
+    currentPhotoIndex = 0;
+
+    selectedSize =
+        product.sizes[0];
+
+    modalQuantity = 1;
+
+
+    document
+        .getElementById("modalCategory")
+        .textContent =
+            product.category;
+
+
+    document
+        .getElementById("modalTitle")
+        .textContent =
+            product.name;
+
+
+    document
+        .getElementById("modalPrice")
+        .textContent =
+            money(product.price);
+
+
+    document
+        .getElementById("modalOldPrice")
+        .textContent =
+            money(product.oldPrice);
+
+
+    document
+        .getElementById("modalDiscount")
+        .textContent =
+            discountPercent(product);
+
+
+    document
+        .getElementById("modalDescription")
+        .textContent =
+            product.description;
+
+
+    document
+        .getElementById("modalStock")
+        .textContent =
+            product.stock;
+
+
+    document
+        .getElementById("modalQuantity")
+        .textContent =
+            modalQuantity;
+
+
+    renderProductFeatures(product);
+
+    renderSizes(product);
+
+    renderGallery(product);
+
+    document
+        .getElementById("productModal")
+        .classList.add("show");
+
+}
+
+
+/* =========================================================
+   PRODUCT FEATURES
+========================================================= */
+
+function renderProductFeatures(product){
+
+    const list =
+        document.getElementById(
+            "modalFeatures"
+        );
+
+
+    list.innerHTML =
+        product.features
+            .map(
+                feature =>
+                    `<li>✓ ${feature}</li>`
+            )
+            .join("");
+
+}
+
+
+/* =========================================================
+   PRODUCT SIZES
+========================================================= */
+
+function renderSizes(product){
+
+    const container =
+        document.getElementById(
+            "modalSizes"
+        );
+
+
+    container.innerHTML =
+        product.sizes
+            .map(
+                size =>
+                    `
+                    <button
+                        class="size ${size === selectedSize ? "active" : ""}"
+                        onclick="selectSize('${size}')">
+                        ${size}
+                    </button>
+                    `
+            )
+            .join("");
+
+}
+
+
+function selectSize(size){
+
+    selectedSize = size;
+
+    if(currentProduct){
+
+        renderSizes(currentProduct);
+
+    }
+
+}
+
+
+/* =========================================================
+   GALLERY
+========================================================= */
+
+function renderGallery(product){
+
+    const main =
+        document.getElementById(
+            "mainProductPhoto"
+        );
+
+
+    main.src =
+        product.photos[0];
+
+
+    const thumbnails =
+        document.getElementById(
+            "productThumbnails"
+        );
+
+
+    thumbnails.innerHTML =
+        product.photos
+            .map(
+                (photo,index) =>
+                    `
+                    <div
+                        class="thumb ${index === 0 ? "active" : ""}"
+                        onclick="showPhoto(${index})">
+
+                        <img src="${photo}" alt="Product photo">
+
+                    </div>
+                    `
+            )
+            .join("");
+
+}
+
+
+function showPhoto(index){
+
+    if(!currentProduct){
+        return;
+    }
+
+
+    currentPhotoIndex =
+        (index + currentProduct.photos.length)
+        % currentProduct.photos.length;
+
+
+    document
+        .getElementById("mainProductPhoto")
+        .src =
+            currentProduct.photos[
+                currentPhotoIndex
+            ];
+
+
+    document
+        .querySelectorAll(".thumb")
+        .forEach(
+            (thumb,i) => {
+
+                thumb.classList.toggle(
+                    "active",
+                    i === currentPhotoIndex
+                );
+
+            }
+        );
+
+}
+
+
+function changePhoto(direction){
+
+    showPhoto(
+        currentPhotoIndex + direction
+    );
+
+}
+
+
+/* =========================================================
+   MODAL QUANTITY
+========================================================= */
+
+function changeModalQuantity(change){
+
+    if(!currentProduct){
+        return;
+    }
+
+
+    modalQuantity += change;
+
+
+    if(modalQuantity < 1){
+        modalQuantity = 1;
+    }
+
+
+    if(modalQuantity > currentProduct.stock){
+
+        modalQuantity =
+            currentProduct.stock;
+
+    }
+
+
+    document
+        .getElementById("modalQuantity")
+        .textContent =
+            modalQuantity;
+
+}
+
+
+/* =========================================================
+   CLOSE PRODUCT
+========================================================= */
+
+function closeProduct(){
+
+    document
+        .getElementById("productModal")
+        .classList.remove("show");
+
+}
+
+
+/* =========================================================
+   AUTH REQUIRED
+========================================================= */
+
+async function requireLogin(){
+
+    const session =
+        await getCurrentSession();
+
+
+    if(!session){
+
+        showToast(
+            "Please login or create an account before shopping."
+        );
+
+        openAuth();
+
+        return false;
+    }
+
+
+    return true;
+
+}
+
+
+/* =========================================================
+   QUICK ADD
+========================================================= */
+
+async function quickAdd(id){
+
+    const ok =
+        await requireLogin();
+
+
+    if(!ok){
+        return;
+    }
+
+
+    const product =
+        products.find(
+            p => p.id === id
+        );
+
+
+    if(!product){
+        return;
+    }
+
+
+    addToCart(
+        product,
+        product.sizes[0],
+        1
+    );
+
+}
+
+
+/* =========================================================
+   ADD CURRENT PRODUCT
+========================================================= */
+
+async function addCurrentProductToCart(){
+
+    if(!currentProduct){
+        return;
+    }
+
+
+    const ok =
+        await requireLogin();
+
+
+    if(!ok){
+        return;
+    }
+
+
+    addToCart(
+        currentProduct,
+        selectedSize,
+        modalQuantity
+    );
+
+
+    closeProduct();
+
+}
+
+
+/* =========================================================
+   ADD CART
+========================================================= */
+
+function addToCart(product,size,quantity){
+
+    const existing =
+        cart.find(
+            item =>
+                item.id === product.id &&
+                item.size === size
+        );
+
+
+    if(existing){
+
+        existing.quantity += quantity;
+
+        if(
+            existing.quantity >
+            product.stock
+        ){
+
+            existing.quantity =
+                product.stock;
+
+        }
+
+    }else{
+
+        cart.push({
+
+            id:product.id,
+            name:product.name,
+            price:product.price,
+            photo:product.photos[0],
+            size:size,
+            quantity:quantity
+
+        });
+
+    }
+
+
+    saveCart();
+
+    showToast(
+        product.name +
+        " added to cart."
+    );
+
+}
+
+
+/* =========================================================
+   SAVE CART
+========================================================= */
+
+function saveCart(){
+
+    localStorage.setItem(
+        "aonedeal_cart",
+        JSON.stringify(cart)
+    );
+
+    updateCartCount();
+
+    renderCart();
+
+}
+
+
+/* =========================================================
+   CART COUNT
+========================================================= */
+
+function updateCartCount(){
+
+    const count =
+        cart.reduce(
+            (sum,item) =>
+                sum + item.quantity,
+            0
+        );
+
+
+    document
+        .getElementById("cartCount")
+        .textContent =
+            count;
+
+}
+
+
+/* =========================================================
+   OPEN CART
+========================================================= */
+
+async function openCart(){
+
+    const ok =
+        await requireLogin();
+
+
+    if(!ok){
+        return;
+    }
+
+
+    renderCart();
+
+
+    document
+        .getElementById("cartDrawer")
+        .classList.add("open");
+
+
+    document
+        .getElementById("overlay")
+        .classList.add("show");
+
+}
+
+
+/* =========================================================
+   CLOSE CART
+========================================================= */
+
+function closeCart(){
+
+    document
+        .getElementById("cartDrawer")
+        .classList.remove("open");
+
+    document
+        .getElementById("overlay")
+        .classList.remove("show");
+
+}
+
+
+/* =========================================================
+   RENDER CART
+========================================================= */
+
+function renderCart(){
+
+    const container =
+        document.getElementById(
+            "cartItems"
+        );
+
+
+    if(!cart.length){
+
+        container.innerHTML =
+            `
+            <div class="empty-cart">
+
+                <div style="font-size:45px;">
+                    🛒
+                </div>
+
+                <h3>Your cart is empty</h3>
+
+                <p style="margin-top:8px;">
+                    Add something beautiful to your cart.
+                </p>
+
+            </div>
+            `;
+
+        document
+            .getElementById("cartTotal")
+            .textContent =
+                "₹0";
+
+        return;
+    }
+
+
+    container.innerHTML =
+        cart.map(
+            (item,index) =>
+                `
+
+                <div class="cart-item">
+
+                    <img
+                        src="${item.photo}"
+                        alt="${item.name}">
+
+
+                    <div>
+
+                        <h4>
+                            ${item.name}
+                        </h4>
+
+                        <p>
+                            Size: ${item.size}
+                        </p>
+
+                        <strong>
+                            ${money(item.price)}
+                        </strong>
+
+
+                        <div
+                            class="cart-qty"
+                            style="margin-top:8px;">
+
+                            <button
+                                onclick="changeCartQuantity(${index},-1)">
+                                −
+                            </button>
+
+                            <span>
+                                ${item.quantity}
+                            </span>
+
+                            <button
+                                onclick="changeCartQuantity(${index},1)">
+                                +
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        class="remove-cart"
+                        onclick="removeCartItem(${index})">
+                        Remove
+                    </button>
+
+                </div>
+
+                `
+        )
+        .join("");
+
+
+    const total =
+        cart.reduce(
+            (sum,item) =>
+                sum +
+                item.price *
+                item.quantity,
+            0
+        );
+
+
+    document
+        .getElementById("cartTotal")
+        .textContent =
+            money(total);
+
+}
+
+
+/* =========================================================
+   CART QUANTITY
+========================================================= */
+
+function changeCartQuantity(index,change){
+
+    if(!cart[index]){
+        return;
+    }
+
+
+    cart[index].quantity += change;
+
+
+    if(cart[index].quantity <= 0){
+
+        cart.splice(index,1);
+
+    }
+
+
+    saveCart();
+
+}
+
+
+/* =========================================================
+   REMOVE CART ITEM
+========================================================= */
+
+function removeCartItem(index){
+
+    cart.splice(index,1);
+
+    saveCart();
+
+    showToast(
+        "Product removed from cart."
+    );
+
+}
+
+
+/* =========================================================
+   BUY NOW
+========================================================= */
+
+async function buyCurrentProduct(){
+
+    if(!currentProduct){
+        return;
+    }
+
+
+    const ok =
+        await requireLogin();
+
+
+    if(!ok){
+        return;
+    }
+
+
+    if(!selectedSize){
+
+        showToast(
+            "Please select a size."
+        );
+
+        return;
+    }
+
+
+    addToCart(
+        currentProduct,
+        selectedSize,
+        modalQuantity
+    );
+
+
+    closeProduct();
+
+    openCart();
+
+}
+
+
+/* =========================================================
+   CHECKOUT
+========================================================= */
 
 async function checkout(){
 
-const {
-data:{
-session
-}
-} =
-await supabaseClient.auth.getSession();
+    const ok =
+        await requireLogin();
 
 
-if(!session){
-
-openAuth();
-
-return;
-
-}
+    if(!ok){
+        return;
+    }
 
 
-if(!cart.length){
+    if(!cart.length){
 
-alert("Your bag is empty.");
+        showToast(
+            "Your cart is empty."
+        );
 
-return;
+        return;
+    }
 
-}
 
+    /*
+       Payment gateway will be connected later.
+       The account/authentication part is already protected.
+    */
 
-/*
-NEXT STEP:
-
-Payment gateway + order database
-will be connected here.
-*/
-
-alert(
-"You are logged in. Checkout can now continue."
-);
+    showToast(
+        "Checkout is ready for the payment gateway integration."
+    );
 
 }
 
 
-/* ======================================================
-   DRAWERS
-====================================================== */
+/* =========================================================
+   WISHLIST
+========================================================= */
+
+function toggleWishlist(event,id){
+
+    event.stopPropagation();
+
+
+    const index =
+        wishlist.indexOf(id);
+
+
+    if(index >= 0){
+
+        wishlist.splice(index,1);
+
+        showToast(
+            "Removed from wishlist."
+        );
+
+    }else{
+
+        wishlist.push(id);
+
+        showToast(
+            "Added to wishlist."
+        );
+
+    }
+
+
+    localStorage.setItem(
+        "aonedeal_wishlist",
+        JSON.stringify(wishlist)
+    );
+
+
+    renderProducts();
+
+}
+
+
+async function openWishlist(){
+
+    const ok =
+        await requireLogin();
+
+
+    if(!ok){
+        return;
+    }
+
+
+    if(!wishlist.length){
+
+        showToast(
+            "Your wishlist is empty."
+        );
+
+        return;
+    }
+
+
+    const first =
+        products.find(
+            product =>
+                product.id === wishlist[0]
+        );
+
+
+    if(first){
+
+        openProduct(first.id);
+
+    }
+
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+function focusSearch(){
+
+    const search =
+        prompt(
+            "Search AONeDEAL products:"
+        );
+
+
+    if(!search){
+        return;
+    }
+
+
+    const query =
+        search
+            .trim()
+            .toLowerCase();
+
+
+    const result =
+        products.find(
+            product =>
+                product.name
+                    .toLowerCase()
+                    .includes(query)
+                ||
+                product.category
+                    .toLowerCase()
+                    .includes(query)
+                ||
+                product.description
+                    .toLowerCase()
+                    .includes(query)
+        );
+
+
+    if(result){
+
+        openProduct(result.id);
+
+    }else{
+
+        showToast(
+            "No product found for: " +
+            search
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
 
 function openMenu(){
 
-document
-.getElementById("menuDrawer")
-.classList.add("open");
+    document
+        .getElementById("sideMenu")
+        .classList.add("open");
 
-document
-.getElementById("overlay")
-.classList.add("show");
-
-}
-
-
-function openCart(){
-
-document
-.getElementById("cartDrawer")
-.classList.add("open");
-
-document
-.getElementById("overlay")
-.classList.add("show");
+    document
+        .getElementById("overlay")
+        .classList.add("show");
 
 }
 
 
 function closeAll(){
 
-document
-.getElementById("menuDrawer")
-.classList.remove("open");
+    document
+        .getElementById("sideMenu")
+        .classList.remove("open");
 
-document
-.getElementById("cartDrawer")
-.classList.remove("open");
+    document
+        .getElementById("cartDrawer")
+        .classList.remove("open");
 
-document
-.getElementById("overlay")
-.classList.remove("show");
+    document
+        .getElementById("overlay")
+        .classList.remove("show");
 
 }
 
 
-/* ======================================================
+/* =========================================================
    LANGUAGE
-====================================================== */
+========================================================= */
 
 function changeLanguage(language){
 
-if(language==="gu"){
+    if(language === "en"){
 
-alert(
-"Gujarati language system ready છે. Product/category translations databaseમાંથી manage કરી શકાય છે."
-);
+        showToast(
+            "English selected."
+        );
+
+        return;
+    }
+
+
+    if(language === "gu"){
+
+        showToast(
+            "Gujarati language support will be connected to the complete translation system."
+        );
+
+        return;
+    }
+
+
+    if(language === "hi"){
+
+        showToast(
+            "Hindi language support will be connected to the complete translation system."
+        );
+
+    }
 
 }
 
-if(language==="hi"){
 
-alert(
-"Hindi language system ready છે."
-);
-
-}
-
-}
-
-
-/* ======================================================
+/* =========================================================
    NEWSLETTER
-====================================================== */
+========================================================= */
 
-function subscribe(event){
+function subscribeNewsletter(event){
 
-event.preventDefault();
+    event.preventDefault();
 
-alert(
-"Thank you for subscribing."
-);
 
-event.target.reset();
+    const email =
+        document
+            .getElementById("newsletterEmail")
+            .value;
+
+
+    showToast(
+        "Thank you! " +
+        email +
+        " has been subscribed."
+    );
+
+
+    document
+        .getElementById("newsletterEmail")
+        .value = "";
 
 }
 
 
-/* ======================================================
-   SUPABASE AUTH STATE
-====================================================== */
+/* =========================================================
+   ESC KEY
+========================================================= */
 
-supabaseClient.auth.onAuthStateChange(
+document.addEventListener(
+    "keydown",
+    function(event){
 
-(event,session)=>{
+        if(event.key === "Escape"){
 
-updateAuthButton();
+            closeAll();
 
-}
+            closeAuth();
 
+            closeProduct();
+
+        }
+
+    }
 );
 
 
-/* ======================================================
-   INITIAL LOAD
-====================================================== */
+/* =========================================================
+   CLICK OUTSIDE PRODUCT MODAL
+========================================================= */
 
-renderProducts();
+document
+    .getElementById("productModal")
+    .addEventListener(
+        "click",
+        function(event){
 
-updateAuthButton();
+            if(
+                event.target ===
+                this
+            ){
 
+                closeProduct();
+
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   CLICK OUTSIDE AUTH MODAL
+========================================================= */
+
+document
+    .getElementById("authModal")
+    .addEventListener(
+        "click",
+        function(event){
+
+            if(
+                event.target ===
+                this
+            ){
+
+                closeAuth();
+
+            }
+
+        }
+    );
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    async function(){
+
+        renderProducts();
+
+        renderCart();
+
+        updateCartCount();
+
+        await updateAuthButton();
+
+
+        /*
+           If user arrives from password reset email,
+           show reset password UI.
+        */
+
+        const params =
+            new URLSearchParams(
+                window.location.search
+            );
+
+
+        if(
+            params.get("reset") === "true"
+        ){
+
+            openAuth();
+
+        }
+
+    }
+);
 
 </script>
 
