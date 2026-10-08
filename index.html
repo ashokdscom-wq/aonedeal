@@ -1,333 +1,3492 @@
 <!DOCTYPE html>
-<html lang="gu">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AONeDEAL - Premium Garments Store</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #f3f3f3; color: #0f1111; }
-        
-        /* Header */
-        header { background-color: #131921; color: white; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 1000; }
-        .logo { font-size: 26px; font-weight: bold; letter-spacing: 1px; }
-        .logo span.ao { color: #fff; }
-        .logo span.deal { color: #febd69; }
-        .search-bar { display: flex; flex: 1; max-width: 600px; margin: 0 20px; }
-        .search-bar input { width: 100%; padding: 10px; border: none; border-radius: 4px 0 0 4px; outline: none; }
-        .search-btn { background-color: #febd69; border: none; padding: 0 20px; border-radius: 0 4px 4px 0; cursor: pointer; font-size: 16px; }
-        .cart-btn { background: none; border: none; color: #febd69; font-size: 16px; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 5px; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        /* Sub Navigation / Categories */
-        .sub-nav { background-color: #232f3e; color: white; padding: 10px 20px; display: flex; gap: 30px; font-size: 15px; overflow-x: auto; }
-        .sub-nav a { color: white; text-decoration: none; white-space: nowrap; }
-        .sub-nav a:hover { color: #febd69; }
+<title>AONeDEAL | Premium Fashion</title>
 
-        /* Main Container */
-        .container { max-width: 1400px; margin: 20px auto; padding: 0 20px; }
-        .section-title { font-size: 24px; margin-bottom: 20px; font-weight: bold; border-bottom: 2px solid #febd69; padding-bottom: 8px; display: inline-block; }
-        
-        /* Product Grid */
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-bottom: 40px; }
-        .product-card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: flex; flex-direction: column; justify-content: space-between; }
-        
-        /* Image Gallery Slider in Card */
-        .image-gallery { position: relative; width: 100%; height: 250px; margin-bottom: 15px; }
-        .image-gallery img { width: 100%; height: 100%; object-fit: cover; border-radius: 6px; display: none; }
-        .image-gallery img.active { display: block; }
-        .thumb-btns { display: flex; gap: 8px; justify-content: center; margin-bottom: 10px; }
-        .thumb-btns button { width: 35px; height: 35px; border: 1px solid #ccc; border-radius: 4px; cursor: pointer; overflow: hidden; background: #fff; }
-        .thumb-btns button img { width: 100%; height: 100%; object-fit: cover; }
+<meta name="description"
+content="AONeDEAL premium fashion store for men and women.">
 
-        .product-title { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
-        .price { font-size: 20px; font-weight: bold; color: #B12704; margin-bottom: 10px; }
-        
-        /* Options (Size & Quantity) */
-        .options-group { margin-bottom: 12px; font-size: 14px; }
-        .options-group label { display: block; margin-bottom: 4px; font-weight: 600; }
-        .options-group select { width: 100%; padding: 6px; border-radius: 4px; border: 1px solid #ccc; }
-        
-        .qty-control { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; }
-        .qty-control button { padding: 4px 10px; background: #e7e7e7; border: 1px solid #adadad; cursor: pointer; border-radius: 3px; font-weight: bold; }
-        .qty-display { font-weight: bold; font-size: 16px; }
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-        .btn-add-cart { background-color: #ffd814; border: 1px solid #fcd200; border-radius: 20px; padding: 10px; width: 100%; font-weight: 600; cursor: pointer; }
-        .btn-add-cart:hover { background-color: #f7ca00; }
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
 
-        /* Cart Drawer / Section */
-        .cart-section { background: white; padding: 25px; border-radius: 8px; margin-top: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-        .cart-items-list { margin-top: 15px; border-top: 1px solid #ddd; padding-top: 15px; }
-        .cart-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid #eee; padding-bottom: 8px; }
+:root{
+    --black:#111111;
+    --white:#ffffff;
+    --cream:#f7f5f1;
+    --gray:#777;
+    --light:#e9e7e3;
+    --gold:#b18a52;
+}
 
-        /* Terms and Conditions */
-        .terms-section { background: #232f3e; color: white; padding: 40px 20px; margin-top: 50px; font-size: 14px; }
-        .terms-container { max-width: 1200px; margin: auto; }
-        .terms-container h3 { color: #febd69; margin-bottom: 15px; font-size: 18px; }
-        .terms-container ul { padding-left: 20px; line-height: 1.8; color: #cccccc; }
+html{
+    scroll-behavior:smooth;
+}
 
-        /* Footer */
-        footer { background-color: #131921; color: white; text-align: center; padding: 20px; font-size: 14px; }
-    </style>
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    color:var(--black);
+    background:white;
+}
+
+button,
+input,
+select{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+/* ================= TOP BAR ================= */
+
+.topbar{
+    height:34px;
+    background:#111;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:10px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+}
+
+/* ================= HEADER ================= */
+
+.header{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:rgba(255,255,255,.95);
+    backdrop-filter:blur(15px);
+    border-bottom:1px solid #eee;
+}
+
+.nav{
+    max-width:1450px;
+    height:76px;
+    margin:auto;
+    padding:0 30px;
+
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    align-items:center;
+}
+
+.logo{
+    font-size:25px;
+    font-weight:800;
+    letter-spacing:4px;
+}
+
+.logo span{
+    font-weight:400;
+}
+
+.navlinks{
+    display:flex;
+    gap:30px;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:1.4px;
+}
+
+.navlinks a{
+    position:relative;
+}
+
+.navlinks a:after{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-7px;
+    height:1px;
+    width:0;
+    background:#111;
+    transition:.3s;
+}
+
+.navlinks a:hover:after{
+    width:100%;
+}
+
+.actions{
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+    gap:15px;
+}
+
+.iconbtn{
+    border:0;
+    background:none;
+    font-size:20px;
+}
+
+.count{
+    position:absolute;
+    background:#111;
+    color:#fff;
+    border-radius:50%;
+    width:16px;
+    height:16px;
+    font-size:9px;
+    display:grid;
+    place-items:center;
+    margin-top:-26px;
+    margin-left:12px;
+}
+
+.lang{
+    padding:8px;
+    border:1px solid #ddd;
+    background:#fff;
+    font-size:10px;
+}
+
+.accountBtn{
+    border:1px solid #111;
+    background:#111;
+    color:#fff;
+    padding:9px 13px;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+/* ================= MOBILE MENU ================= */
+
+.menuBtn{
+    display:none;
+    background:none;
+    border:0;
+    font-size:24px;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    min-height:calc(100vh - 110px);
+    position:relative;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+}
+
+.hero img{
+    position:absolute;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.hero:after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        90deg,
+        rgba(0,0,0,.65),
+        rgba(0,0,0,.1)
+    );
+}
+
+.heroContent{
+    position:relative;
+    z-index:2;
+    color:#fff;
+    max-width:1450px;
+    width:100%;
+    margin:auto;
+    padding:80px 7%;
+}
+
+.eyebrow{
+    font-size:11px;
+    letter-spacing:4px;
+    text-transform:uppercase;
+}
+
+.hero h1{
+    font-family:Georgia,serif;
+    font-weight:400;
+    font-size:clamp(50px,7vw,100px);
+    line-height:.95;
+    max-width:750px;
+    margin:20px 0;
+}
+
+.hero p{
+    max-width:500px;
+    font-size:15px;
+    color:#eee;
+    margin-bottom:28px;
+}
+
+.btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    min-width:160px;
+    padding:15px 25px;
+
+    background:#fff;
+    color:#111;
+
+    text-transform:uppercase;
+    font-size:10px;
+    letter-spacing:1.5px;
+    font-weight:bold;
+
+    border:0;
+}
+
+.btn.dark{
+    background:#111;
+    color:#fff;
+}
+
+/* ================= SECTION ================= */
+
+.section{
+    max-width:1450px;
+    margin:auto;
+    padding:90px 30px;
+}
+
+.sectionHead{
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    margin-bottom:30px;
+}
+
+.sectionTitle{
+    font-family:Georgia,serif;
+    font-size:42px;
+    font-weight:400;
+}
+
+.sectionSub{
+    color:#777;
+    font-size:13px;
+    margin-top:7px;
+}
+
+/* ================= CATEGORY ================= */
+
+.categoryGrid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+}
+
+.categoryCard{
+    height:560px;
+    position:relative;
+    overflow:hidden;
+}
+
+.categoryCard img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.6s;
+}
+
+.categoryCard:hover img{
+    transform:scale(1.04);
+}
+
+.categoryContent{
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+
+    padding:45px;
+    color:#fff;
+
+    background:linear-gradient(
+        transparent,
+        rgba(0,0,0,.8)
+    );
+}
+
+.categoryContent h2{
+    font:400 45px Georgia,serif;
+}
+
+.categoryContent p{
+    margin:10px 0 20px;
+}
+
+/* ================= FILTER ================= */
+
+.filters{
+    display:flex;
+    gap:8px;
+    overflow:auto;
+    margin-bottom:30px;
+}
+
+.filter{
+    white-space:nowrap;
+    border:1px solid #ddd;
+    padding:10px 15px;
+    background:white;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.filter.active{
+    background:#111;
+    color:white;
+}
+
+/* ================= PRODUCTS ================= */
+
+.productGrid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+}
+
+.product{
+    min-width:0;
+}
+
+.productImage{
+    position:relative;
+    aspect-ratio:3/4;
+    overflow:hidden;
+    background:#f2f2f2;
+}
+
+.productImage img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:.4s;
+}
+
+.product:hover .productImage img{
+    transform:scale(1.035);
+}
+
+.productBadge{
+    position:absolute;
+    left:12px;
+    top:12px;
+    background:white;
+    padding:7px 10px;
+    font-size:9px;
+    text-transform:uppercase;
+}
+
+.wishlist{
+    position:absolute;
+    right:12px;
+    top:12px;
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    background:white;
+    border:0;
+    font-size:18px;
+}
+
+.wishlist.active{
+    background:#111;
+    color:white;
+}
+
+.quickAdd{
+    position:absolute;
+    left:12px;
+    right:12px;
+    bottom:12px;
+
+    background:#fff;
+    border:0;
+    padding:13px;
+
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:1.2px;
+
+    transform:translateY(70px);
+    transition:.3s;
+}
+
+.product:hover .quickAdd{
+    transform:translateY(0);
+}
+
+.productInfo{
+    padding:13px 2px;
+}
+
+.productInfo h3{
+    font-size:14px;
+    font-weight:500;
+}
+
+.price{
+    margin-top:6px;
+    font-size:13px;
+}
+
+.oldPrice{
+    color:#999;
+    text-decoration:line-through;
+    margin-left:7px;
+}
+
+/* ================= PRODUCT VIEW MODAL ================= */
+
+.productModal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.65);
+    z-index:300;
+
+    display:none;
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+}
+
+.productModal.show{
+    display:flex;
+}
+
+.productView{
+    width:min(1050px,100%);
+    max-height:90vh;
+    overflow:auto;
+    background:white;
+
+    display:grid;
+    grid-template-columns:1fr 1fr;
+
+    position:relative;
+}
+
+.closeModal{
+    position:absolute;
+    right:15px;
+    top:12px;
+
+    z-index:5;
+
+    background:white;
+    border:0;
+
+    width:35px;
+    height:35px;
+    border-radius:50%;
+
+    font-size:18px;
+}
+
+.gallery{
+    background:#f3f3f3;
+    padding:25px;
+}
+
+.mainPhoto{
+    width:100%;
+    aspect-ratio:4/5;
+    object-fit:cover;
+}
+
+.thumbs{
+    display:flex;
+    gap:8px;
+    margin-top:10px;
+    overflow:auto;
+}
+
+.thumb{
+    width:70px;
+    height:80px;
+    flex-shrink:0;
+    border:1px solid transparent;
+    cursor:pointer;
+}
+
+.thumb.active{
+    border:2px solid #111;
+}
+
+.thumb img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.productDetails{
+    padding:55px 45px;
+}
+
+.productDetails .small{
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    color:#999;
+}
+
+.productDetails h2{
+    font:400 40px Georgia,serif;
+    margin:12px 0;
+}
+
+.productDetails .bigPrice{
+    font-size:20px;
+    margin-bottom:20px;
+}
+
+.productDetails p{
+    color:#666;
+    font-size:14px;
+    line-height:1.8;
+}
+
+.sizeTitle{
+    font-size:11px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    margin:25px 0 10px;
+}
+
+.sizes{
+    display:flex;
+    gap:8px;
+}
+
+.size{
+    border:1px solid #ddd;
+    padding:10px 16px;
+    background:white;
+}
+
+.size.selected{
+    background:#111;
+    color:white;
+}
+
+/* ================= BANNER ================= */
+
+.banner{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    background:#eee;
+}
+
+.banner img{
+    width:100%;
+    height:500px;
+    object-fit:cover;
+}
+
+.bannerText{
+    padding:60px;
+    display:flex;
+    justify-content:center;
+    flex-direction:column;
+}
+
+.bannerText h2{
+    font:400 50px Georgia,serif;
+    margin:15px 0;
+}
+
+.bannerText p{
+    max-width:450px;
+    color:#666;
+    margin-bottom:25px;
+}
+
+/* ================= NEWSLETTER ================= */
+
+.newsletter{
+    background:#111;
+    color:white;
+    text-align:center;
+    padding:80px 20px;
+}
+
+.newsletter h2{
+    font:400 42px Georgia,serif;
+}
+
+.newsletter p{
+    color:#aaa;
+    margin:12px 0 25px;
+}
+
+.subscribe{
+    display:flex;
+    max-width:500px;
+    margin:auto;
+}
+
+.subscribe input{
+    flex:1;
+    padding:16px;
+    border:0;
+    outline:0;
+}
+
+.subscribe button{
+    background:#b18a52;
+    color:white;
+    border:0;
+    padding:0 25px;
+}
+
+/* ================= FOOTER ================= */
+
+.footer{
+    background:#111;
+    color:#fff;
+    padding:60px 30px 25px;
+}
+
+.footerGrid{
+    max-width:1400px;
+    margin:auto;
+
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr;
+    gap:40px;
+}
+
+.footer h3{
+    font-size:11px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    margin-bottom:18px;
+}
+
+.footer a,
+.footer p{
+    display:block;
+    color:#aaa;
+    font-size:12px;
+    margin:9px 0;
+}
+
+.copyright{
+    max-width:1400px;
+    margin:40px auto 0;
+    padding-top:20px;
+    border-top:1px solid #292929;
+    color:#777;
+    font-size:10px;
+}
+
+/* ================= DRAWERS ================= */
+
+.overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.5);
+    z-index:150;
+    display:none;
+}
+
+.overlay.show{
+    display:block;
+}
+
+.drawer{
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:-430px;
+
+    width:min(400px,90vw);
+
+    background:white;
+    z-index:200;
+
+    transition:.35s;
+}
+
+.drawer.open{
+    left:0;
+}
+
+.cartDrawer{
+    position:fixed;
+    top:0;
+    bottom:0;
+    right:-430px;
+
+    width:min(420px,92vw);
+
+    background:white;
+    z-index:200;
+
+    transition:.35s;
+}
+
+.cartDrawer.open{
+    right:0;
+}
+
+.drawerHead{
+    height:75px;
+    padding:0 25px;
+    border-bottom:1px solid #eee;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.drawerBody{
+    padding:25px;
+    height:calc(100% - 75px);
+    overflow:auto;
+}
+
+.menuTitle{
+    color:#999;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    margin:20px 0 8px;
+}
+
+.menuLink{
+    display:block;
+    padding:10px 0;
+    font-size:16px;
+}
+
+/* ================= CART ================= */
+
+.cartBody{
+    padding:25px;
+    height:calc(100% - 75px);
+    display:flex;
+    flex-direction:column;
+}
+
+.cartItems{
+    flex:1;
+    overflow:auto;
+}
+
+.cartItem{
+    display:grid;
+    grid-template-columns:70px 1fr auto;
+    gap:12px;
+    padding:15px 0;
+    border-bottom:1px solid #eee;
+}
+
+.cartItem img{
+    width:70px;
+    height:85px;
+    object-fit:cover;
+}
+
+.cartItem h4{
+    font-size:13px;
+}
+
+.cartItem p{
+    font-size:12px;
+    margin-top:5px;
+}
+
+.remove{
+    font-size:10px;
+    color:#888;
+    border:0;
+    background:none;
+    margin-top:8px;
+}
+
+.cartTotal{
+    display:flex;
+    justify-content:space-between;
+    border-top:1px solid #111;
+    padding-top:18px;
+    margin-top:15px;
+}
+
+/* ================= AUTH ================= */
+
+.authModal{
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,.7);
+
+    z-index:500;
+
+    display:none;
+    align-items:center;
+    justify-content:center;
+
+    padding:20px;
+}
+
+.authModal.show{
+    display:flex;
+}
+
+.authBox{
+    width:min(450px,100%);
+    background:#fff;
+
+    padding:38px;
+
+    position:relative;
+}
+
+.authClose{
+    position:absolute;
+    right:18px;
+    top:15px;
+
+    border:0;
+    background:none;
+    font-size:20px;
+}
+
+.authLogo{
+    text-align:center;
+    font-size:21px;
+    font-weight:800;
+    letter-spacing:3px;
+}
+
+.authBox h2{
+    text-align:center;
+    font:400 31px Georgia,serif;
+    margin:12px 0 6px;
+}
+
+.authSubtitle{
+    text-align:center;
+    color:#777;
+    font-size:12px;
+    margin-bottom:22px;
+}
+
+.authTabs{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    border-bottom:1px solid #ddd;
+    margin-bottom:20px;
+}
+
+.authTab{
+    border:0;
+    background:white;
+    padding:12px;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.authTab.active{
+    border-bottom:2px solid #111;
+}
+
+.authForm label{
+    display:block;
+    margin:13px 0 7px;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.authForm input{
+    width:100%;
+    padding:13px;
+    border:1px solid #ddd;
+    outline:none;
+}
+
+.authForm input:focus{
+    border-color:#111;
+}
+
+.authSubmit{
+    width:100%;
+    background:#111;
+    color:#fff;
+    border:0;
+    padding:15px;
+    margin-top:20px;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:1.5px;
+}
+
+.authLink{
+    border:0;
+    background:none;
+    color:#555;
+    font-size:11px;
+    text-decoration:underline;
+    margin-top:15px;
+}
+
+.otpBox{
+    display:none;
+}
+
+.authMessage{
+    font-size:11px;
+    margin-top:12px;
+    text-align:center;
+}
+
+.success{
+    color:green;
+}
+
+.error{
+    color:#c00;
+}
+
+/* ================= ACCOUNT ================= */
+
+.accountBox{
+    text-align:center;
+    padding:25px 0;
+}
+
+.accountBox h3{
+    font:400 27px Georgia,serif;
+}
+
+.accountBox p{
+    color:#777;
+    font-size:12px;
+    margin:8px 0 25px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:900px){
+
+    .nav{
+        grid-template-columns:auto 1fr auto;
+        height:68px;
+        padding:0 18px;
+    }
+
+    .menuBtn{
+        display:block;
+    }
+
+    .navlinks{
+        display:none;
+    }
+
+    .logo{
+        text-align:center;
+        font-size:20px;
+    }
+
+    .productGrid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .categoryGrid{
+        grid-template-columns:1fr;
+    }
+
+    .categoryCard{
+        height:430px;
+    }
+
+    .productView{
+        grid-template-columns:1fr;
+    }
+
+    .gallery{
+        padding:15px;
+    }
+
+    .productDetails{
+        padding:35px 25px;
+    }
+
+    .banner{
+        grid-template-columns:1fr;
+    }
+
+    .banner img{
+        height:400px;
+    }
+
+    .footerGrid{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+@media(max-width:600px){
+
+    .topbar{
+        font-size:8px;
+    }
+
+    .section{
+        padding:60px 18px;
+    }
+
+    .sectionTitle{
+        font-size:31px;
+    }
+
+    .productGrid{
+        gap:10px;
+    }
+
+    .productInfo h3{
+        font-size:12px;
+    }
+
+    .quickAdd{
+        transform:none;
+        padding:10px;
+    }
+
+    .hero h1{
+        font-size:47px;
+    }
+
+    .categoryContent{
+        padding:25px;
+    }
+
+    .categoryContent h2{
+        font-size:36px;
+    }
+
+    .bannerText{
+        padding:40px 25px;
+    }
+
+    .bannerText h2{
+        font-size:40px;
+    }
+
+    .footerGrid{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .authBox{
+        padding:28px 20px;
+    }
+}
+</style>
 </head>
+
 <body>
 
-    <!-- Header -->
-    <header>
-        <div class="logo"><span class="ao">AONe</span><span class="deal">DEAL</span></div>
-        <div class="search-bar">
-            <input type="text" placeholder="શર્ટ, પેન્ટ, લેડીઝ વેર શોધો...">
-            <button class="search-btn">🔍</button>
-        </div>
-        <button class="cart-btn" onclick="scrollToCart()">🛒 કાર્ટ (<span id="cart-count">૦</span>)</button>
-    </header>
+<!-- ======================================================
+     TOP BAR
+====================================================== -->
 
-    <!-- Sub Navigation Categories -->
-    <div class="sub-nav">
-        <a href="#gents">👕 જેન્ટ્સ શર્ટ & પેન્ટ</a>
-        <a href="#ladies">👗 લેડીઝ ગારમેન્ટ્સ</a>
-        <a href="#trending">🔥 ટ્રેન્ડિંગ ઓફર્સ</a>
-        <a href="#terms">📜 ટર્મ્સ એન્ડ કંડિશન્સ</a>
-    </div>
+<div class="topbar">
+    Free shipping on orders over ₹1,999 • Easy 7-day returns
+</div>
 
-    <div class="container">
 
-        <!-- Gents Section -->
-        <h2 class="section-title" id="gents">જેન્ટ્સ ગારમેન્ટ્સ (Gents Wear)</h2>
-        <div class="product-grid">
-            
-            <!-- Product 1: Gents Shirt -->
-            <div class="product-card" id="p1">
-                <div>
-                    <div class="image-gallery" id="gal-1">
-                        <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf" class="active" alt="Shirt 1">
-                        <img src="https://images.unsplash.com/photo-1598033129183-c4f50c736f10" alt="Shirt 2">
-                        <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c" alt="Shirt 3">
-                    </div>
-                    <div class="thumb-btns">
-                        <button onclick="changeImage(1, 0)"><img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf"></button>
-                        <button onclick="changeImage(1, 1)"><img src="https://images.unsplash.com/photo-1598033129183-c4f50c736f10"></button>
-                        <button onclick="changeImage(1, 2)"><img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c"></button>
-                    </div>
-                    <div class="product-title">પ્રિમિયમ કોટન ફોર્મલ શર્ટ</div>
-                    <div class="price">₹૯૯૯</div>
-                    
-                    <div class="options-group">
-                        <label>સાઇઝ પસંદ કરો:</label>
-                        <select id="size-1">
-                            <option value="S">S (Small)</option>
-                            <option value="M">M (Medium)</option>
-                            <option value="L" selected>L (Large)</option>
-                            <option value="XL">XL (Extra Large)</option>
-                        </select>
-                    </div>
+<!-- ======================================================
+     HEADER
+====================================================== -->
 
-                    <div class="options-group">
-                        <label>જથ્થો (Quantity):</label>
-                        <div class="qty-control">
-                            <button onclick="updateQty(1, -1)">-</button>
-                            <span class="qty-display" id="qty-1">૧</span>
-                            <button onclick="updateQty(1, 1)">+</button>
-                        </div>
-                    </div>
-                </div>
-                <button class="btn-add-cart" onclick="addToCart('પ્રિમિયમ કોટન ફોર્મલ શર્ટ', 999, 1)">કાર્ટમાં ઉમેરો</button>
-            </div>
+<header class="header">
 
-            <!-- Product 2: Gents Pant -->
-            <div class="product-card" id="p2">
-                <div>
-                    <div class="image-gallery" id="gal-2">
-                        <img src="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80" class="active" alt="Pant 1">
-                        <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246" alt="Pant 2">
-                    </div>
-                    <div class="thumb-btns">
-                        <button onclick="changeImage(2, 0)"><img src="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80"></button>
-                        <button onclick="changeImage(2, 1)"><img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246"></button>
-                    </div>
-                    <div class="product-title">સ્ટાઇલિશ જેન્ટ્સ ફોર્મલ પેન્ટ</div>
-                    <div class="price">₹૧,૨૯૯</div>
-                    
-                    <div class="options-group">
-                        <label>કમરની સાઇઝ:</label>
-                        <select id="size-2">
-                            <option value="30">30 inch</option>
-                            <option value="32" selected>32 inch</option>
-                            <option value="34">34 inch</option>
-                            <option value="36">36 inch</option>
-                        </select>
-                    </div>
+<nav class="nav">
 
-                    <div class="options-group">
-                        <label>જથ્થો (Quantity):</label>
-                        <div class="qty-control">
-                            <button onclick="updateQty(2, -1)">-</button>
-                            <span class="qty-display" id="qty-2">૧</span>
-                            <button onclick="updateQty(2, 1)">+</button>
-                        </div>
-                    </div>
-                </div>
-                <button class="btn-add-cart" onclick="addToCart('સ્ટાઇલિશ જેન્ટ્સ ફોર્મલ પેન્ટ', 1299, 2)">કાર્ટમાં ઉમેરો</button>
-            </div>
+<button class="menuBtn" onclick="openMenu()">
+☰
+</button>
 
-        </div>
+<a href="#home" class="logo">
+AONE<span>DEAL</span>
+</a>
 
-        <!-- Ladies Section -->
-        <h2 class="section-title" id="ladies">લેડીઝ ગારમેન્ટ્સ (Ladies Wear)</h2>
-        <div class="product-grid">
-            
-            <!-- Product 3: Ladies Kurti -->
-            <div class="product-card" id="p3">
-                <div>
-                    <div class="image-gallery" id="gal-3">
-                        <img src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b" class="active" alt="Kurti 1">
-                        <img src="https://images.unsplash.com/photo-1617627143750-d86bc21e42bb" alt="Kurti 2">
-                    </div>
-                    <div class="thumb-btns">
-                        <button onclick="changeImage(3, 0)"><img src="https://images.unsplash.com/photo-1583391733956-3750e0ff4e8b"></button>
-                        <button onclick="changeImage(3, 1)"><img src="https://images.unsplash.com/photo-1617627143750-d86bc21e42bb"></button>
-                    </div>
-                    <div class="product-title">ડિઝાઇનર એમ્બ્રોઇડરી કુર્તી</div>
-                    <div class="price">₹૧,૪૯૯</div>
-                    
-                    <div class="options-group">
-                        <label>સાઇઝ પસંદ કરો:</label>
-                        <select id="size-3">
-                            <option value="S">S</option>
-                            <option value="M" selected>M</option>
-                            <option value="L">L</option>
-                            <option value="XL">XL</option>
-                        </select>
-                    </div>
+<div class="navlinks">
 
-                    <div class="options-group">
-                        <label>જથ્થો (Quantity):</label>
-                        <div class="qty-control">
-                            <button onclick="updateQty(3, -1)">-</button>
-                            <span class="qty-display" id="qty-3">૧</span>
-                            <button onclick="updateQty(3, 1)">+</button>
-                        </div>
-                    </div>
-                </div>
-                <button class="btn-add-cart" onclick="addToCart('ડિઝાઇનર એમ્બ્રોઇડરી કુર્તી', 1499, 3)">કાર્ટમાં ઉમેરો</button>
-            </div>
+<a href="#home">Home</a>
 
-        </div>
+<a href="#men">
+Men
+</a>
 
-        <!-- Cart Summary Section -->
-        <div class="cart-section" id="cart-section">
-            <h2 style="font-size: 22px; margin-bottom: 10px;">🛒 તમારી શોપિંગ કાર્ટ (Total Summary)</h2>
-            <div class="cart-items-list" id="cart-items">
-                <p style="color: #666;">તમારું કાર્ટ ખાલી છે.</p>
-            </div>
-            <div style="margin-top: 20px; font-size: 18px; font-weight: bold; text-align: right;" id="cart-total">
-                કુલ રકમ: ₹૦
-            </div>
-        </div>
+<a href="#women">
+Women
+</a>
 
-    </div>
+<a href="#new">
+New Arrivals
+</a>
 
-    <!-- Terms and Conditions -->
-    <div class="terms-section" id="terms">
-        <div class="terms-container">
-            <h3>📜 ટર્મ્સ એન્ડ કંડિશન્સ (Terms & Conditions)</h3>
-            <ul>
-                <div>• **રીટર્ન અને એક્સચેન્જ:** ડિલિવરી મળ્યાના ૭ દિવસની અંદર પ્રોડક્ટ રિપ્લેસ કે એક્સચેન્જ કરી શકાશે.</div>
-                <div>• **પેમેન્ટ પદ્ધતિ:** કેશ ઓન ડિલિવરી (COD) અને ઓનલાઈન યુપીઆઈ પેમેન્ટ ઉપલબ્ધ છે.</div>
-                <div>• **ગુણવત્તા:** AONeDEAL દ્વારા વેચાતી તમામ ગારમેન્ટ પ્રોડક્ટ્સ પ્રીમિયમ ક્વોલિટીની ચકાસણી પછી જ મોકલવામાં આવે છે.</div>
-                <div>• **શિપિંગ નીતિ:** Ahmedabad અને આસપાસના વિસ્તારોમાં ૩ થી ૫ કાર્યરત દિવસમાં ડિલિવરી કરવામાં આવે છે.</div>
-            </ul>
-        </div>
-    </div>
+<a href="#offers">
+Offers
+</a>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2026 AONeDEAL. તમામ હકો સુરક્ષિત. (Designed for Premium Garment Shopping)</p>
-    </footer>
+</div>
 
-    <!-- JavaScript for Functionality -->
-    <script>
-        let cart = [];
+<div class="actions">
 
-        // Image Gallery Switcher
-        function changeImage(productID, imageIndex) {
-            const gallery = document.getElementById('gal-' + productID);
-            const images = gallery.getElementsByTagName('img');
-            for (let i = 0; i < images.length; i++) {
-                images[i].classList.remove('active');
-            }
-            images[imageIndex].classList.add('active');
-        }
+<button class="accountBtn"
+id="accountButton"
+onclick="openAccount()">
+LOGIN
+</button>
 
-        // Quantity Control
-        let quantities = { 1: 1, 2: 1, 3: 1 };
-        function updateQty(productID, change) {
-            quantities[productID] += change;
-            if (quantities[productID] < 1) quantities[productID] = 1;
-            document.getElementById('qty-' + productID).innerText = quantities[productID];
-        }
+<button class="iconbtn"
+onclick="openCart()">
+🛍
+<span class="count" id="cartCount">0</span>
+</button>
 
-        // Add to Cart Logic
-        function addToCart(name, price, productID) {
-            let size = document.getElementById('size-' + productID).value;
-            let qty = quantities[productID];
+<select class="lang"
+onchange="changeLanguage(this.value)">
+<option value="en">EN</option>
+<option value="gu">ગુજરાતી</option>
+<option value="hi">हिन्दी</option>
+</select>
 
-            let existingItem = cart.find(item => item.id === productID && item.size === size);
-            if (existingItem) {
-                existingItem.qty += qty;
-            } else {
-                cart.push({ id: productID, name: name, price: price, size: size, qty: qty });
-            }
-            updateCartUI();
-        }
+</div>
 
-        // Update Cart UI
-        function updateCartUI() {
-            let cartItemsDiv = document.getElementById('cart-items');
-            let cartCountSpan = document.getElementById('cart-count');
-            let cartTotalDiv = document.getElementById('cart-total');
+</nav>
 
-            if (cart.length === 0) {
-                cartItemsDiv.innerHTML = '<p style="color: #666;">તમારું કાર્ટ ખાલી છે.</p>';
-                cartCountSpan.innerText = '૦';
-                cartTotalDiv.innerText = 'કુલ રકમ: ₹૦';
-                return;
-            }
+</header>
 
-            let html = '';
-            let total = 0;
-            let totalCount = 0;
 
-            cart.forEach((item, index) => {
-                let itemTotal = item.price * item.qty;
-                total += itemTotal;
-                totalCount += item.qty;
-                html += `
-                    <div class="cart-item">
-                        <div>
-                            <strong>${item.name}</strong> (સાઇઝ: ${item.size})<br>
-                            <small>જથ્થો: ${item.qty} × ₹${item.price}</small>
-                        </div>
-                        <div>
-                            <span style="font-weight: bold; color: #B12704; margin-right: 15px;">₹${itemTotal}</span>
-                            <button onclick="removeItem(${index})" style="background: #ff4d4d; color: white; border: none; padding: 4px 8px; border-radius: 4px; cursor: pointer;">હટાવો</button>
-                        </div>
-                    </div>
-                `;
-            });
+<!-- ======================================================
+     HOME PAGE
+====================================================== -->
 
-            cartItemsDiv.innerHTML = html;
-            cartCountSpan.innerText = totalCount;
-            cartTotalDiv.innerText = 'કુલ રકમ: ₹' + total;
-        }
+<main id="home">
 
-        function removeItem(index) {
-            cart.splice(index, 1);
-            updateCartUI();
-        }
+<section class="hero">
 
-        function scrollToCart() {
-            document.getElementById('cart-section').scrollIntoView({ behavior: 'smooth' });
-        }
-    </script>
+<img
+src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=2000&q=90"
+alt="Premium Fashion"
+>
+
+<div class="heroContent">
+
+<div class="eyebrow">
+THE NEW SEASON 2026
+</div>
+
+<h1>
+Elevate Your Everyday Style.
+</h1>
+
+<p>
+Curated fashion for modern men and women.
+Premium looks, timeless essentials and effortless confidence.
+</p>
+
+<a href="#men" class="btn">
+SHOP COLLECTION
+</a>
+
+</div>
+
+</section>
+
+
+<!-- ======================================================
+     CATEGORY SELECTION
+====================================================== -->
+
+<section class="section">
+
+<div class="sectionHead">
+
+<div>
+
+<h2 class="sectionTitle">
+Shop by Category
+</h2>
+
+<p class="sectionSub">
+Choose your collection.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="categoryGrid">
+
+<a href="#men" class="categoryCard">
+
+<img
+src="https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?auto=format&fit=crop&w=1200&q=90"
+alt="Men"
+>
+
+<div class="categoryContent">
+
+<h2>
+Men
+</h2>
+
+<p>
+Shirts • T-Shirts • Formal Shirts • Formal Pants
+</p>
+
+<span class="btn">
+EXPLORE MEN
+</span>
+
+</div>
+
+</a>
+
+
+<a href="#women" class="categoryCard">
+
+<img
+src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=90"
+alt="Women"
+>
+
+<div class="categoryContent">
+
+<h2>
+Women
+</h2>
+
+<p>
+Formal Shirts • Formal Pants • Dresses • Leggings • Sarees
+</p>
+
+<span class="btn">
+EXPLORE WOMEN
+</span>
+
+</div>
+
+</a>
+
+</div>
+
+</section>
+
+
+<!-- ======================================================
+     MEN
+====================================================== -->
+
+<section class="section" id="men">
+
+<div class="sectionHead">
+
+<div>
+
+<h2 class="sectionTitle">
+Men's Collection
+</h2>
+
+<p class="sectionSub">
+Choose your men's category.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="filters">
+
+<button class="filter active"
+onclick="filterProducts('men','All',this)">
+All
+</button>
+
+<button class="filter"
+onclick="filterProducts('men','Shirts',this)">
+Shirts
+</button>
+
+<button class="filter"
+onclick="filterProducts('men','T-Shirts',this)">
+T-Shirts
+</button>
+
+<button class="filter"
+onclick="filterProducts('men','Formal Shirts',this)">
+Formal Shirts
+</button>
+
+<button class="filter"
+onclick="filterProducts('men','Formal Pants',this)">
+Formal Pants
+</button>
+
+</div>
+
+
+<div class="productGrid" id="menProducts">
+</div>
+
+</section>
+
+
+<!-- ======================================================
+     WOMEN
+====================================================== -->
+
+<section class="section"
+id="women"
+style="background:#faf9f7;max-width:none;">
+
+<div style="max-width:1390px;margin:auto">
+
+<div class="sectionHead">
+
+<div>
+
+<h2 class="sectionTitle">
+Women's Collection
+</h2>
+
+<p class="sectionSub">
+Choose your women's category.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="filters">
+
+<button class="filter active"
+onclick="filterProducts('women','All',this)">
+All
+</button>
+
+<button class="filter"
+onclick="filterProducts('women','Formal Shirts',this)">
+Formal Shirts
+</button>
+
+<button class="filter"
+onclick="filterProducts('women','Formal Pants',this)">
+Formal Pants
+</button>
+
+<button class="filter"
+onclick="filterProducts('women','Dresses',this)">
+Dresses
+</button>
+
+<button class="filter"
+onclick="filterProducts('women','Leggings',this)">
+Leggings
+</button>
+
+<button class="filter"
+onclick="filterProducts('women','Sarees',this)">
+Sarees
+</button>
+
+</div>
+
+
+<div class="productGrid"
+id="womenProducts">
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ======================================================
+     NEW ARRIVALS
+====================================================== -->
+
+<section class="section" id="new">
+
+<div class="banner">
+
+<img
+src="https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&w=1200&q=90"
+alt="New Collection"
+>
+
+<div class="bannerText">
+
+<div class="eyebrow">
+LIMITED EDIT
+</div>
+
+<h2>
+Designed for the way you live.
+</h2>
+
+<p>
+Minimal. Refined. Confident.
+Explore our latest collection created for effortless everyday dressing.
+</p>
+
+<a href="#men" class="btn dark">
+DISCOVER COLLECTION
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ======================================================
+     NEWSLETTER
+====================================================== -->
+
+<section class="newsletter"
+id="offers">
+
+<h2>
+Stay in the know.
+</h2>
+
+<p>
+Get first access to new drops, private offers and style edits.
+</p>
+
+<form class="subscribe"
+onsubmit="subscribe(event)">
+
+<input
+type="email"
+placeholder="Your email address"
+required
+>
+
+<button>
+SUBSCRIBE
+</button>
+
+</form>
+
+</section>
+
+</main>
+
+
+<!-- ======================================================
+     FOOTER
+====================================================== -->
+
+<footer class="footer">
+
+<div class="footerGrid">
+
+<div>
+
+<div class="logo">
+AONE<span>DEAL</span>
+</div>
+
+<p>
+Premium fashion for modern lifestyles.
+Quality pieces, considered design and confident style.
+</p>
+
+</div>
+
+
+<div>
+
+<h3>
+SHOP
+</h3>
+
+<a href="#men">
+Men
+</a>
+
+<a href="#women">
+Women
+</a>
+
+<a href="#new">
+New Arrivals
+</a>
+
+<a href="#offers">
+Offers
+</a>
+
+</div>
+
+
+<div>
+
+<h3>
+HELP
+</h3>
+
+<a href="#">
+Contact Us
+</a>
+
+<a href="#">
+Shipping
+</a>
+
+<a href="#">
+Returns
+</a>
+
+<a href="#">
+FAQs
+</a>
+
+</div>
+
+
+<div>
+
+<h3>
+FOLLOW
+</h3>
+
+<a href="#">
+Instagram
+</a>
+
+<a href="#">
+Facebook
+</a>
+
+<a href="#">
+YouTube
+</a>
+
+</div>
+
+</div>
+
+
+<div class="copyright">
+© 2026 AONeDEAL. All Rights Reserved.
+</div>
+
+</footer>
+
+
+<!-- ======================================================
+     MENU DRAWER
+====================================================== -->
+
+<div class="overlay"
+id="overlay"
+onclick="closeAll()">
+</div>
+
+
+<aside class="drawer"
+id="menuDrawer">
+
+<div class="drawerHead">
+
+<strong>
+MENU
+</strong>
+
+<button onclick="closeAll()">
+✕
+</button>
+
+</div>
+
+
+<div class="drawerBody">
+
+<div class="menuTitle">
+MEN
+</div>
+
+<a class="menuLink"
+href="#men"
+onclick="closeAll()">
+Shirts
+</a>
+
+<a class="menuLink"
+href="#men"
+onclick="closeAll()">
+T-Shirts
+</a>
+
+<a class="menuLink"
+href="#men"
+onclick="closeAll()">
+Formal Shirts
+</a>
+
+<a class="menuLink"
+href="#men"
+onclick="closeAll()">
+Formal Pants
+</a>
+
+
+<div class="menuTitle">
+WOMEN
+</div>
+
+<a class="menuLink"
+href="#women"
+onclick="closeAll()">
+Formal Shirts
+</a>
+
+<a class="menuLink"
+href="#women"
+onclick="closeAll()">
+Formal Pants
+</a>
+
+<a class="menuLink"
+href="#women"
+onclick="closeAll()">
+Dresses
+</a>
+
+<a class="menuLink"
+href="#women"
+onclick="closeAll()">
+Leggings
+</a>
+
+<a class="menuLink"
+href="#women"
+onclick="closeAll()">
+Sarees
+</a>
+
+
+<div class="menuTitle">
+EXPLORE
+</div>
+
+<a class="menuLink"
+href="#new"
+onclick="closeAll()">
+New Arrivals
+</a>
+
+<a class="menuLink"
+href="#offers"
+onclick="closeAll()">
+Offers
+</a>
+
+</div>
+
+</aside>
+
+
+<!-- ======================================================
+     CART
+====================================================== -->
+
+<aside class="cartDrawer"
+id="cartDrawer">
+
+<div class="drawerHead">
+
+<strong>
+YOUR BAG
+</strong>
+
+<button onclick="closeAll()">
+✕
+</button>
+
+</div>
+
+
+<div class="cartBody">
+
+<div class="cartItems"
+id="cartItems">
+</div>
+
+
+<div class="cartTotal">
+
+<strong>
+TOTAL
+</strong>
+
+<strong id="cartTotal">
+₹0
+</strong>
+
+</div>
+
+
+<button
+class="btn dark"
+style="width:100%;margin-top:18px"
+onclick="checkout()">
+
+CHECKOUT
+
+</button>
+
+</div>
+
+</aside>
+
+
+<!-- ======================================================
+     AUTH MODAL
+====================================================== -->
+
+<div class="authModal"
+id="authModal">
+
+<div class="authBox">
+
+<button
+class="authClose"
+onclick="closeAuth()">
+✕
+</button>
+
+
+<div class="authLogo">
+AONEDEAL
+</div>
+
+
+<h2 id="authTitle">
+Welcome Back
+</h2>
+
+
+<p class="authSubtitle"
+id="authSubtitle">
+Login to continue shopping.
+</p>
+
+
+<div class="authTabs">
+
+<button
+class="authTab active"
+id="loginTab"
+onclick="showLogin()">
+
+LOGIN
+
+</button>
+
+
+<button
+class="authTab"
+id="signupTab"
+onclick="showSignup()">
+
+CREATE ACCOUNT
+
+</button>
+
+</div>
+
+
+<!-- LOGIN -->
+
+<form
+class="authForm"
+id="loginForm"
+onsubmit="loginUser(event)">
+
+<label>
+Email Address
+</label>
+
+<input
+id="loginEmail"
+type="email"
+required
+placeholder="you@example.com"
+>
+
+
+<label>
+Password
+</label>
+
+<input
+id="loginPassword"
+type="password"
+required
+placeholder="Your password"
+>
+
+
+<button
+class="authSubmit">
+
+LOGIN
+
+</button>
+
+
+<button
+type="button"
+class="authLink"
+onclick="showForgot()">
+
+Forgot Password?
+
+</button>
+
+
+<p
+class="authMessage"
+id="loginMessage">
+</p>
+
+</form>
+
+
+<!-- SIGNUP -->
+
+<form
+class="authForm"
+id="signupForm"
+style="display:none"
+onsubmit="signupUser(event)">
+
+<label>
+Full Name
+</label>
+
+<input
+id="signupName"
+type="text"
+required
+placeholder="Your name"
+>
+
+
+<label>
+Email Address
+</label>
+
+<input
+id="signupEmail"
+type="email"
+required
+placeholder="you@example.com"
+>
+
+
+<label>
+Password
+</label>
+
+<input
+id="signupPassword"
+type="password"
+required
+minlength="6"
+placeholder="Minimum 6 characters"
+>
+
+
+<button
+class="authSubmit">
+
+CREATE ACCOUNT
+
+</button>
+
+
+<p
+class="authMessage"
+id="signupMessage">
+</p>
+
+</form>
+
+
+<!-- OTP -->
+
+<form
+class="authForm otpBox"
+id="otpForm"
+onsubmit="verifySignupOtp(event)">
+
+<label>
+OTP
+</label>
+
+<input
+id="signupOtp"
+type="text"
+inputmode="numeric"
+maxlength="6"
+required
+placeholder="Enter 6 digit OTP"
+>
+
+
+<button
+class="authSubmit">
+
+VERIFY OTP
+
+</button>
+
+
+<p
+class="authMessage"
+id="otpMessage">
+</p>
+
+</form>
+
+
+<!-- FORGOT PASSWORD -->
+
+<form
+class="authForm"
+id="forgotForm"
+style="display:none"
+onsubmit="sendResetEmail(event)">
+
+<label>
+Email Address
+</label>
+
+<input
+id="forgotEmail"
+type="email"
+required
+placeholder="Your registered email"
+>
+
+
+<button
+class="authSubmit">
+
+SEND RESET LINK
+
+</button>
+
+
+<button
+type="button"
+class="authLink"
+onclick="showLogin()">
+
+Back to Login
+
+</button>
+
+
+<p
+class="authMessage"
+id="forgotMessage">
+</p>
+
+</form>
+
+
+<!-- ACCOUNT -->
+
+<div
+class="accountBox"
+id="accountBox"
+style="display:none">
+
+<h3>
+My Account
+</h3>
+
+<p id="accountEmail">
+</p>
+
+<button
+class="btn dark"
+onclick="logoutUser()">
+
+LOGOUT
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ======================================================
+     PRODUCT DETAILS MODAL
+====================================================== -->
+
+<div
+class="productModal"
+id="productModal">
+
+<div class="productView">
+
+<button
+class="closeModal"
+onclick="closeProduct()">
+
+✕
+
+</button>
+
+
+<div class="gallery">
+
+<img
+class="mainPhoto"
+id="mainProductPhoto"
+src=""
+alt=""
+>
+
+
+<div
+class="thumbs"
+id="productThumbs">
+</div>
+
+</div>
+
+
+<div class="productDetails">
+
+<div class="small"
+id="productCategory">
+</div>
+
+
+<h2 id="productName">
+</h2>
+
+
+<div class="bigPrice"
+id="productPrice">
+</div>
+
+
+<p id="productDescription">
+</p>
+
+
+<div class="sizeTitle">
+SELECT SIZE
+</div>
+
+
+<div class="sizes">
+
+<button
+class="size"
+onclick="selectSize(this)">
+S
+</button>
+
+<button
+class="size"
+onclick="selectSize(this)">
+M
+</button>
+
+<button
+class="size"
+onclick="selectSize(this)">
+L
+</button>
+
+<button
+class="size"
+onclick="selectSize(this)">
+XL
+</button>
+
+</div>
+
+
+<button
+class="btn dark"
+style="width:100%;margin-top:30px"
+id="productAddButton">
+
+ADD TO BAG
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* ======================================================
+   SUPABASE CONFIGURATION
+======================================================
+
+   અહીં તમારું Supabase Project URL અને ANON KEY નાખો.
+
+   Example:
+
+   const SUPABASE_URL =
+   "https://xxxxxxxx.supabase.co";
+
+   const SUPABASE_ANON_KEY =
+   "eyJhbGciOiJIUzI1Ni...";
+
+====================================================== */
+
+const SUPABASE_URL =
+"YOUR_SUPABASE_URL";
+
+const SUPABASE_ANON_KEY =
+"YOUR_SUPABASE_ANON_KEY";
+
+
+const supabaseClient =
+supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_ANON_KEY
+);
+
+
+/* ======================================================
+   PRODUCTS
+
+   દરેક productમાં 4 અલગ photos છે.
+====================================================== */
+
+const products = [
+
+{
+id:1,
+group:"men",
+category:"Shirts",
+name:"Premium Oxford Shirt",
+price:1499,
+oldPrice:1999,
+badge:"BEST SELLER",
+
+photos:[
+"https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&w=900&q=90",
+"https://images.unsplash.com/photo-1603252109303-2751441dd157?auto=format&fit=crop&w=900&q=90",
+"https://images.unsplash.com/photo-1602810319428-019690571b5b?auto=format&fit=crop&w=900&q=90",
+"https://images.unsplash.com/photo-1608234807905-4466023792f5?auto=format&fit=crop&w=900&q=90"
+],
+
+description:
+"Premium Oxford shirt designed for a clean and confident everyday look."
+},
+
+{
+id:2,
+group:"men",
+category:"T-Shirts",
+name:"Essential Premium Tee",
+price:899,
+oldPrice:1299,
+badge:"TRENDING",
+
+photos:[
+"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=900&q=90",
+"https://images.unsplash.com/photo-1503341504253-dff4815485f1?auto=format&fit=crop&w=900&q=90",
+"https://images.unsplash.com/photo-1583743814966-8936f37f4678?auto=format&fit=crop&w=900&q=90",
+"https://images.unsplash.com/photo-1622445275576-721325763afe?auto=format&fit=crop&w=900&q=90"
+],
+
+description:
+"Premium cotton T-shirt with a clean modern silhouette."
+},
+
+{
+id:3,
+group:"men",
+category:"Formal Shirts",
+name:"Executive White Shirt",
+price:1899,
+oldPrice:2499,
+badge:"PREMIUM",
+
+photos:[
+"https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&w=900&q=90",
+"https://images.unsplash.com/photo-1621072156002-e2fccdc0b176?auto=format&fit=crop&w=900&q=90",
+"https://images.unsplash.com/photo-1608234807905-4466023792f5?auto=format&fit=crop&w=900&q=90",
+"https://images.unsplash.com/photo-1603252109303-2751441dd157?auto=format&fit=crop&w=900&q=90"
+],
+
+description:
+"Elegant formal shirt for business meetings and special occasions."
+},
+
+{
+id:4,
+group:"men",
+category:"Formal Pants",
+name:"Tailored Black Trousers",
+price:1999,
+oldPrice:2799,
+badge:"NEW",
+
+photos:[
+"https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&w=900&q=90",
+"https://images.unsplash.com/photo-1598033129183-c4f50c736f10?auto=format&fit=crop&w=900&q=90",
+"https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?auto=format&fit=crop&w=900&q=90",
+"https://images.unsplash.com/photo-1610652492500-ded49ceeb378?auto=format&fit=crop&w=900&q=90"
+],
+
+description:
+"Tailored formal trousers with a refined premium finish."
+},
+
+{
+id:5,
+group:"women",
+category:"Formal Shirts",
+name:"Silk Touch Blouse",
+price:1799,
+oldPrice:2399,
+badge:"NEW",
+
+photos:[
+"https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=900&q=90",
+"https://images.unsplash.com/photo-1551488831-8f9d5f1d2c1b?auto=format&fit=crop&w=900&q=90",
+"https://images.unsplash.com/photo-1598554747436-c9293d6a588f?auto=format&fit=crop&w=900&q=90",
+"https://images.unsplash.com/photo-1581044777550-4cfa60707c03?auto=format&fit=crop&w=900&q=90"
+],
+
+description:
+"Elegant women's formal blouse with a smooth premium finish."
+},
+
+{
+id:6,
+group:"women",
+category:"Formal Pants",
+name:"Elegant Tailored Pants",
+price:1899,
+oldPrice:2599,
+badge:"",
+
+photos:[
+"https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=900&q=90",
+"https://images.unsplash.com/photo-1506629905607-d9a9b8a8c6e0?auto=format&fit=crop&w=900&q=90",
+"https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=900&q=90",
+"https://images.unsplash.com/photo-1584273143981-41c073dfe8f8?auto=format&fit=crop&w=900&q=90"
+],
+
+description:
+"Modern tailored pants designed for a sophisticated professional wardrobe."
+},
+
+{
+id:7,
+group:"women",
+category:"Dresses",
+name:"Satin Evening Dress",
+price:2499,
+oldPrice:3299,
+badge:"BEST SELLER",
+
+photos:[
+"https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=900&q=90",
+"https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=900&q=90",
+"https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=900&q=90",
+"https://images.unsplash.com/photo-1539008835657-9e8e9680c956?auto=format&fit=crop&w=900&q=90"
+],
+
+description:
+"Elegant satin dress created for evening occasions."
+},
+
+{
+id:8,
+group:"women",
+category:"Leggings",
+name:"Second Skin Leggings",
+price:799,
+oldPrice:1099,
+badge:"",
+
+photos:[
+"https://images.unsplash.com/photo-1506629905607-d9a9b8a8c6e0?auto=format&fit=crop&w=900&q=90",
+"https://images.unsplash.com/photo-1506629905607-d9a9b8a8c6e0?auto=format&fit=crop&w=900&q=90",
+"https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=90",
+"https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=90"
+],
+
+description:
+"Comfortable stretch leggings designed for everyday movement."
+},
+
+{
+id:9,
+group:"women",
+category:"Sarees",
+name:"Elegant Heritage Saree",
+price:2999,
+oldPrice:3999,
+badge:"PREMIUM",
+
+photos:[
+"https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=900&q=90",
+"https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=900&q=90",
+"https://images.unsplash.com/photo-1583391733956-6c78276477e2?auto=format&fit=crop&w=900&q=90",
+"https://images.unsplash.com/photo-1594223274512-ad4803739b7c?auto=format&fit=crop&w=900&q=90"
+],
+
+description:
+"Premium heritage-inspired saree with an elegant traditional finish."
+}
+
+];
+
+
+let cart =
+JSON.parse(
+localStorage.getItem("aonedeal_cart") || "[]"
+);
+
+let currentProduct = null;
+
+
+/* ======================================================
+   PRODUCT CARD
+====================================================== */
+
+function productCard(product){
+
+return `
+
+<article class="product">
+
+<div
+class="productImage"
+onclick="openProduct(${product.id})"
+style="cursor:pointer"
+>
+
+<img
+src="${product.photos[0]}"
+alt="${product.name}"
+loading="lazy"
+>
+
+${
+product.badge
+?
+`<span class="productBadge">
+${product.badge}
+</span>`
+:
+""
+}
+
+<button
+class="quickAdd"
+onclick="event.stopPropagation();addToCart(${product.id})"
+>
+ADD TO BAG
+</button>
+
+</div>
+
+
+<div class="productInfo"
+onclick="openProduct(${product.id})"
+style="cursor:pointer">
+
+<h3>
+${product.name}
+</h3>
+
+<div class="price">
+
+₹${product.price.toLocaleString("en-IN")}
+
+<span class="oldPrice">
+₹${product.oldPrice.toLocaleString("en-IN")}
+</span>
+
+</div>
+
+</div>
+
+</article>
+
+`;
+}
+
+
+/* ======================================================
+   RENDER
+====================================================== */
+
+function renderProducts(){
+
+document.getElementById("menProducts").innerHTML =
+products
+.filter(p=>p.group==="men")
+.map(productCard)
+.join("");
+
+
+document.getElementById("womenProducts").innerHTML =
+products
+.filter(p=>p.group==="women")
+.map(productCard)
+.join("");
+
+updateCart();
+
+}
+
+
+/* ======================================================
+   CATEGORY FILTER
+====================================================== */
+
+function filterProducts(group,category,button){
+
+const container =
+group==="men"
+?
+document.getElementById("menProducts")
+:
+document.getElementById("womenProducts");
+
+
+document
+.querySelectorAll(
+group==="men"
+?
+"#men .filter"
+:
+"#women .filter"
+)
+.forEach(btn=>{
+btn.classList.remove("active");
+});
+
+
+button.classList.add("active");
+
+
+container.innerHTML =
+products
+.filter(p=>
+p.group===group &&
+(category==="All" || p.category===category)
+)
+.map(productCard)
+.join("");
+
+}
+
+
+/* ======================================================
+   PRODUCT DETAIL
+====================================================== */
+
+function openProduct(id){
+
+const product =
+products.find(p=>p.id===id);
+
+if(!product)return;
+
+currentProduct=product;
+
+
+document.getElementById("productCategory")
+.textContent=product.category;
+
+document.getElementById("productName")
+.textContent=product.name;
+
+document.getElementById("productPrice")
+.innerHTML=
+`₹${product.price.toLocaleString("en-IN")}
+<span style="color:#999;text-decoration:line-through;font-size:14px">
+₹${product.oldPrice.toLocaleString("en-IN")}
+</span>`;
+
+document.getElementById("productDescription")
+.textContent=product.description;
+
+
+document.getElementById("mainProductPhoto")
+.src=product.photos[0];
+
+
+const thumbs =
+document.getElementById("productThumbs");
+
+thumbs.innerHTML="";
+
+
+product.photos.forEach(
+(photo,index)=>{
+
+const thumb =
+document.createElement("div");
+
+thumb.className=
+"thumb"+(index===0?" active":"");
+
+thumb.innerHTML=
+`<img src="${photo}" alt="">`;
+
+thumb.onclick=()=>{
+
+document.getElementById(
+"mainProductPhoto"
+).src=photo;
+
+document
+.querySelectorAll(".thumb")
+.forEach(t=>
+t.classList.remove("active")
+);
+
+thumb.classList.add("active");
+
+};
+
+thumbs.appendChild(thumb);
+
+});
+
+
+document.getElementById(
+"productAddButton"
+).onclick=()=>{
+addToCart(product.id);
+};
+
+
+document
+.getElementById("productModal")
+.classList.add("show");
+
+}
+
+
+function closeProduct(){
+
+document
+.getElementById("productModal")
+.classList.remove("show");
+
+}
+
+
+/* ======================================================
+   SIZE
+====================================================== */
+
+function selectSize(button){
+
+document
+.querySelectorAll(".size")
+.forEach(
+b=>b.classList.remove("selected")
+);
+
+button.classList.add("selected");
+
+}
+
+
+/* ======================================================
+   AUTH HELPERS
+====================================================== */
+
+function openAuth(){
+
+document
+.getElementById("authModal")
+.classList.add("show");
+
+showLogin();
+
+}
+
+
+function closeAuth(){
+
+document
+.getElementById("authModal")
+.classList.remove("show");
+
+}
+
+
+function showLogin(){
+
+document.getElementById("loginForm")
+.style.display="block";
+
+document.getElementById("signupForm")
+.style.display="none";
+
+document.getElementById("otpForm")
+.style.display="none";
+
+document.getElementById("forgotForm")
+.style.display="none";
+
+document.getElementById("accountBox")
+.style.display="none";
+
+
+document.getElementById("loginTab")
+.classList.add("active");
+
+document.getElementById("signupTab")
+.classList.remove("active");
+
+}
+
+
+function showSignup(){
+
+document.getElementById("loginForm")
+.style.display="none";
+
+document.getElementById("signupForm")
+.style.display="block";
+
+document.getElementById("otpForm")
+.style.display="none";
+
+document.getElementById("forgotForm")
+.style.display="none";
+
+document.getElementById("accountBox")
+.style.display="none";
+
+
+document.getElementById("loginTab")
+.classList.remove("active");
+
+document.getElementById("signupTab")
+.classList.add("active");
+
+}
+
+
+function showForgot(){
+
+document.getElementById("loginForm")
+.style.display="none";
+
+document.getElementById("signupForm")
+.style.display="none";
+
+document.getElementById("otpForm")
+.style.display="none";
+
+document.getElementById("forgotForm")
+.style.display="block";
+
+document.getElementById("accountBox")
+.style.display="none";
+
+}
+
+
+/* ======================================================
+   SIGN UP
+====================================================== */
+
+async function signupUser(event){
+
+event.preventDefault();
+
+const name =
+document.getElementById("signupName")
+.value.trim();
+
+const email =
+document.getElementById("signupEmail")
+.value.trim();
+
+const password =
+document.getElementById("signupPassword")
+.value;
+
+
+const message =
+document.getElementById("signupMessage");
+
+message.className="authMessage";
+message.textContent="Creating account...";
+
+
+const {data,error} =
+await supabaseClient.auth.signUp({
+
+email:email,
+
+password:password,
+
+options:{
+data:{
+full_name:name
+}
+}
+
+});
+
+
+if(error){
+
+message.className=
+"authMessage error";
+
+message.textContent=
+error.message;
+
+return;
+
+}
+
+
+/*
+IMPORTANT:
+
+If your Supabase email template is configured
+for OTP, user will receive the OTP.
+
+The account is NOT treated as logged in until
+OTP verification is successful.
+*/
+
+
+sessionStorage.setItem(
+"signup_email",
+email
+);
+
+
+document.getElementById("signupForm")
+.style.display="none";
+
+document.getElementById("otpForm")
+.style.display="block";
+
+
+document.getElementById("authTitle")
+.textContent="Verify Your Email";
+
+document.getElementById("authSubtitle")
+.textContent=
+"Enter the OTP sent to your email.";
+
+}
+
+
+/* ======================================================
+   VERIFY SIGNUP OTP
+====================================================== */
+
+async function verifySignupOtp(event){
+
+event.preventDefault();
+
+const email =
+sessionStorage.getItem("signup_email");
+
+const token =
+document.getElementById("signupOtp")
+.value.trim();
+
+
+const message =
+document.getElementById("otpMessage");
+
+message.textContent="Verifying...";
+
+
+const {data,error} =
+await supabaseClient.auth.verifyOtp({
+
+email:email,
+
+token:token,
+
+type:"signup"
+
+});
+
+
+if(error){
+
+message.className=
+"authMessage error";
+
+message.textContent=
+"Invalid or expired OTP.";
+
+return;
+
+}
+
+
+message.className=
+"authMessage success";
+
+message.textContent=
+"Account verified successfully.";
+
+
+sessionStorage.removeItem("signup_email");
+
+
+setTimeout(()=>{
+
+closeAuth();
+
+updateAuthButton();
+
+},800);
+
+}
+
+
+/* ======================================================
+   LOGIN
+====================================================== */
+
+async function loginUser(event){
+
+event.preventDefault();
+
+
+const email =
+document.getElementById("loginEmail")
+.value.trim();
+
+const password =
+document.getElementById("loginPassword")
+.value;
+
+
+const message =
+document.getElementById("loginMessage");
+
+message.textContent="Logging in...";
+
+
+const {data,error} =
+await supabaseClient.auth.signInWithPassword({
+
+email:email,
+
+password:password
+
+});
+
+
+if(error){
+
+message.className=
+"authMessage error";
+
+message.textContent=
+"Account not found or email/password is incorrect.";
+
+return;
+
+}
+
+
+message.className=
+"authMessage success";
+
+message.textContent=
+"Login successful.";
+
+
+setTimeout(()=>{
+
+closeAuth();
+
+updateAuthButton();
+
+},500);
+
+}
+
+
+/* ======================================================
+   FORGOT PASSWORD
+====================================================== */
+
+async function sendResetEmail(event){
+
+event.preventDefault();
+
+
+const email =
+document.getElementById("forgotEmail")
+.value.trim();
+
+
+const message =
+document.getElementById("forgotMessage");
+
+message.textContent=
+"Sending reset email...";
+
+
+const {error} =
+await supabaseClient.auth
+.resetPasswordForEmail(
+
+email,
+
+{
+redirectTo:
+window.location.origin+
+window.location.pathname+
+"?reset=true"
+}
+
+);
+
+
+if(error){
+
+message.className=
+"authMessage error";
+
+message.textContent=
+error.message;
+
+return;
+
+}
+
+
+message.className=
+"authMessage success";
+
+message.textContent=
+"Password reset link sent to your email.";
+
+}
+
+
+/* ======================================================
+   AUTH STATUS
+====================================================== */
+
+async function updateAuthButton(){
+
+const {
+data:{
+session
+}
+} =
+await supabaseClient.auth.getSession();
+
+
+const button =
+document.getElementById("accountButton");
+
+
+if(session){
+
+button.textContent="ACCOUNT";
+
+}else{
+
+button.textContent="LOGIN";
+
+}
+
+}
+
+
+async function openAccount(){
+
+const {
+data:{
+session
+}
+} =
+await supabaseClient.auth.getSession();
+
+
+if(!session){
+
+openAuth();
+
+return;
+
+}
+
+
+const email =
+session.user.email;
+
+
+document.getElementById("loginForm")
+.style.display="none";
+
+document.getElementById("signupForm")
+.style.display="none";
+
+document.getElementById("otpForm")
+.style.display="none";
+
+document.getElementById("forgotForm")
+.style.display="none";
+
+document.getElementById("accountBox")
+.style.display="block";
+
+
+document.getElementById("accountEmail")
+.textContent=email;
+
+
+document.getElementById("authModal")
+.classList.add("show");
+
+}
+
+
+/* ======================================================
+   LOGOUT
+====================================================== */
+
+async function logoutUser(){
+
+await supabaseClient.auth.signOut();
+
+closeAuth();
+
+updateAuthButton();
+
+alert("You have been logged out.");
+
+}
+
+
+/* ======================================================
+   ADD TO CART
+====================================================== */
+
+async function addToCart(id){
+
+const {
+data:{
+session
+}
+} =
+await supabaseClient.auth.getSession();
+
+
+/*
+IMPORTANT:
+
+Without valid login session,
+product cannot be added.
+*/
+
+if(!session){
+
+sessionStorage.setItem(
+"pending_product",
+id
+);
+
+openAuth();
+
+return;
+
+}
+
+
+const product =
+products.find(p=>p.id===id);
+
+if(!product)return;
+
+
+const existing =
+cart.find(p=>p.id===id);
+
+
+if(existing){
+
+existing.quantity++;
+
+}else{
+
+cart.push({
+
+id:product.id,
+
+name:product.name,
+
+price:product.price,
+
+image:product.photos[0],
+
+quantity:1
+
+});
+
+}
+
+
+localStorage.setItem(
+"aonedeal_cart",
+JSON.stringify(cart)
+);
+
+
+updateCart();
+
+openCart();
+
+}
+
+
+/* ======================================================
+   CART
+====================================================== */
+
+function updateCart(){
+
+const count =
+cart.reduce(
+(total,item)=>
+total+item.quantity,
+0
+);
+
+document.getElementById(
+"cartCount"
+).textContent=count;
+
+
+const box =
+document.getElementById("cartItems");
+
+
+if(!cart.length){
+
+box.innerHTML=
+`
+<div style="
+text-align:center;
+padding:60px 10px;
+color:#999;
+font-size:13px;
+">
+Your bag is empty.
+</div>
+`;
+
+document.getElementById(
+"cartTotal"
+).textContent="₹0";
+
+return;
+
+}
+
+
+box.innerHTML=
+cart.map(item=>`
+
+<div class="cartItem">
+
+<img
+src="${item.image}"
+alt=""
+>
+
+<div>
+
+<h4>
+${item.name}
+</h4>
+
+<p>
+₹${item.price.toLocaleString("en-IN")}
+× ${item.quantity}
+</p>
+
+<button
+class="remove"
+onclick="removeFromCart(${item.id})"
+>
+REMOVE
+</button>
+
+</div>
+
+<strong>
+₹${(
+item.price*
+item.quantity
+).toLocaleString("en-IN")}
+</strong>
+
+</div>
+
+`).join("");
+
+
+const total =
+cart.reduce(
+(total,item)=>
+total+
+item.price*item.quantity,
+0
+);
+
+
+document.getElementById(
+"cartTotal"
+).textContent=
+"₹"+total.toLocaleString("en-IN");
+
+}
+
+
+function removeFromCart(id){
+
+cart =
+cart.filter(
+item=>item.id!==id
+);
+
+localStorage.setItem(
+"aonedeal_cart",
+JSON.stringify(cart)
+);
+
+updateCart();
+
+}
+
+
+async function checkout(){
+
+const {
+data:{
+session
+}
+} =
+await supabaseClient.auth.getSession();
+
+
+if(!session){
+
+openAuth();
+
+return;
+
+}
+
+
+if(!cart.length){
+
+alert("Your bag is empty.");
+
+return;
+
+}
+
+
+/*
+NEXT STEP:
+
+Payment gateway + order database
+will be connected here.
+*/
+
+alert(
+"You are logged in. Checkout can now continue."
+);
+
+}
+
+
+/* ======================================================
+   DRAWERS
+====================================================== */
+
+function openMenu(){
+
+document
+.getElementById("menuDrawer")
+.classList.add("open");
+
+document
+.getElementById("overlay")
+.classList.add("show");
+
+}
+
+
+function openCart(){
+
+document
+.getElementById("cartDrawer")
+.classList.add("open");
+
+document
+.getElementById("overlay")
+.classList.add("show");
+
+}
+
+
+function closeAll(){
+
+document
+.getElementById("menuDrawer")
+.classList.remove("open");
+
+document
+.getElementById("cartDrawer")
+.classList.remove("open");
+
+document
+.getElementById("overlay")
+.classList.remove("show");
+
+}
+
+
+/* ======================================================
+   LANGUAGE
+====================================================== */
+
+function changeLanguage(language){
+
+if(language==="gu"){
+
+alert(
+"Gujarati language system ready છે. Product/category translations databaseમાંથી manage કરી શકાય છે."
+);
+
+}
+
+if(language==="hi"){
+
+alert(
+"Hindi language system ready છે."
+);
+
+}
+
+}
+
+
+/* ======================================================
+   NEWSLETTER
+====================================================== */
+
+function subscribe(event){
+
+event.preventDefault();
+
+alert(
+"Thank you for subscribing."
+);
+
+event.target.reset();
+
+}
+
+
+/* ======================================================
+   SUPABASE AUTH STATE
+====================================================== */
+
+supabaseClient.auth.onAuthStateChange(
+
+(event,session)=>{
+
+updateAuthButton();
+
+}
+
+);
+
+
+/* ======================================================
+   INITIAL LOAD
+====================================================== */
+
+renderProducts();
+
+updateAuthButton();
+
+
+</script>
+
 </body>
-</html>
+    </html>
