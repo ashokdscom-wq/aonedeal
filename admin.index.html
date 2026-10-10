@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AONeDEAL | Admin Studio</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+:root {
+  --gold: #b88a44;
+  --black: #171717;
+  --paper: #f7f6f3;
+  --line: #e8e4dd;
+  --white: #fff;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--black);
+  font-family: Arial, Helvetica, sans-serif;
+}
+button, input, select, textarea { font: inherit; }
+button { cursor: pointer; }
+.hidden { display: none !important; }
+.topline { height: 5px; background: var(--gold); }
+header {
+  min-height: 75px;
+  padding: 15px 25px;
+  background: var(--black);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+.logo { font-size: 22px; font-weight: 900; letter-spacing: 1.5px; }
+.logo span { color: var(--gold); }
+.logo small {
+  display: block;
+  font-size: 9px;
+  color: #bbb;
+  letter-spacing: 3px;
+  margin-top: 5px;
+}
+button {
+  border: 0;
+  border-radius: 7px;
+  padding: 11px 15px;
+  font-size: 12px;
+  font-weight: 800;
+}
+.gold { background: var(--gold); color: #111; }
+.white { background: white; border: 1px solid var(--line); color: #111; }
+.red { background: #fff0ef; color: #a51d17; }
+.login-wrap { max-width: 440px; margin: 7vh auto; padding: 16px; }
+.panel {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 23px;
+  margin-bottom: 18px;
+}
+.mark {
+  width: 46px; height: 46px;
+  background: #111; color: var(--gold);
+  display: grid; place-items: center;
+  border-radius: 10px; font-size: 23px; font-weight: 900;
+}
+.eyebrow {
+  margin: 18px 0 8px;
+  color: var(--gold);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+h1 { font-size: 28px; margin: 0; }
+h2 { font-size: 17px; margin: 0 0 15px; }
+p { font-size: 12px; line-height: 1.7; color: #777; }
+.field { display: flex; flex-direction: column; gap: 7px; margin: 13px 0; }
+.field label { font-size: 11px; font-weight: 800; color: #555; }
+.field input, .field select, .field textarea,
+.toolbar input, .toolbar select {
+  width: 100%;
+  border: 1px solid #ddd8cf;
+  border-radius: 7px;
+  padding: 11px;
+  background: white;
+  font-size: 12px;
+}
+.field textarea { min-height: 80px; resize: vertical; }
+.login-wrap .gold { width: 100%; margin-top: 8px; }
+.status {
+  display: none;
+  padding: 11px;
+  margin: 12px 0;
+  border-radius: 7px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.status.show { display: block; }
+.status.ok { background: #eaf7ef; color: #17643b; }
+.status.err { background: #fff0ef; color: #a51d17; }
+.hint { font-size: 10px; color: #888; }
+.layout { display: grid; grid-template-columns: 210px 1fr; min-height: calc(100vh - 80px); }
+aside { background: white; padding: 18px 12px; border-right: 1px solid var(--line); }
+.nav {
+  width: 100%; text-align: left; background: white;
+  color: #555; margin: 3px 0; padding: 13px;
+}
+.nav.active, .nav:hover { background: #f4eee4; color: #111; }
+main { padding: 25px; min-width: 0; }
+.heading {
+  display: flex; justify-content: space-between;
+  align-items: center; gap: 12px; margin-bottom: 20px;
+}
+.heading h1 { font-size: 27px; }
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 18px; }
+.stat { background: white; border: 1px solid var(--line); border-radius: 10px; padding: 16px; }
+.stat small { font-size: 10px; color: #777; font-weight: bold; }
+.stat strong { display: block; font-size: 26px; margin-top: 8px; }
+.toolbar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+.toolbar input { flex: 1; min-width: 150px; }
+.toolbar select { width: auto; min-width: 120px; }
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; }
+table { width: 100%; border-collapse: collapse; min-width: 650px; }
+th, td { padding: 12px; border-bottom: 1px solid #eee; text-align: left; font-size: 12px; }
+th { background: #faf9f6; color: #777; font-size: 10px; }
+tr:last-child td { border-bottom: 0; }
+.product { display: flex; gap: 10px; align-items: center; min-width: 200px; }
+.product img { width: 42px; height: 52px; object-fit: cover; border-radius: 5px; background: #eee; }
+.product small { display: block; color: #888; margin-top: 4px; }
+.tag { background: #f2ebdf; color: #795b2e; padding: 5px 8px; border-radius: 20px; font-size: 10px; font-weight: bold; }
+.tag.off { background: #eee; color: #777; }
+.actions { display: flex; gap: 5px; flex-wrap: wrap; }
+.tiny { background: white; border: 1px solid var(--line); padding: 7px 9px; font-size: 10px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.full { grid-column: 1 / -1; }
+.modal-back {
+  position: fixed; inset: 0; background: #0009; z-index: 10;
+  display: none; align-items: center; justify-content: center; padding: 15px;
+}
+.modal-back.show { display: flex; }
+.modal {
+  width: min(740px, 100%); max-height: 94vh; overflow-y: auto;
+  padding: 22px; background: white; border-radius: 12px;
+}
+.modal-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 15px; }
+.form-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px; }
+.categories { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.catbox { border: 1px solid var(--line); border-radius: 9px; padding: 14px; }
+.catrow { display: flex; justify-content: space-between; align-items: center; gap: 8px; border-top: 1px solid #eee; padding: 10px 0; font-size: 12px; }
+.empty { padding: 25px; text-align: center; color: #888; font-size: 12px; }
+
+@media(max-width:850px) {
+  .layout { grid-template-columns: 1fr; }
+  aside { display: flex; gap: 5px; overflow-x: auto; border-right: 0; border-bottom: 1px solid var(--line); }
+  .nav { white-space: nowrap; width: auto; }
+  main { padding: 15px; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+}
+@media(max-width:550px) {
+  header { padding: 13px; flex-wrap: wrap; }
+  .grid, .categories { grid-template-columns: 1fr; }
+  .full { grid-column: auto; }
+  .heading { align-items: flex-start; flex-direction: column; }
+}
+</style>
+</head>
+
+<body>
+<div class="topline"></div>
+
+<!-- ADMIN LOGIN -->
+<div id="loginView">
+  <header>
+    <div class="logo">AONe<span>DEAL</span><small>ADMIN STUDIO</small></div>
+    <span class="hint" style="color:#ddd">SECURE ACCESS</span>
+  </header>
+  <div class="login-wrap">
+    <div class="panel">
+      <div class="mark">A</div>
+      <div class="eyebrow">ADMIN ACCESS</div>
+      <h1>Welcome back.</h1>
+      <p>Sign in with your existing Supabase Auth account. Your user must also be listed as an active admin in the admins table.</p>
+      <div id="loginStatus" class="status"></div>
+      <form id="loginForm">
+        <div class="field">
+          <label>ADMIN EMAIL</label>
+          <input id="email" type="email" required autocomplete="username">
+        </div>
+        <div class="field">
+          <label>PASSWORD</label>
+          <input id="password" type="password" required autocomplete="current-password">
+        </div>
+        <button class="gold">SIGN IN TO ADMIN →</button>
+      </form>
+      <p class="hint">Use your Supabase Project URL and publishable/anon key below in the code. Never paste your secret/service_role key into a website.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN APP -->
+<div id="appView" class="hidden">
+  <header>
+    <div class="logo">AONe<span>DEAL</span><small>ADMIN STUDIO · STORE MANAGEMENT</small></div>
+    <div>
+      <button class="white" onclick="window.open('../index.html','_blank','noopener')">VIEW STORE ↗</button>
+      <button class="gold" id="logoutBtn">LOG OUT</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside>
+      <button class="nav active" data-page="overview">▦ Overview</button>
+      <button class="nav" data-page="products">◇ Products</button>
+      <button class="nav" data-page="categories">▤ Categories</button>
+    </aside>
+
+    <main>
+      <div id="appStatus" class="status"></div>
+
+      <section id="page-overview">
+        <div class="heading">
+          <div><div class="eyebrow">YOUR STORE AT A GLANCE</div><h1>Overview</h1><p>Manage your AONeDEAL catalogue.</p></div>
+          <button class="gold" onclick="openProduct()">＋ ADD PRODUCT</button>
+        </div>
+        <div class="stats">
+          <div class="stat"><small>TOTAL PRODUCTS</small><strong id="statTotal">—</strong></div>
+          <div class="stat"><small>ACTIVE PRODUCTS</small><strong id="statActive">—</strong></div>
+          <div class="stat"><small>CATEGORIES</small><strong id="statCats">—</strong></div>
+          <div class="stat"><small>LOW STOCK (≤5)</small><strong id="statLow">—</strong></div>
+        </div>
+        <div class="panel"><h2>Products</h2><div id="recentProducts"></div></div>
+        <div class="panel">
+          <h2>Important — Website Sync</h2>
+          <p>This admin panel saves data to Supabase. Your existing root index.html currently has a hard-coded product list, so that file must also be connected to Supabase before admin changes appear on the storefront.</p>
+        </div>
+      </section>
+
+      <section id="page-products" class="hidden">
+        <div class="heading">
+          <div><div class="eyebrow">CATALOGUE CONTROL</div><h1>Products</h1><p>Add, edit, hide or delete products.</p></div>
+          <button class="gold" onclick="openProduct()">＋ ADD PRODUCT</button>
+        </div>
+        <div class="panel">
+          <div class="toolbar">
+            <input id="searchInput" placeholder="Search products…">
+            <select id="groupFilter"><option value="">All groups</option><option value="men">Men</option><option value="women">Women</option></select>
+            <select id="activeFilter"><option value="">All status</option><option value="true">Active</option><option value="false">Hidden</option></select>
+            <button class="white" onclick="loadData()">↻ Refresh</button>
+          </div>
+          <div id="productTable"></div>
+        </div>
+      </section>
+
+      <section id="page-categories" class="hidden">
+        <div class="heading"><div><div class="eyebrow">STORE STRUCTURE</div><h1>Categories</h1><p>Maintain Men and Women categories.</p></div></div>
+        <div class="panel">
+          <h2>Add Category</h2>
+          <form id="categoryForm" class="grid">
+            <div class="field"><label>GROUP</label><select id="newCatGroup"><option value="men">Men</option><option value="women">Women</option></select></div>
+            <div class="field"><label>CATEGORY NAME</label><input id="newCatName" required placeholder="e.g. T-Shirts"></div>
+            <div class="field"><label>SORT ORDER</label><input id="newCatOrder" type="number" min="0" value="0"></div>
+            <div class="field" style="justify-content:end"><button class="gold">＋ SAVE CATEGORY</button></div>
+          </form>
+        </div>
+        <div class="panel"><h2>Current Categories</h2><div id="categoryList"></div></div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<!-- PRODUCT EDITOR -->
+<div id="productModal" class="modal-back">
+  <div class="modal">
+    <div class="modal-head">
+      <div><div class="eyebrow">CATALOGUE EDITOR</div><h2 id="modalHeading">Add Product</h2></div>
+      <button class="white" type="button" onclick="closeProduct()">✕</button>
+    </div>
+    <div id="formStatus" class="status"></div>
+    <form id="productForm">
+      <input type="hidden" id="productId">
+      <div class="grid">
+        <div class="field"><label>PRODUCT NAME *</label><input id="productName" required></div>
+        <div class="field"><label>GROUP *</label><select id="productGroup"><option value="men">Men</option><option value="women">Women</option></select></div>
+        <div class="field"><label>CATEGORY *</label><select id="productCategory" required></select></div>
+        <div class="field"><label>BADGE</label><select id="productBadge"><option value="">None</option><option>NEW</option><option>TRENDING</option><option>PREMIUM</option><option>BEST SELLER</option><option>VALUE</option><option>FESTIVE</option><option>SALE</option></select></div>
+        <div class="field"><label>PRICE (₹) *</label><input id="productPrice" type="number" min="0" step=".01" required></div>
+        <div class="field"><label>OLD PRICE (₹)</label><input id="productOldPrice" type="number" min="0" step=".01"></div>
+        <div class="field"><label>STOCK *</label><input id="productStock" type="number" min="0" value="0" required></div>
+        <div class="field"><label>SORT ORDER</label><input id="productOrder" type="number" min="0" value="0"></div>
+        <div class="field full">
+          <label>PHOTO URLS — ONE PER LINE *</label>
+          <textarea id="productPhotos" required placeholder="https://example.com/photo1.jpg&#10;https://example.com/photo2.jpg"></textarea>
+          <span class="hint">This version accepts photo URLs, not direct file uploads.</span>
+        </div>
+        <div class="field"><label>SIZES — COMMA SEPARATED</label><input id="productSizes" placeholder="S, M, L, XL, XXL"></div>
+        <div class="field"><label>COLOURS — COMMA SEPARATED</label><input id="productColors" placeholder="Black, White, Navy"></div>
+        <div class="field full"><label>DESCRIPTION</label><textarea id="productDescription"></textarea></div>
+        <div class="field full"><label>FEATURES — ONE PER LINE</label><textarea id="productFeatures"></textarea></div>
+        <div class="field"><label>STATUS</label><select id="productActive"><option value="true">Active — show in store</option><option value="false">Hidden</option></select></div>
+      </div>
+      <div class="form-actions">
+        <button class="white" type="button" onclick="closeProduct()">CANCEL</button>
+        <button class="gold" id="saveProductBtn">SAVE PRODUCT</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+/* ==========================================================
+   SUPABASE CONFIGURATION
+   Use Project URL + Publishable/Anon key ONLY.
+   Never use a secret/service_role key in browser code.
+========================================================== */
+const SUPABASE_URL = "YOUR_SUPABASE_URL";
+const SUPABASE_ANON_KEY = "YOUR_SUPABASE_PUBLISHABLE_OR_ANON_KEY";
+
+let db = null;
+let products = [];
+let categories = [];
+
+const $ = id => document.getElementById(id);
+const list = value => Array.isArray(value) ? value : [];
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
+  }[char]));
+}
+
+function money(value) {
+  return "₹" + Number(value || 0).toLocaleString("en-IN");
+}
+
+function slugify(value) {
+  return String(value).toLowerCase().trim()
+    .replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
+
+function showStatus(element, message, type = "ok") {
+  element.textContent = message;
+  element.className = "status show " + (type === "err" ? "err" : "ok");
+}
+
+function clearStatus(element) {
+  element.textContent = "";
+  element.className = "status";
+}
+
+function connectSupabase() {
+  if (
+    !SUPABASE_URL.startsWith("https://") ||
+    SUPABASE_URL.includes("YOUR_") ||
+    SUPABASE_ANON_KEY.includes("YOUR_")
+  ) {
+    showStatus(
+      $("loginStatus"),
+      "Setup required: replace SUPABASE_URL and SUPABASE_ANON_KEY in this file.",
+      "err"
+    );
+    return false;
+  }
+
+  db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  return true;
+}
+
+/* Only active admin/super_admin users may access the panel. */
+async function verifyAdmin(user) {
+  const { data, error } = await db
+    .from("admins")
+    .select("id,email,role,active")
+    .eq("id", user.id)
+    .maybeSingle();
+
+  if (error) throw error;
+
+  if (
+    !data ||
+    data.active !== true ||
+    !["admin", "super_admin"].includes(data.role)
+  ) {
+    await db.auth.signOut();
+    throw new Error(
+      "This account is not an active admin. Check that admins.id matches your Auth user ID and active is true."
+    );
+  }
+
+  return data;
+}
+
+/* LOGIN */
+async function loginAdmin(event) {
+  event.preventDefault();
+  clearStatus($("loginStatus"));
+
+  if (!db && !connectSupabase()) return;
+
+  const email = $("email").value.trim().toLowerCase();
+  const password = $("password").value;
+
+  const { data, error } = await db.auth.signInWithPassword({ email, password });
+
+  if (error) {
+    showStatus($("loginStatus"), "Login failed: " + error.message, "err");
+    return;
+  }
+
+  try {
+    await verifyAdmin(data.user);
+    $("loginView").classList.add("hidden");
+    $("appView").classList.remove("hidden");
+    await loadData();
+  } catch (error) {
+    showStatus($("loginStatus"), error.message, "err");
+  }
+}
+
+async function logoutAdmin() {
+  if (db) await db.auth.signOut();
+  $("appView").classList.add("hidden");
+  $("loginView").classList.remove("hidden");
+  $("password").value = "";
+}
+
+/* NAVIGATION */
+function showPage(name) {
+  document.querySelectorAll("[id^='page-']").forEach(section => {
+    section.classList.add("hidden");
+  });
+  $("page-" + name).classList.remove("hidden");
+
+  document.querySelectorAll(".nav").forEach(button => {
+    button.classList.toggle("active", button.dataset.page === name);
+  });
+
+  if (name === "products") renderProducts();
+  if (name === "categories") renderCategories();
+}
+
+document.querySelectorAll(".nav").forEach(button => {
+  button.addEventListener("click", () => showPage(button.dataset.page));
+});
+
+/* PRODUCT TABLE */
+function renderTable(items) {
+  if (!items.length) {
+    return '<div class="empty">No products found. Click “Add Product” to begin.</div>';
+  }
+
+  return `
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>PRODUCT</th><th>PRICE</th><th>STOCK</th><th>STATUS</th><th>ACTIONS</th></tr></thead>
+        <tbody>
+          ${items.map(product => `
+            <tr>
+              <td>
+                <div class="product">
+                  <img src="${escapeHTML(list(product.photos)[0] || "")}" alt=""
+                       onerror="this.style.visibility='hidden'">
+                  <div>
+                    <b>${escapeHTML(product.name)}</b>
+                    <small>${escapeHTML(product.group_name)} · ${escapeHTML(product.category)}</small>
+                  </div>
+                </div>
+              </td>
+              <td><b>${money(product.price)}</b>
+                ${product.old_price ? `<small style="display:block;color:#999;text-decoration:line-through">${money(product.old_price)}</small>` : ""}
+              </td>
+              <td>${Number(product.stock || 0) <= 5 ? `<b style="color:#b42318">${Number(product.stock || 0)}</b>` : Number(product.stock || 0)}</td>
+              <td><span class="tag ${product.active === false ? "off" : ""}">${product.active === false ? "HIDDEN" : "ACTIVE"}</span></td>
+              <td><div class="actions">
+                <button class="tiny" onclick="editProduct('${product.id}')">EDIT</button>
+                <button class="tiny" onclick="toggleProduct('${product.id}')">${product.active === false ? "SHOW" : "HIDE"}</button>
+                <button class="tiny" onclick="deleteProduct('${product.id}')">DELETE</button>
+              </div></td>
+            </tr>
+          `).join("")}
+        </tbody>
+      </table>
+    </div>`;
+}
+
+/* LOAD PRODUCTS AND CATEGORIES */
+async function loadData() {
+  showStatus($("appStatus"), "Loading data from Supabase…");
+
+  try {
+    const [productResult, categoryResult] = await Promise.all([
+      db.from("products").select("*").order("sort_order", { ascending: true }),
+      db.from("categories").select("*").order("group_name").order("sort_order")
+    ]);
+
+    if (productResult.error) throw productResult.error;
+    if (categoryResult.error) throw categoryResult.error;
+
+    products = productResult.data.map(product => ({
+      ...product,
+      photos: list(product.photos),
+      sizes: list(product.sizes),
+      colors: list(product.colors),
+      features: list(product.features),
+      active: product.active !== false
+    }));
+
+    categories = categoryResult.data || [];
+
+    $("statTotal").textContent = products.length;
+    $("statActive").textContent = products.filter(p => p.active).length;
+    $("statCats").textContent = categories.length;
+    $("statLow").textContent = products.filter(p => Number(p.stock || 0) <= 5).length;
+
+    $("recentProducts").innerHTML = renderTable(products.slice(0, 5));
+    renderProducts();
+    renderCategories();
+    refreshCategoryOptions();
+
+    showStatus($("appStatus"), "Connected. Catalogue loaded from Supabase.");
+  } catch (error) {
+    showStatus(
+      $("appStatus"),
+      "Could not load data: " + error.message + ". Check your table columns and Supabase RLS policies.",
+      "err"
+    );
+  }
+}
+
+function renderProducts() {
+  const query = ($("searchInput").value || "").trim().toLowerCase();
+  const group = $("groupFilter").value;
+  const active = $("activeFilter").value;
+
+  const filtered = products.filter(product => {
+    const matchesText = !query ||
+      [product.name, product.category, product.group_name]
+        .join(" ").toLowerCase().includes(query);
+
+    const matchesGroup = !group || product.group_name === group;
+    const matchesStatus = !active || String(product.active) === active;
+
+    return matchesText && matchesGroup && matchesStatus;
+  });
+
+  $("productTable").innerHTML = renderTable(filtered);
+}
+
+/* PRODUCT CATEGORY DROPDOWN */
+function refreshCategoryOptions(selected = "") {
+  const group = $("productGroup").value;
+  const available = categories.filter(category =>
+    category.group_name === group && category.active !== false
+  );
+
+  $("productCategory").innerHTML = available.map(category =>
+    `<option value="${escapeHTML(category.name)}">${escapeHTML(category.name)}</option>`
+  ).join("") || '<option value="">Create a category first</option>';
+
+  if (selected) $("productCategory").value = selected;
+}
+
+/* OPEN PRODUCT FORM */
+function openProduct(product = null) {
+  clearStatus($("formStatus"));
+  $("productForm").reset();
+
+  $("productId").value = product?.id || "";
+  $("modalHeading").textContent = product ? "Edit Product" : "Add Product";
+
+  $("productName").value = product?.name || "";
+  $("productGroup").value = product?.group_name || "men";
+  refreshCategoryOptions(product?.category || "");
+
+  $("productBadge").value = product?.badge || "";
+  $("productPrice").value = product?.price ?? "";
+  $("productOldPrice").value = product?.old_price ?? "";
+  $("productStock").value = product?.stock ?? 0;
+  $("productOrder").value = product?.sort_order ?? 0;
+
+  $("productPhotos").value = list(product?.photos).join("\n");
+  $("productSizes").value = list(product?.sizes).join(", ");
+  $("productColors").value = list(product?.colors).join(", ");
+  $("productDescription").value = product?.description || "";
+  $("productFeatures").value = list(product?.features).join("\n");
+  $("productActive").value = String(product?.active !== false);
+
+  $("productModal").classList.add("show");
+}
+
+function closeProduct() {
+  $("productModal").classList.remove("show");
+}
+
+function editProduct(id) {
+  const product = products.find(item => String(item.id) === String(id));
+  if (product) openProduct(product);
+}
+
+/* SAVE PRODUCT */
+async function saveProduct(event) {
+  event.preventDefault();
+  clearStatus($("formStatus"));
+
+  const photos = $("productPhotos").value
+    .split(/\n/)
+    .map(url => url.trim())
+    .filter(Boolean)
+    .slice(0, 8);
+
+  if (!photos.length || photos.some(url => !/^https?:\/\//i.test(url))) {
+    showStatus($("formStatus"), "Enter valid http(s) photo URLs, one URL per line.", "err");
+    return;
+  }
+
+  if (!$("productCategory").value) {
+    showStatus($("formStatus"), "Create a category for this group first.", "err");
+    return;
+  }
+
+  const name = $("productName").value.trim();
+
+  const payload = {
+    group_name: $("productGroup").value,
+    category: $("productCategory").value,
+    name,
+    slug: slugify(name),
+    price: Number($("productPrice").value),
+    old_price: $("productOldPrice").value === "" ? null : Number($("productOldPrice").value),
+    stock: Number($("productStock").value),
+    sizes: $("productSizes").value.split(",").map(x => x.trim()).filter(Boolean),
+    colors: $("productColors").value.split(",").map(x => x.trim()).filter(Boolean),
+    photos,
+    description: $("productDescription").value.trim(),
+    features: $("productFeatures").value.split("\n").map(x => x.trim()).filter(Boolean),
+    badge: $("productBadge").value || null,
+    active: $("productActive").value === "true",
+    sort_order: Number($("productOrder").value) || 0,
+    updated_at: new Date().toISOString()
+  };
+
+  const id = $("productId").value;
+  $("saveProductBtn").disabled = true;
+
+  try {
+    const result = id
+      ? await db.from("products").update(payload).eq("id", id)
+      : await db.from("products").insert(payload);
+
+    if (result.error) throw result.error;
+
+    closeProduct();
+    await loadData();
+    showPage("products");
+    showStatus($("appStatus"), id ? "Product updated successfully." : "Product added successfully.");
+  } catch (error) {
+    showStatus($("formStatus"), "Save failed: " + error.message, "err");
+  } finally {
+    $("saveProductBtn").disabled = false;
+  }
+}
+
+/* HIDE / SHOW PRODUCT */
+async function toggleProduct(id) {
+  const product = products.find(item => String(item.id) === String(id));
+  if (!product) return;
+
+  try {
+    const { error } = await db.from("products")
+      .update({ active: !product.active, updated_at: new Date().toISOString() })
+      .eq("id", id);
+
+    if (error) throw error;
+    await loadData();
+  } catch (error) {
+    showStatus($("appStatus"), "Update failed: " + error.message, "err");
+  }
+}
+
+/* DELETE PRODUCT */
+async function deleteProduct(id) {
+  const product = products.find(item => String(item.id) === String(id));
+  if (!product) return;
+
+  if (!confirm(`Permanently delete "${product.name}"?`)) return;
+
+  try {
+    const { error } = await db.from("products").delete().eq("id", id);
+    if (error) throw error;
+
+    await loadData();
+    showStatus($("appStatus"), "Product deleted.");
+  } catch (error) {
+    showStatus($("appStatus"), "Delete failed: " + error.message, "err");
+  }
+}
+
+/* CATEGORIES */
+function renderCategories() {
+  $("categoryList").innerHTML = '<div class="categories">' +
+    ["men", "women"].map(group => {
+      const groupCategories = categories.filter(c => c.group_name === group);
+
+      return `<div class="catbox">
+        <b>${group === "men" ? "MEN" : "WOMEN"} (${groupCategories.length})</b>
+        ${groupCategories.map(category => `
+          <div class="catrow">
+            <div>${escapeHTML(category.name)}
+              <div class="hint">${category.active === false ? "Hidden" : "Active"} · Order ${Number(category.sort_order || 0)}</div>
+            </div>
+            <div class="actions">
+              <button class="tiny" onclick="toggleCategory('${category.id}')">${category.active === false ? "SHOW" : "HIDE"}</button>
+              <button class="tiny" onclick="deleteCategory('${category.id}')">DELETE</button>
+            </div>
+          </div>
+        `).join("") || '<div class="empty">No categories yet.</div>'}
+      </div>`;
+    }).join("") + '</div>';
+}
+
+async function addCategory(event) {
+  event.preventDefault();
+
+  const name = $("newCatName").value.trim();
+  if (!name) return;
+
+  try {
+    const { error } = await db.from("categories").insert({
+      group_name: $("newCatGroup").value,
+      name,
+      slug: slugify(name),
+      sort_order: Number($("newCatOrder").value) || 0,
+      active: true
+    });
+
+    if (error) throw error;
+
+    $("categoryForm").reset();
+    $("newCatOrder").value = 0;
+    await loadData();
+    showPage("categories");
+    showStatus($("appStatus"), "Category added successfully.");
+  } catch (error) {
+    showStatus($("appStatus"), "Category save failed: " + error.message, "err");
+  }
+}
+
+async function toggleCategory(id) {
+  const category = categories.find(item => String(item.id) === String(id));
+  if (!category) return;
+
+  try {
+    const { error } = await db.from("categories")
+      .update({
+        active: category.active === false,
+        updated_at: new Date().toISOString()
+      })
+      .eq("id", id);
+
+    if (error) throw error;
+    await loadData();
+  } catch (error) {
+    showStatus($("appStatus"), "Category update failed: " + error.message, "err");
+  }
+}
+
+async function deleteCategory(id) {
+  const category = categories.find(item => String(item.id) === String(id));
+  if (!category) return;
+
+  if (!confirm(`Delete category "${category.name}"? This may fail if products still use it.`)) return;
+
+  try {
+    const { error } = await db.from("categories").delete().eq("id", id);
+    if (error) throw error;
+    await loadData();
+  } catch (error) {
+    showStatus($("appStatus"), "Category delete failed: " + error.message, "err");
+  }
+}
+
+/* EVENTS */
+$("loginForm").addEventListener("submit", loginAdmin);
+$("logoutBtn").addEventListener("click", logoutAdmin);
+$("productForm").addEventListener("submit", saveProduct);
+$("categoryForm").addEventListener("submit", addCategory);
+$("productGroup").addEventListener("change", () => refreshCategoryOptions());
+["searchInput", "groupFilter", "activeFilter"].forEach(id => {
+  $(id).addEventListener("input", renderProducts);
+});
+$("productModal").addEventListener("click", event => {
+  if (event.target === $("productModal")) closeProduct();
+});
+
+/* STARTUP */
+(async function startAdmin() {
+  if (!connectSupabase()) return;
+
+  try {
+    const { data, error } = await db.auth.getSession();
+    if (error) throw error;
+
+    if (data.session) {
+      try {
+        await verifyAdmin(data.session.user);
+        $("loginView").classList.add("hidden");
+        $("appView").classList.remove("hidden");
+        await loadData();
+      } catch (error) {
+        showStatus($("loginStatus"), error.message, "err");
+      }
+    }
+  } catch (error) {
+    showStatus($("loginStatus"), error.message, "err");
+  }
+})();
+</script>
+</body>
+</html>
